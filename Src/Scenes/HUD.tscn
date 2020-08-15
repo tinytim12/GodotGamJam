@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Art/UI/HomeBtn.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/HUD.gd" type="Script" id=2]
+
+[node name="HUD" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HomeBtn" type="TextureButton" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture_normal = ExtResource( 1 )
+[connection signal="button_up" from="HomeBtn" to="." method="_on_HomeBtn_up"]
