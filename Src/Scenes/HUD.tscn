@@ -15,4 +15,7 @@ __meta__ = {
 margin_right = 40.0
 margin_bottom = 40.0
 texture_normal = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="button_up" from="HomeBtn" to="." method="_on_HomeBtn_up"]
