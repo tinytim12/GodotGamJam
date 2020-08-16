@@ -4,7 +4,7 @@
 [ext_resource path="res://Art/Sprites/tiles/init_tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://Art/Sprites/kid.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/NextLevelBtn.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/NextLevelBtn.tscn" type="PackedScene" id=6]
 
 [node name="Level_01" type="Node2D"]
 
@@ -13,7 +13,7 @@ margin_left = 256.0
 margin_right = 320.0
 margin_bottom = 16.0
 rect_scale = Vector2( 2, 2 )
-text = "Level 01"
+text = "Level 02"
 align = 1
 valign = 1
 __meta__ = {
@@ -35,7 +35,15 @@ texture = ExtResource( 3 )
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 48, 144 )
 
-[node name="NextLevelBtn" parent="." instance=ExtResource( 5 )]
+[node name="NextLevelBtn" parent="." instance=ExtResource( 6 )]
 margin_left = 608.0
 margin_right = 640.0
-scene_path = "res://Scenes/Level_02.tscn"
+scene_path = "res://Scenes/Level_03.tscn"
+
+[node name="PrevLevelBtn" parent="." instance=ExtResource( 6 )]
+margin_left = 592.0
+margin_top = 32.0
+margin_right = 624.0
+margin_bottom = 64.0
+rect_rotation = 180.0
+scene_path = "res://Scenes/Level_01.tscn"
