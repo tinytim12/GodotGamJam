@@ -2,10 +2,10 @@
 
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Art/Sprites/tiles/init_tileset.tres" type="TileSet" id=2]
-[ext_resource path="res://Art/Sprites/kid.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/NextLevelBtn.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Art/Sprites/key.png" type="Texture" id=6]
+[ext_resource path="res://Art/Sprites/kid.png" type="Texture" id=7]
 
 [node name="Level_01" type="Node2D"]
 
@@ -28,16 +28,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="kid" type="Sprite" parent="."]
-position = Vector2( 32, 104 )
-texture = ExtResource( 3 )
-
 [node name="key" type="Sprite" parent="."]
 position = Vector2( 464, 40 )
 texture = ExtResource( 6 )
 
-[node name="Player" parent="." instance=ExtResource( 4 )]
+[node name="Parent" parent="." instance=ExtResource( 4 )]
 position = Vector2( 32, 72 )
+
+[node name="Kid" parent="." instance=ExtResource( 4 )]
+position = Vector2( 32, 104 )
+is_kid = true
+char_texture = ExtResource( 7 )
 
 [node name="NextLevelBtn" parent="." instance=ExtResource( 5 )]
 margin_left = 20.0

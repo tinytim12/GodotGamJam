@@ -1,41 +1,48 @@
 extends KinematicBody2D
 
-var speed = 64
+export var is_kid = false
+var GRAVITY = 32
+var SPEED = 64
+var JUMP_SPEED = -384
 var velocity = Vector2.ZERO
-var jump_speed = -384
-var gravity = 32
 var ground_normal = Vector2(0, -1)
 var is_grounded = false
 var jump_count = 0
-var dir_vector = Vector2(1, 0)
+var MAX_JUMPS = 2
+var dir_vector = Vector2(1, 0) # default looking right
 
+export(Texture) var char_texture
 
 func _ready():
-	pass
+	if is_kid == true:
+		GRAVITY = -32
+		SPEED = 64
+		JUMP_SPEED = 384
+		ground_normal = Vector2(0, 1)
+		$Sprite.texture = char_texture
 
 
-func _physics_process(delta):
-	
+func _physics_process(_delta):
+	# input handling
 	if Input.is_action_pressed("ui_left"):
-		velocity.x = -speed
+		velocity.x = -SPEED
 	elif Input.is_action_pressed("ui_right"):
-		velocity.x = speed
+		velocity.x = SPEED
 	else:
 		velocity.x = 0
 	
 	# now only double jump
-	if Input.is_action_just_pressed("ui_up") and jump_count < 2:
-		print(str(jump_count) + " - " + str(velocity.y))
-		velocity.y = jump_speed
+	if Input.is_action_just_pressed("ui_up") and jump_count < MAX_JUMPS:
+		velocity.y = JUMP_SPEED
 		jump_count += 1
-
-	velocity.y += gravity
-	
+	# apply gravity
+	velocity.y += GRAVITY
+	# move and slide 
 	velocity = move_and_slide(velocity, ground_normal)
-	print(str(jump_count) + " ---- "+ str(velocity.y))
+	# check for reached ground
 	if is_on_floor():
 		is_grounded = true
-		jump_count = 0		
+		jump_count = 0
 	else:
 		is_grounded = false
 	

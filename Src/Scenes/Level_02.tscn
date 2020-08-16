@@ -10,7 +10,7 @@
 [ext_resource path="res://Scenes/TextureRect.gd" type="Script" id=8]
 [ext_resource path="res://Art/Shaders/red.png" type="Texture" id=9]
 
-[node name="Level_01" type="Node2D"]
+[node name="Level_02" type="Node2D"]
 
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_left = -174.159
@@ -46,9 +46,10 @@ scale = Vector2( 0.978448, 1 )
 texture = ExtResource( 7 )
 texture_scale = 1.45
 script = ExtResource( 5 )
-playerP = NodePath("../../Player")
-childP = NodePath("..")
-redP = NodePath("../../TextureRect")
+playerP = NodePath("../../../Level_02/Player")
+childP = NodePath("../../../Level_02/kid")
+redP = NodePath("../../../Level_02/TextureRect")
+cameraP = NodePath("../../../Level_02/Player/Camera2D")
 
 [node name="NextLevelBtn" parent="." instance=ExtResource( 6 )]
 margin_left = 48.0
