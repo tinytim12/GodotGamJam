@@ -3,6 +3,7 @@ extends Light2D
 export(NodePath) var playerP
 export(NodePath) var childP
 export(NodePath) var redP
+export(NodePath) var cameraP;
 export(int) var threshold
 # Declare member variables here. Examples:
 # var a = 2
@@ -14,6 +15,7 @@ var _timer = null
 onready var red = get_node(redP)
 onready var child = get_node(childP)
 onready var player = get_node(playerP)
+onready var camera = get_node(cameraP)
 
 func _ready():
 	set("energy", 0.0)
@@ -51,6 +53,14 @@ func _checkDistance():
 		print("red.modulate.a")
 		if (threshold < 0):
 			print("GAMEOVER")
+			
+		if (distance > 15):
+			camera.set_offset(Vector2( \
+		rand_range(-1.0, 1.0) * (distance - 15) / 10, \
+		rand_range(-1.0, 1.0) * (distance- 15) / 10 \
+	))
 	else:
 		threshold = 100000
+		red.modulate.a = 0
+		set("energy", 0)
 		

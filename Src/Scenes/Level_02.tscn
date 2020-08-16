@@ -45,6 +45,7 @@ script = ExtResource( 5 )
 playerP = NodePath("../../Player")
 childP = NodePath("..")
 redP = NodePath("../../Player/Camera2D/TextureRect")
+cameraP = NodePath("../../Player/Camera2D")
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 48, 144 )
