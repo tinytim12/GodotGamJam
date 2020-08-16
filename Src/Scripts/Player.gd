@@ -1,6 +1,8 @@
 extends KinematicBody2D
 
 export var is_kid = false
+export(Texture) var char_texture
+
 var GRAVITY = 32
 var SPEED = 64
 var JUMP_SPEED = -384
@@ -11,9 +13,10 @@ var jump_count = 0
 var MAX_JUMPS = 2
 var dir_vector = Vector2(1, 0) # default looking right
 
-export(Texture) var char_texture
+var TARGET_FPS = 60
 
 func _ready():
+	Engine.set_target_fps(TARGET_FPS)
 	if is_kid == true:
 		GRAVITY = -32
 		SPEED = 64
@@ -22,7 +25,7 @@ func _ready():
 		$Sprite.texture = char_texture
 
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	# input handling
 	if Input.is_action_pressed("ui_left"):
 		velocity.x = -SPEED
@@ -45,4 +48,4 @@ func _physics_process(_delta):
 		jump_count = 0
 	else:
 		is_grounded = false
-	
+
