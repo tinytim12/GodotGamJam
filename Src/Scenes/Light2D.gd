@@ -2,6 +2,7 @@ extends Light2D
 
 export(NodePath) var playerP
 export(NodePath) var childP
+export(NodePath) var redP
 export(int) var threshold
 # Declare member variables here. Examples:
 # var a = 2
@@ -10,7 +11,9 @@ export(int) var threshold
 
 # Called when the node enters the scene tree for the first time.
 var _timer = null
-
+onready var red = get_node(redP)
+onready var child = get_node(childP)
+onready var player = get_node(playerP)
 
 func _ready():
 	set("energy", 0.0)
@@ -22,7 +25,9 @@ func _ready():
 	_timer.set_wait_time(0.2)
 	_timer.set_one_shot(false) # Make sure it loops
 	_timer.start()
-
+	 
+	red = get_node(redP)
+	red.modulate.a = 0
 
 func _on_Timer_timeout():
 	print("Second!")
@@ -36,15 +41,16 @@ func _on_Timer_timeout():
 	
 	
 func _checkDistance():
-	var child = get_node(childP)
-	var player = get_node(playerP)
+	
 	var distance = abs(child.position.x - player.position.x);
 	if (distance > 10):
 		set("energy", distance / 10);
 		threshold -= distance/100
+		
+		red.modulate.a = .005 * distance
+		print("red.modulate.a")
 		if (threshold < 0):
 			print("GAMEOVER")
-			print (distance)
 	else:
 		threshold = 100000
 		
