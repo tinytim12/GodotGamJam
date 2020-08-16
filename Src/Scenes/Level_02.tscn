@@ -12,28 +12,32 @@
 
 [node name="Level_01" type="Node2D"]
 
-[node name="Label" type="Label" parent="."]
-margin_left = 256.0
-margin_right = 320.0
-margin_bottom = 16.0
-rect_scale = Vector2( 2, 2 )
-text = "Level 02"
-align = 1
-valign = 1
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -174.159
+margin_top = -93.796
+margin_right = 1105.84
+margin_bottom = 626.204
+texture = ExtResource( 9 )
+script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HUD" parent="." instance=ExtResource( 1 )]
+[node name="Player" parent="." instance=ExtResource( 4 )]
+position = Vector2( 32, 64 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2( 128, 16 )
+current = true
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
-cell_size = Vector2( 32, 32 )
+cell_size = Vector2( 16, 16 )
 format = 1
-tile_data = PoolIntArray( 131084, 1, 0, 131085, 1, 0, 131086, 1, 0, 196616, 1, 0, 196617, 1, 0, 196618, 1, 0, 196626, 2, 0, 262162, 2, 0, 327680, 4, 0, 327681, 4, 0, 327682, 4, 0, 327683, 4, 0, 327684, 4, 0, 327685, 4, 0, 327686, 4, 0, 327687, 4, 0, 327688, 4, 0, 327689, 4, 0, 327690, 4, 0, 327691, 4, 0, 327692, 4, 0, 327693, 4, 0, 327694, 4, 0, 327695, 4, 0, 327696, 4, 0, 327697, 4, 0, 327698, 4, 0, 327699, 4, 0, 327700, 4, 0, 327701, 4, 0, 327702, 4, 0, 327703, 4, 0, 524300, 1, 0, 524301, 1, 0, 524302, 1, 0, 589832, 1, 0, 589833, 1, 0, 589834, 1, 0, 589842, 2, 0, 655378, 2, 0, 720896, 4, 0, 720897, 4, 0, 720898, 4, 0, 720899, 4, 0, 720900, 4, 0, 720901, 4, 0, 720902, 4, 0, 720903, 4, 0, 720904, 4, 0, 720905, 4, 0, 720906, 4, 0, 720907, 4, 0, 720908, 4, 0, 720909, 4, 0, 720910, 4, 0, 720911, 4, 0, 720912, 4, 0, 720913, 4, 0, 720914, 4, 0, 720915, 4, 0, 720916, 4, 0, 720917, 4, 0, 720918, 4, 0, 720919, 4, 0 )
+tile_data = PoolIntArray( 0, 4, 0, 65536, 5, 0, 131072, 4, 0, 131086, 4, 0, 131087, 4, 0, 131088, 4, 0, 131089, 4, 0, 196608, 5, 0, 196617, 4, 0, 196618, 4, 0, 196619, 4, 0, 196622, 4, 0, 196623, 4, 0, 196624, 4, 0, 196625, 4, 0, 196627, 3, 0, 262144, 4, 0, 262148, 4, 0, 262149, 4, 0, 262150, 4, 0, 262153, 4, 0, 262154, 4, 0, 262155, 4, 0, 262158, 4, 0, 262159, 4, 0, 262160, 4, 0, 262161, 4, 0, 262163, 3, 0, 327680, 5, 0, 327681, 5, 0, 327682, 5, 0, 327683, 5, 0, 327684, 5, 0, 327685, 5, 0, 327686, 5, 0, 327687, 5, 0, 327688, 5, 0, 327689, 5, 0, 327690, 5, 0, 327691, 5, 0, 327692, 5, 0, 327693, 5, 0, 327694, 5, 0, 327695, 5, 0, 327696, 5, 0, 327697, 5, 0, 327698, 5, 0, 327699, 5, 0, 393216, 4, 0, 393220, 4, 0, 393221, 4, 0, 393222, 4, 0, 393225, 4, 0, 393226, 4, 0, 393227, 4, 0, 393230, 4, 0, 393231, 4, 0, 393232, 4, 0, 393233, 4, 0, 393235, 3, 0, 458752, 5, 0, 458761, 4, 0, 458762, 4, 0, 458763, 4, 0, 458766, 4, 0, 458767, 4, 0, 458768, 4, 0, 458769, 4, 0, 458771, 3, 0, 524288, 4, 0, 524302, 4, 0, 524303, 4, 0, 524304, 4, 0, 524305, 4, 0, 589824, 5, 0, 655360, 4, 0, 720896, 5, 0 )
 
 [node name="kid" type="Sprite" parent="."]
-position = Vector2( 48, 336 )
+position = Vector2( 32, 112 )
 texture = ExtResource( 3 )
 
 [node name="Light2D" type="Light2D" parent="kid"]
@@ -44,35 +48,30 @@ texture_scale = 1.45
 script = ExtResource( 5 )
 playerP = NodePath("../../Player")
 childP = NodePath("..")
-redP = NodePath("../../Player/Camera2D/TextureRect")
+redP = NodePath("../../TextureRect")
 
-[node name="Player" parent="." instance=ExtResource( 4 )]
-position = Vector2( 48, 144 )
+[node name="NextLevelBtn" parent="." instance=ExtResource( 6 )]
+margin_left = 48.0
+margin_right = 64.0
+scene_path = "res://Scenes/Level_03.tscn"
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2( 254, 79 )
-current = true
+[node name="PrevLevelBtn" parent="." instance=ExtResource( 6 )]
+margin_left = 40.0
+margin_top = 16.0
+margin_right = 56.0
+margin_bottom = 32.0
+rect_rotation = 180.0
+scene_path = "res://Scenes/Level_01.tscn"
 
-[node name="TextureRect" type="TextureRect" parent="Player/Camera2D"]
-margin_left = -334.159
-margin_top = -189.796
-margin_right = 331.841
-margin_bottom = 192.204
-texture = ExtResource( 9 )
-script = ExtResource( 8 )
+[node name="Label" type="Label" parent="."]
+margin_left = 64.0
+margin_right = 128.0
+margin_bottom = 16.0
+text = "Level 02"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NextLevelBtn" parent="." instance=ExtResource( 6 )]
-margin_left = 608.0
-margin_right = 640.0
-scene_path = "res://Scenes/Level_03.tscn"
-
-[node name="PrevLevelBtn" parent="." instance=ExtResource( 6 )]
-margin_left = 592.0
-margin_top = 32.0
-margin_right = 624.0
-margin_bottom = 64.0
-rect_rotation = 180.0
-scene_path = "res://Scenes/Level_01.tscn"
+[node name="HUD" parent="." instance=ExtResource( 1 )]
