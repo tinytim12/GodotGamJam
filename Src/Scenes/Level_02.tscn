@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Art/Sprites/tiles/init_tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://Art/Sprites/kid.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Light2D.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/NextLevelBtn.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Art/Shaders/texture.png" type="Texture" id=7]
 
 [node name="Level_01" type="Node2D"]
 
@@ -32,8 +34,21 @@ tile_data = PoolIntArray( 131084, 1, 0, 131085, 1, 0, 131086, 1, 0, 196616, 1, 0
 position = Vector2( 48, 336 )
 texture = ExtResource( 3 )
 
+[node name="Light2D" type="Light2D" parent="kid"]
+position = Vector2( 0.999997, 1 )
+scale = Vector2( 0.978448, 1 )
+texture = ExtResource( 7 )
+texture_scale = 1.45
+script = ExtResource( 5 )
+playerP = NodePath("../../Player")
+childP = NodePath("..")
+
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 48, 144 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2( 254, 79 )
+current = true
 
 [node name="NextLevelBtn" parent="." instance=ExtResource( 6 )]
 margin_left = 608.0
