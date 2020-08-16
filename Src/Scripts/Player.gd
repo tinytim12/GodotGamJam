@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 var speed = 64
 var velocity = Vector2.ZERO
-var jump_speed = -512
+var jump_speed = -384
 var gravity = 32
 var ground_normal = Vector2(0, -1)
 

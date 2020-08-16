@@ -4,8 +4,8 @@
 [ext_resource path="res://Scripts/NextLevelBtn.gd" type="Script" id=2]
 
 [node name="NextLevelBtn" type="TextureButton"]
-margin_right = 32.0
-margin_bottom = 32.0
+margin_right = 16.0
+margin_bottom = 16.0
 texture_normal = ExtResource( 1 )
 script = ExtResource( 2 )
 __meta__ = {
