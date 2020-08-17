@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=10 format=2]
+[gd_resource type="TileSet" load_steps=11 format=2]
 
 [ext_resource path="res://Art/Sprites/tiles/door.png" type="Texture" id=1]
 [ext_resource path="res://Art/Sprites/tiles/floating.png" type="Texture" id=2]
@@ -17,6 +17,8 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=4]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+
+[sub_resource type="GDScript" id=5]
 
 [resource]
 2/name = "danger.png 2"
@@ -162,3 +164,4 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 6/shape_one_way_margin = 0.0
 6/shapes = [  ]
 6/z_index = 0
+script = SubResource( 5 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Art/Sprites/tiles/init_tileset.tres" type="TileSet" id=2]
@@ -12,6 +12,10 @@
 [ext_resource path="res://Scripts/Light2D.gd" type="Script" id=10]
 [ext_resource path="res://Art/Shaders/red.png" type="Texture" id=11]
 [ext_resource path="res://Art/Shaders/texture.png" type="Texture" id=12]
+[ext_resource path="res://Scenes/switchTrigger.gd" type="Script" id=13]
+[ext_resource path="res://Art/Shaders/switchtile.png" type="Texture" id=14]
+
+[sub_resource type="RectangleShape2D" id=1]
 
 [node name="Level_01" type="Node2D"]
 script = ExtResource( 6 )
@@ -41,10 +45,10 @@ redP = NodePath("../TextureRect")
 cameraP = NodePath("../../Parent")
 
 [node name="TextureRect" type="TextureRect" parent="Kid"]
-margin_left = -93.2238
-margin_top = -141.458
-margin_right = 1186.78
-margin_bottom = 578.542
+margin_left = 148.004
+margin_top = 394.936
+margin_right = 1428.01
+margin_bottom = 1114.94
 texture = ExtResource( 11 )
 stretch_mode = 1
 __meta__ = {
@@ -94,10 +98,24 @@ __meta__ = {
 margin_left = 20.0
 margin_right = 36.0
 scene_path = "res://Scenes/Level_02.tscn"
+
+[node name="Switch" type="Area2D" parent="."]
+position = Vector2( 184.055, 23.1249 )
+script = ExtResource( 13 )
+tileMapP = NodePath("../TileMap")
+
+[node name="Sprite" type="Sprite" parent="Switch"]
+position = Vector2( -92.4997, 50.0254 )
+texture = ExtResource( 14 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Switch"]
+position = Vector2( -93.4436, 49.5534 )
+shape = SubResource( 1 )
 [connection signal="OnInteraction" from="Key" to="." method="_OnInteraction"]
 [connection signal="OnInteraction" from="Star" to="." method="_OnInteraction"]
 [connection signal="OnInteraction" from="Door_Parent" to="." method="_OnInteraction"]
 [connection signal="OnInteraction" from="Door_Kid" to="." method="_OnInteraction"]
+[connection signal="body_entered" from="Switch" to="Switch" method="_on_Area2D_body_entered"]
 
 [editable path="Key"]
 
