@@ -8,14 +8,17 @@ export(int) var threshold
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-
+var dangerDistance = 15
+var reddenRate = 0.002
+var lightRate = 30
+var cameraThreshold = 35
 
 # Called when the node enters the scene tree for the first time.
 var _timer = null
 onready var red = get_node(redP)
 onready var child = get_node(childP)
 onready var player = get_node(playerP)
-onready var camera = get_node(cameraP)
+onready var camera = get_node("/root/Level_01/Parent/MainCamera")
 
 func _ready():
 	set("energy", 0.0)
@@ -46,19 +49,19 @@ func _on_Timer_timeout():
 func _checkDistance():
 	
 	var distance = abs(child.position.x - player.position.x);
-	if (distance > 10):
-		set("energy", distance / 20);
+	if (distance > dangerDistance):
+		set("energy", distance / lightRate);
 		threshold -= 1;
 		if (red.modulate.a < 0.7):
-			red.modulate.a = .002 * distance
+			red.modulate.a = reddenRate * distance
 			print("red.modulate.a")
 		if (threshold < 0):
 			_gameOver()
 			
-		if (threshold < 35):
-			camera.get_child().set_offset(Vector2( \
-		rand_range(-1.0, 1.0) * (35 - threshold ) / 5, \
-		rand_range(-1.0, 1.0) * (35 - threshold ) / 5 \
+		if (threshold < cameraThreshold):
+			camera.set_offset(Vector2( \
+		rand_range(-1.0, 1.0) * (cameraThreshold - threshold ) / 5, \
+		rand_range(-1.0, 1.0) * (cameraThreshold - threshold ) / 5 \
 	))
 	else:
 		threshold = 50

@@ -15,6 +15,8 @@ var jump_count = 0
 var MAX_JUMPS = 2
 var dir_vector = Vector2(1, 0) # default looking right
 
+var childSpeedModifier = 20
+
 onready var player_sprite = get_node("Sprite")
 onready var player_camera = get_node("MainCamera")
 
@@ -38,10 +40,28 @@ func _ready():
 
 func _physics_process(delta):
 	# input handling
+	
+			
 	if Input.is_action_pressed("ui_left"):
-		velocity.x = -SPEED
+		if is_kid ==true:
+			velocity.x = -SPEED + childSpeedModifier
+		else:
+			velocity.x = -SPEED
 	elif Input.is_action_pressed("ui_right"):
-		velocity.x = SPEED
+		if is_kid == true:
+			velocity.x = SPEED -childSpeedModifier
+		else:
+			velocity.x = SPEED
+	elif is_kid == true:
+		var distance = get_node("/root/Level_01/Parent").position.x - position.x
+		if ( abs(distance) >1):
+
+			if (distance < 0):
+				velocity.x = -SPEED +childSpeedModifier
+				print("too far")
+			else:
+				velocity.x = SPEED -childSpeedModifier
+		else: velocity.x = 0
 	else:
 		velocity.x = 0
 	
