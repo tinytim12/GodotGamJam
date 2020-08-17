@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Art/Sprites/tiles/init_tileset.tres" type="TileSet" id=2]
@@ -12,11 +12,15 @@
 [ext_resource path="res://Scripts/Light2D.gd" type="Script" id=10]
 [ext_resource path="res://Art/Shaders/red.png" type="Texture" id=11]
 [ext_resource path="res://Art/Shaders/texture.png" type="Texture" id=12]
+[ext_resource path="res://Scenes/switchTrigger.gd" type="Script" id=13]
+[ext_resource path="res://Art/Shaders/switchtile.png" type="Texture" id=14]
+
+[sub_resource type="RectangleShape2D" id=1]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 6 )
-prev_scene = "res://Scenes/MainMenu2D.tscn"
-next_scene = "res://Scenes/Level_02.tscn"
+prev_scene = "res://Scenes/Level_01.tscn"
+next_scene = "res://Scenes/Level_03.tscn"
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
@@ -81,25 +85,46 @@ texture = ExtResource( 8 )
 [node name="HUD" parent="." instance=ExtResource( 1 )]
 
 [node name="Label" type="Label" parent="."]
-margin_left = 40.4949
-margin_top = -0.749146
-margin_right = 104.495
-margin_bottom = 15.2509
-text = "Level 01"
+margin_left = 61.0
+margin_right = 125.0
+margin_bottom = 16.0
+text = "Level 02"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="PrevLevelBtn" parent="." instance=ExtResource( 5 )]
+margin_left = 34.0
+margin_top = 16.0
+margin_right = 50.0
+margin_bottom = 32.0
+rect_rotation = 180.0
+scene_path = "res://Scenes/Level_01.tscn"
+
 [node name="NextLevelBtn" parent="." instance=ExtResource( 5 )]
-margin_left = 20.0
-margin_right = 36.0
-scene_path = "res://Scenes/Level_02.tscn"
+margin_left = 39.0
+margin_right = 55.0
+scene_path = "res://Scenes/Level_03.tscn"
+
+[node name="Switch" type="Area2D" parent="."]
+position = Vector2( 184.055, 23.1249 )
+script = ExtResource( 13 )
+tileMapP = NodePath("../../Level/TileMap")
+
+[node name="Sprite" type="Sprite" parent="Switch"]
+position = Vector2( -92.4997, 50.0254 )
+texture = ExtResource( 14 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Switch"]
+position = Vector2( -93.4436, 49.5534 )
+shape = SubResource( 1 )
 [connection signal="OnInteraction" from="Key" to="." method="_OnInteraction"]
 [connection signal="OnInteraction" from="Star" to="." method="_OnInteraction"]
 [connection signal="OnInteraction" from="Door_Parent" to="." method="_OnInteraction"]
 [connection signal="OnInteraction" from="Door_Kid" to="." method="_OnInteraction"]
+[connection signal="body_entered" from="Switch" to="Switch" method="_on_Area2D_body_entered"]
 
 [editable path="Key"]
 
