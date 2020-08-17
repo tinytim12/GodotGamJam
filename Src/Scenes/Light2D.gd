@@ -19,6 +19,7 @@ onready var camera = get_node(cameraP)
 
 func _ready():
 	set("energy", 0.0)
+	threshold = 50
 	
 	_timer = Timer.new()
 	add_child(_timer)
@@ -46,21 +47,24 @@ func _checkDistance():
 	
 	var distance = abs(child.position.x - player.position.x);
 	if (distance > 10):
-		set("energy", distance / 10);
-		threshold -= distance/100
-		
-		red.modulate.a = .005 * distance
-		print("red.modulate.a")
+		set("energy", distance / 20);
+		threshold -= 1;
+		if (red.modulate.a < 0.7):
+			red.modulate.a = .002 * distance
+			print("red.modulate.a")
 		if (threshold < 0):
-			print("GAMEOVER")
+			_gameOver()
 			
-		if (distance > 15):
+		if (threshold < 35):
 			camera.set_offset(Vector2( \
-		rand_range(-1.0, 1.0) * (distance - 15) / 10, \
-		rand_range(-1.0, 1.0) * (distance- 15) / 10 \
+		rand_range(-1.0, 1.0) * (35 - threshold ) / 5, \
+		rand_range(-1.0, 1.0) * (35 - threshold ) / 5 \
 	))
 	else:
-		threshold = 100000
+		threshold = 50
 		red.modulate.a = 0
 		set("energy", 0)
 		
+
+func _gameOver():
+	get_tree().reload_current_scene()
