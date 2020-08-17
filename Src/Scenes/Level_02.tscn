@@ -1,27 +1,39 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Art/Sprites/tiles/init_tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://Art/Sprites/kid.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/Light2D.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/Light2D.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/NextLevelBtn.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Art/Shaders/texture.png" type="Texture" id=7]
-[ext_resource path="res://Scenes/TextureRect.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/TextureRect.gd" type="Script" id=8]
 [ext_resource path="res://Art/Shaders/red.png" type="Texture" id=9]
+[ext_resource path="res://Scenes/Interactables.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Art/Sprites/tiles/door.png" type="Texture" id=11]
+[ext_resource path="res://Scripts/Level.gd" type="Script" id=12]
 
-[node name="Level_01" type="Node2D"]
+[node name="Level_02" type="Node2D"]
+script = ExtResource( 12 )
+prev_scene = "res://Scenes/Level_01.tscn"
+next_scene = "res://Scenes/Level_03.tscn"
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_left = -174.159
-margin_top = -93.796
-margin_right = 1105.84
-margin_bottom = 626.204
+margin_left = -176.0
+margin_top = -96.0
+margin_right = 1104.0
+margin_bottom = 624.0
 texture = ExtResource( 9 )
 script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 0, 4, 0, 65536, 5, 0, 131072, 4, 0, 131086, 4, 0, 131087, 4, 0, 131088, 4, 0, 131089, 4, 0, 131094, 4, 0, 131095, 4, 0, 196608, 5, 0, 196617, 4, 0, 196618, 4, 0, 196619, 4, 0, 196622, 4, 0, 196623, 4, 0, 196624, 4, 0, 196625, 4, 0, 196629, 4, 0, 196630, 4, 0, 196631, 4, 0, 196632, 4, 0, 262144, 4, 0, 262148, 4, 0, 262149, 4, 0, 262150, 4, 0, 262153, 4, 0, 262154, 4, 0, 262155, 4, 0, 262158, 4, 0, 262159, 4, 0, 262160, 4, 0, 262161, 4, 0, 262165, 4, 0, 262166, 4, 0, 262167, 4, 0, 262168, 4, 0, 327680, 5, 0, 327681, 5, 0, 327682, 5, 0, 327683, 5, 0, 327684, 5, 0, 327685, 5, 0, 327686, 5, 0, 327687, 5, 0, 327688, 5, 0, 327689, 5, 0, 327690, 5, 0, 327691, 5, 0, 327692, 5, 0, 327693, 5, 0, 327694, 5, 0, 327695, 5, 0, 327696, 5, 0, 327697, 5, 0, 327698, 5, 0, 327699, 5, 0, 327700, 5, 0, 327701, 5, 0, 327702, 5, 0, 327703, 5, 0, 327704, 5, 0, 327705, 5, 0, 327706, 5, 0, 327707, 5, 0, 327708, 5, 0, 327709, 5, 0, 393216, 4, 0, 393220, 4, 0, 393221, 4, 0, 393222, 4, 0, 393225, 4, 0, 393226, 4, 0, 393227, 4, 0, 393230, 4, 0, 393231, 4, 0, 393232, 4, 0, 393233, 4, 0, 393237, 4, 0, 393238, 4, 0, 393239, 4, 0, 393240, 4, 0, 458752, 5, 0, 458761, 4, 0, 458762, 4, 0, 458763, 4, 0, 458766, 4, 0, 458767, 4, 0, 458768, 4, 0, 458769, 4, 0, 458773, 4, 0, 458774, 4, 0, 458775, 4, 0, 458776, 4, 0, 524288, 4, 0, 524302, 4, 0, 524303, 4, 0, 524304, 4, 0, 524305, 4, 0, 524310, 4, 0, 524311, 4, 0, 589824, 5, 0, 655360, 4, 0, 720896, 5, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 32, 64 )
@@ -29,12 +41,6 @@ position = Vector2( 32, 64 )
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2( 128, 16 )
 current = true
-
-[node name="TileMap" type="TileMap" parent="."]
-tile_set = ExtResource( 2 )
-cell_size = Vector2( 16, 16 )
-format = 1
-tile_data = PoolIntArray( 0, 4, 0, 65536, 5, 0, 131072, 4, 0, 131086, 4, 0, 131087, 4, 0, 131088, 4, 0, 131089, 4, 0, 196608, 5, 0, 196617, 4, 0, 196618, 4, 0, 196619, 4, 0, 196622, 4, 0, 196623, 4, 0, 196624, 4, 0, 196625, 4, 0, 196627, 3, 0, 262144, 4, 0, 262148, 4, 0, 262149, 4, 0, 262150, 4, 0, 262153, 4, 0, 262154, 4, 0, 262155, 4, 0, 262158, 4, 0, 262159, 4, 0, 262160, 4, 0, 262161, 4, 0, 262163, 3, 0, 327680, 5, 0, 327681, 5, 0, 327682, 5, 0, 327683, 5, 0, 327684, 5, 0, 327685, 5, 0, 327686, 5, 0, 327687, 5, 0, 327688, 5, 0, 327689, 5, 0, 327690, 5, 0, 327691, 5, 0, 327692, 5, 0, 327693, 5, 0, 327694, 5, 0, 327695, 5, 0, 327696, 5, 0, 327697, 5, 0, 327698, 5, 0, 327699, 5, 0, 393216, 4, 0, 393220, 4, 0, 393221, 4, 0, 393222, 4, 0, 393225, 4, 0, 393226, 4, 0, 393227, 4, 0, 393230, 4, 0, 393231, 4, 0, 393232, 4, 0, 393233, 4, 0, 393235, 3, 0, 458752, 5, 0, 458761, 4, 0, 458762, 4, 0, 458763, 4, 0, 458766, 4, 0, 458767, 4, 0, 458768, 4, 0, 458769, 4, 0, 458771, 3, 0, 524288, 4, 0, 524302, 4, 0, 524303, 4, 0, 524304, 4, 0, 524305, 4, 0, 589824, 5, 0, 655360, 4, 0, 720896, 5, 0 )
 
 [node name="kid" type="Sprite" parent="."]
 position = Vector2( 32, 112 )
@@ -46,9 +52,23 @@ scale = Vector2( 0.978448, 1 )
 texture = ExtResource( 7 )
 texture_scale = 1.45
 script = ExtResource( 5 )
-playerP = NodePath("../../Player")
-childP = NodePath("..")
-redP = NodePath("../../TextureRect")
+playerP = NodePath("../../../Level_02/Player")
+childP = NodePath("../../../Level_02/kid")
+redP = NodePath("../../../Level_02/TextureRect")
+cameraP = NodePath("../../../Level_02/Player/Camera2D")
+
+[node name="Door_Parent" parent="." instance=ExtResource( 10 )]
+position = Vector2( 448, 72 )
+
+[node name="Sprite" parent="Door_Parent" index="1"]
+texture = ExtResource( 11 )
+
+[node name="Door_kid" parent="." instance=ExtResource( 10 )]
+position = Vector2( 448, 104 )
+itype = "Door"
+
+[node name="Sprite" parent="Door_kid" index="1"]
+texture = ExtResource( 11 )
 
 [node name="NextLevelBtn" parent="." instance=ExtResource( 6 )]
 margin_left = 48.0
@@ -75,3 +95,8 @@ __meta__ = {
 }
 
 [node name="HUD" parent="." instance=ExtResource( 1 )]
+[connection signal="OnInteraction" from="Door_Parent" to="." method="_OnInteraction"]
+
+[editable path="Door_Parent"]
+
+[editable path="Door_kid"]
