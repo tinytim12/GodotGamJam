@@ -11,12 +11,6 @@ height = 4.61968
 script = ExtResource( 1 )
 char_texture = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
-
 [node name="MainCamera" type="Camera2D" parent="."]
 current = true
 limit_left = 0
@@ -26,3 +20,9 @@ drag_margin_v_enabled = true
 smoothing_enabled = true
 drag_margin_left = 0.3
 drag_margin_right = 0.3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )

@@ -56,7 +56,7 @@ func _checkDistance():
 			_gameOver()
 			
 		if (threshold < 35):
-			camera.set_offset(Vector2( \
+			camera.get_child().set_offset(Vector2( \
 		rand_range(-1.0, 1.0) * (35 - threshold ) / 5, \
 		rand_range(-1.0, 1.0) * (35 - threshold ) / 5 \
 	))
