@@ -1,23 +1,110 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/MainMenu2D.gd" type="Script" id=1]
 [ext_resource path="res://Art/UI/PlayBtn.png" type="Texture" id=2]
 [ext_resource path="res://Art/Sprites/Heading.png" type="Texture" id=3]
+[ext_resource path="res://Art/Sprites/Interactables/Things.png" type="Texture" id=4]
+[ext_resource path="res://Art/Sprites/Bg/Mock_Up_1-Sheet.png" type="Texture" id=5]
+[ext_resource path="res://Art/Sprites/parent.png" type="Texture" id=6]
+[ext_resource path="res://Art/Sprites/kid.png" type="Texture" id=7]
+[ext_resource path="res://Art/Sprites/tiles/floor.png" type="Texture" id=8]
 
 [node name="MainMenu2D" type="Node2D"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 135.345 ],
+"_edit_vertical_guides_": [ 240.024 ]
+}
+
+[node name="Sprite3" type="Sprite" parent="."]
+position = Vector2( 240, 135 )
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 960, 0, 480, 270 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 240, 135 )
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 480, 0, 480, 270 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 240.024, 135 )
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 480, 270 )
+
+[node name="GameName" type="Sprite" parent="."]
+position = Vector2( 240.024, 53.5435 )
+texture = ExtResource( 3 )
+
+[node name="floor" type="TextureRect" parent="."]
+margin_top = 135.0
+margin_right = 480.0
+margin_bottom = 151.0
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite4" type="Sprite" parent="."]
+position = Vector2( 47.1986, 118.929 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+
+[node name="Sprite5" type="Sprite" parent="."]
+position = Vector2( 46.0196, 167.212 )
+rotation = 3.14159
+scale = Vector2( 2, 2 )
+texture = ExtResource( 7 )
+flip_h = true
+
+[node name="Sprite6" type="Sprite" parent="."]
+position = Vector2( 236.43, 121 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 14, 1, 35, 16 )
+
+[node name="Sprite7" type="Sprite" parent="."]
+position = Vector2( 428.096, 103.929 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 3, 16, 24, 32 )
+
+[node name="Sprite8" type="Sprite" parent="."]
+position = Vector2( 428.096, 176.612 )
+rotation = 3.14159
+scale = Vector2( 1.6, 1.6 )
+texture = ExtResource( 4 )
+flip_h = true
+region_enabled = true
+region_rect = Rect2( 3, 16, 24, 32 )
 
 [node name="Play_button" type="TextureButton" parent="."]
-margin_left = 146.472
-margin_top = 106.214
-margin_right = 162.472
-margin_bottom = 122.214
+margin_left = 218.196
+margin_top = 159.065
+margin_right = 234.196
+margin_bottom = 175.065
+rect_scale = Vector2( 3, 3 )
 texture_normal = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 167.589, 47.4199 )
-texture = ExtResource( 3 )
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = 220.0
+margin_top = 177.0
+margin_right = 266.0
+margin_bottom = 193.0
+mouse_filter = 2
+bbcode_enabled = true
+bbcode_text = "[rainbow]PLAY"
+text = "PLAY"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="button_up" from="Play_button" to="." method="_on_Play_button_up"]

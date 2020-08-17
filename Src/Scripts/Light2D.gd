@@ -18,7 +18,7 @@ var _timer = null
 onready var red = get_node(redP)
 onready var child = get_node(childP)
 onready var player = get_node(playerP)
-onready var camera = get_node("/root/Level_01/Parent/MainCamera")
+onready var camera = get_node("/root/Level/Parent/MainCamera")
 
 func _ready():
 	set("energy", 0.0)
@@ -36,7 +36,7 @@ func _ready():
 	red.modulate.a = 0
 
 func _on_Timer_timeout():
-	print("Second!")
+	#print("Second!")
 	_checkDistance()
 	pass # Replace with function body.
 
@@ -47,14 +47,13 @@ func _on_Timer_timeout():
 	
 	
 func _checkDistance():
-	
 	var distance = abs(child.position.x - player.position.x);
 	if (distance > dangerDistance):
 		set("energy", distance / lightRate);
 		threshold -= 1;
 		if (red.modulate.a < 0.7):
 			red.modulate.a = reddenRate * distance
-			print("red.modulate.a")
+			#print("red.modulate.a")
 		if (threshold < 0):
 			_gameOver()
 			

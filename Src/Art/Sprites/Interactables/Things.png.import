@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/key.png-37d7178d417b99d20abb3314c2ec70aa.stex"
+path="res://.import/Things.png-b6f03d7b055e8863308cad217396b69f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Sprites/key.png"
-dest_files=[ "res://.import/key.png-37d7178d417b99d20abb3314c2ec70aa.stex" ]
+source_file="res://Art/Sprites/Interactables/Things.png"
+dest_files=[ "res://.import/Things.png-b6f03d7b055e8863308cad217396b69f.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
