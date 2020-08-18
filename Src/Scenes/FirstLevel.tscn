@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Art/Sprites/tiles/init_tileset.tres" type="TileSet" id=2]
@@ -9,7 +9,11 @@
 [ext_resource path="res://Art/Sprites/kid.png" type="Texture" id=7]
 [ext_resource path="res://Art/Sprites/tiles/door.png" type="Texture" id=8]
 [ext_resource path="res://Art/Shaders/switchtile.png" type="Texture" id=9]
-[ext_resource path="res://Switch.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Switch.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/MainCamera.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/TextureRect.tscn" type="PackedScene" id=12]
+
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 11.8742, 29.7109 )
@@ -18,6 +22,8 @@ extents = Vector2( 11.8742, 29.7109 )
 script = ExtResource( 6 )
 prev_scene = "res://Scenes/MainMenu2D.tscn"
 next_scene = "res://Scenes/Level_02.tscn"
+
+[node name="MainCamera" parent="." instance=ExtResource( 11 )]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
@@ -84,6 +90,8 @@ texture = ExtResource( 9 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gate"]
 position = Vector2( 654.184, 100.65 )
 shape = SubResource( 1 )
+
+[node name="TextureRect" parent="." instance=ExtResource( 12 )]
 [connection signal="OnInteraction" from="Door_Parent" to="." method="_OnInteraction"]
 [connection signal="OnInteraction" from="Door_Kid" to="." method="_OnInteraction"]
 [connection signal="OnInteraction" from="Switch" to="." method="_OnInteraction"]

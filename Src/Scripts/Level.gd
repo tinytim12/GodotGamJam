@@ -6,6 +6,8 @@ var mainmenu_scene = "res://Scenes/MainMenu2D.tscn"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Find important scene nodes: players and camera, etc.
+	GM.init_level()
 	pass # Replace with function body.
 
 

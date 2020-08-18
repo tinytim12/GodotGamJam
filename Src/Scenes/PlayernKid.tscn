@@ -1,19 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Art/Sprites/parent.png" type="Texture" id=3]
 [ext_resource path="res://Art/Sprites/kid.png" type="Texture" id=4]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Parent" type="KinematicBody2D" parent="." instance=ExtResource( 2 )]
+[node name="Parent" parent="." instance=ExtResource( 2 )]
 position = Vector2( 32, 72 )
-script = ExtResource( 1 )
 char_texture = ExtResource( 3 )
 
-[node name="Kid" type="KinematicBody2D" parent="." instance=ExtResource( 2 )]
+[node name="Kid" parent="." instance=ExtResource( 2 )]
 position = Vector2( 32, 104 )
-script = ExtResource( 1 )
 is_kid = true
 char_texture = ExtResource( 4 )
