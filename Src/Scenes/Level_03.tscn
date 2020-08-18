@@ -26,6 +26,7 @@ position = Vector2( 32, 104 )
 [node name="Kid" parent="." instance=ExtResource( 4 )]
 position = Vector2( 32, 168 )
 is_kid = true
+parentP = NodePath("../Parent")
 char_texture = ExtResource( 3 )
 
 [node name="Door_Parent" parent="." instance=ExtResource( 5 )]

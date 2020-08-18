@@ -11,6 +11,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		load_level()
 
+
 func _on_Play_button_up():
 	load_level()
 

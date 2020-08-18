@@ -27,8 +27,8 @@ position = Vector2( 40.4949, 104 )
 [node name="Kid" parent="." instance=ExtResource( 4 )]
 position = Vector2( 40.4949, 162 )
 is_kid = true
-char_texture = ExtResource( 7 )
 parentP = NodePath("../Parent")
+char_texture = ExtResource( 7 )
 
 [node name="Key" parent="." instance=ExtResource( 3 )]
 position = Vector2( 264, 84 )

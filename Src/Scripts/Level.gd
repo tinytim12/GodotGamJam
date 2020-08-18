@@ -9,18 +9,15 @@ func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
 # load main menu
 func load_mainmenu_scene():
 	get_tree().change_scene(mainmenu_scene)
 
+
 # load prev scene
 func load_prev_scene():
 	get_tree().change_scene(prev_scene)
+
 
 # load next scene
 func load_next_scene():

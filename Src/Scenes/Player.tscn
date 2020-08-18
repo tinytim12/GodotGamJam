@@ -11,9 +11,8 @@ height = 4.61968
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
-char_texture = ExtResource( 2 )
 parentP = NodePath(".")
-redP = NodePath("KidEffects/TextureRect")
+char_texture = ExtResource( 2 )
 
 [node name="MainCamera" type="Camera2D" parent="."]
 current = true

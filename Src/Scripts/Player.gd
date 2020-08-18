@@ -1,7 +1,9 @@
 extends KinematicBody2D
 
 export var is_kid = false
+export(NodePath) var parentP
 export(Texture) var char_texture
+export(int) var threshold
 
 var TARGET_FPS = 60
 
@@ -26,26 +28,23 @@ var tilemap_cell_size
 # ------------------------------------------------------------------------------
 # Kid reddening effect
 # ------------------------------------------------------------------------------
-export(NodePath) var parentP
-export(NodePath) var redP
-export(int) var threshold
 var dangerDistance = 15
 var reddenRate = 0.002
 var lightRate = 30
 var cameraThreshold = 35
 var _timer = null
 
-onready var red = get_node(redP)
 onready var parent = get_node(parentP)
 onready var camera = parent.get_node("MainCamera")
 onready var light = get_node("KidEffects/Light2D")
+onready var red = get_node("KidEffects/TextureRect")
 # ------------------------------------------------------------------------------
 
 func _ready():
 	Engine.set_target_fps(TARGET_FPS)
 	if is_kid == true:
 		GRAVITY = -GRAVITY
-		SPEED = SPEED - childSpeedModifier
+		SPEED = SPEED #- childSpeedModifier
 		JUMP_SPEED = -JUMP_SPEED
 		ground_normal = -ground_normal
 		player_sprite.texture = char_texture
@@ -63,7 +62,6 @@ func _ready():
 		_timer.set_one_shot(false) # Make sure it loops
 		_timer.start()
 		 
-		red = get_node(redP)
 		red.modulate.a = 0
 # ------------------------------------------------------------------------------
 		# remove camera
@@ -83,22 +81,22 @@ func _physics_process(delta):
 	# input handling
 	if Input.is_action_pressed("ui_left"):
 		if is_kid == true:
-			velocity.x = -SPEED #+ childSpeedModifier
+			velocity.x = -SPEED + childSpeedModifier
 		else:
 			velocity.x = -SPEED
 	elif Input.is_action_pressed("ui_right"):
 		if is_kid == true:
-			velocity.x = SPEED #- childSpeedModifier
+			velocity.x = SPEED - childSpeedModifier
 		else:
 			velocity.x = SPEED
 	elif is_kid == true:
-		var distance = get_node("/root/Level/Parent").position.x - position.x
-		if ( abs(distance) >1):
+		var distance = parent.position.x - position.x
+		if (abs(distance) > 1):
 			if (distance < 0):
-				velocity.x = -SPEED #+ childSpeedModifier
+				velocity.x = -SPEED + childSpeedModifier
 				#print("too far")
 			else:
-				velocity.x = SPEED #- childSpeedModifier
+				velocity.x = SPEED - childSpeedModifier
 		else: 
 			velocity.x = 0
 	else:
