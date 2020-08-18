@@ -4,7 +4,8 @@ export (String, FILE) var prev_scene
 export (String, FILE) var next_scene
 var mainmenu_scene = "res://Scenes/MainMenu2D.tscn"
 
-# Called when the node enters the scene tree for the first time.
+onready var AudioMgr = get_node("AudioMgr")
+
 func _ready():
 	pass # Replace with function body.
 
@@ -27,16 +28,24 @@ func load_next_scene():
 func _OnInteraction(val):
 	print("_OnInteraction : " + str(val))
 	if val == "Switch":
-		
 		var gate = find_node_by_name(get_tree().get_root(), "Gate")
 		gate.queue_free()
-		print ("Switched on")
+		print_debug("_OnInteraction : Switch")
+		if AudioMgr != null:
+			AudioMgr.play_sfx(GData.SFX.switch)
 	elif val == "Door":
+		print_debug("_OnInteraction : Door")
+		if AudioMgr != null:
+			AudioMgr.play_sfx(GData.SFX.rune)
 		load_next_scene()
 	elif val == "Star":
-		print ("Collected Star")
+		print_debug ("_OnInteraction : Collected Star")
+		if AudioMgr != null:
+			AudioMgr.play_sfx(GData.SFX.star)
 	elif val == "Key":
-		print ("Collected Key")
+		print_debug ("_OnInteraction : Collected Key")
+		if AudioMgr != null:
+			AudioMgr.play_sfx(GData.SFX.star)
 
 
 func find_node_by_name(root, name):

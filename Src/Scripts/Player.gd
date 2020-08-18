@@ -38,6 +38,8 @@ onready var parent = get_node(parentP)
 onready var camera = parent.get_node("MainCamera")
 onready var light = get_node("KidEffects/Light2D")
 onready var red_effect = get_node(textureRectP)
+onready var AudioMgr = get_parent().get_node("AudioMgr")
+
 # ------------------------------------------------------------------------------
 
 func _ready():
@@ -103,6 +105,8 @@ func _physics_process(delta):
 			velocity.y = JUMP_SPEED - childJumpModifier
 		else:
 			velocity.y = JUMP_SPEED
+			if AudioMgr!= null:
+				AudioMgr.play_sfx(GData.SFX.jump)
 		jump_count += 1
 	# apply gravity
 	velocity.y += GRAVITY * delta
@@ -156,7 +160,7 @@ func _checkDistance(delta):
 func _gameOver():
 	get_tree().reload_current_scene()
 
-	
+
 func _adjustChild():
 	var sceneName = get_tree().get_current_scene().get_name();
 	if(sceneName == "FirstLevel" ):

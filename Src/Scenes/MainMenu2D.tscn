@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/MainMenu2D.gd" type="Script" id=1]
 [ext_resource path="res://Art/UI/PlayBtn.png" type="Texture" id=2]
@@ -9,24 +9,6 @@
 [ext_resource path="res://Art/Sprites/kid.png" type="Texture" id=7]
 [ext_resource path="res://Art/Sprites/tiles/floor.png" type="Texture" id=8]
 [ext_resource path="res://Fonts/mago1.ttf" type="DynamicFontData" id=9]
-[ext_resource path="res://Audio/Fox_Child.wav" type="AudioStream" id=10]
-[ext_resource path="res://Audio/Fox_Adult.wav" type="AudioStream" id=11]
-[ext_resource path="res://Audio/Jump_5.wav" type="AudioStream" id=12]
-[ext_resource path="res://Audio/Key_1.wav" type="AudioStream" id=13]
-[ext_resource path="res://Audio/Key_3.wav" type="AudioStream" id=14]
-[ext_resource path="res://Audio/Rune_1.wav" type="AudioStream" id=15]
-[ext_resource path="res://Audio/Rune_2.wav" type="AudioStream" id=16]
-[ext_resource path="res://Audio/Key_2.wav" type="AudioStream" id=17]
-[ext_resource path="res://Audio/Footstep_3.wav" type="AudioStream" id=18]
-[ext_resource path="res://Audio/Jump_2.wav" type="AudioStream" id=19]
-[ext_resource path="res://Audio/Jump_3.wav" type="AudioStream" id=20]
-[ext_resource path="res://Audio/Footstep_1.wav" type="AudioStream" id=21]
-[ext_resource path="res://Audio/Warning_1.wav" type="AudioStream" id=22]
-[ext_resource path="res://Audio/ButtonClick.wav" type="AudioStream" id=23]
-[ext_resource path="res://Audio/Footstep_2.wav" type="AudioStream" id=24]
-[ext_resource path="res://Audio/Footstep_4.wav" type="AudioStream" id=25]
-[ext_resource path="res://Audio/Jump_1.wav" type="AudioStream" id=26]
-[ext_resource path="res://Audio/Jump_4.wav" type="AudioStream" id=27]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 9 )
@@ -37,6 +19,8 @@ __meta__ = {
 "_edit_horizontal_guides_": [ 135.345 ],
 "_edit_vertical_guides_": [ 240.024 ]
 }
+
+[node name="AudioMgr" parent="." instance=ExtResource( 3 )]
 
 [node name="Sprite3" type="Sprite" parent="."]
 position = Vector2( 240, 135 )
@@ -144,15 +128,4 @@ text = "Foxy Family"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="AudioMgr" parent="." instance=ExtResource( 3 )]
-position = Vector2( 240, 135 )
-button_click = ExtResource( 23 )
-sfx_warning = ExtResource( 22 )
-walks = [ ExtResource( 21 ), ExtResource( 24 ), ExtResource( 18 ), ExtResource( 25 ) ]
-jumps = [ ExtResource( 26 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 27 ), ExtResource( 12 ) ]
-keys = [ ExtResource( 13 ), ExtResource( 17 ), ExtResource( 14 ) ]
-runes = [ ExtResource( 15 ), ExtResource( 16 ) ]
-parents = [ ExtResource( 11 ) ]
-kids = [ ExtResource( 10 ) ]
 [connection signal="button_up" from="Play_button" to="." method="_on_Play_button_up"]

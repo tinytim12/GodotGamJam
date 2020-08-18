@@ -3,6 +3,7 @@ extends Node2D
 
 func _ready():
 	Engine.target_fps = GData.TARGET_FPS
+	$AudioMgr.play_sfx(GData.SFX.kid)
 
 
 func _process(_delta):
@@ -12,7 +13,7 @@ func _process(_delta):
 
 func _on_Play_button_up():
 	$AudioMgr.play_sfx(GData.SFX.button_click)
-	#load_level()
+	load_level()
 
 
 func load_level():

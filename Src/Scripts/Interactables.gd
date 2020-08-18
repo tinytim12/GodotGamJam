@@ -16,5 +16,6 @@ func _ready():
 
 func _on_Player_entered(body):
 	if (body.name == "Parent"):
-		self.queue_free()
+		print_debug("OnInteraction : " + itype + " : emit_signal")
 		emit_signal("OnInteraction", itype)
+		self.queue_free()

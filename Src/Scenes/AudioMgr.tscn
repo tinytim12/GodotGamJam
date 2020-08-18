@@ -1,18 +1,56 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scripts/AudioMgr.gd" type="Script" id=1]
+[ext_resource path="res://Audio/Footstep_1.wav" type="AudioStream" id=2]
+[ext_resource path="res://Audio/Jump_1.wav" type="AudioStream" id=3]
+[ext_resource path="res://Audio/Jump_2.wav" type="AudioStream" id=4]
+[ext_resource path="res://Audio/Jump_3.wav" type="AudioStream" id=5]
+[ext_resource path="res://Audio/Fox_Child.wav" type="AudioStream" id=6]
+[ext_resource path="res://Audio/Fox_Adult.wav" type="AudioStream" id=7]
+[ext_resource path="res://Audio/Jump_5.wav" type="AudioStream" id=8]
+[ext_resource path="res://Audio/Key_1.wav" type="AudioStream" id=9]
+[ext_resource path="res://Audio/Key_3.wav" type="AudioStream" id=10]
+[ext_resource path="res://Audio/Rune_1.wav" type="AudioStream" id=11]
+[ext_resource path="res://Audio/Rune_2.wav" type="AudioStream" id=12]
+[ext_resource path="res://Audio/Key_2.wav" type="AudioStream" id=13]
+[ext_resource path="res://Audio/Footstep_3.wav" type="AudioStream" id=14]
+[ext_resource path="res://Audio/Warning_1.wav" type="AudioStream" id=15]
+[ext_resource path="res://Audio/ButtonClick.wav" type="AudioStream" id=16]
+[ext_resource path="res://Audio/Footstep_2.wav" type="AudioStream" id=17]
+[ext_resource path="res://Audio/Footstep_4.wav" type="AudioStream" id=18]
+[ext_resource path="res://Audio/Jump_4.wav" type="AudioStream" id=19]
 
 [node name="AudioMgr" type="Node2D"]
+position = Vector2( 240, 135 )
 script = ExtResource( 1 )
+button_click = ExtResource( 16 )
+sfx_warning = ExtResource( 15 )
+walks = [ ExtResource( 2 ), ExtResource( 17 ), ExtResource( 14 ), ExtResource( 18 ) ]
+jumps = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 19 ), ExtResource( 8 ) ]
+keys = [ ExtResource( 9 ), ExtResource( 13 ), ExtResource( 10 ) ]
+runes = [ ExtResource( 11 ), ExtResource( 12 ) ]
+parents = [ ExtResource( 7 ) ]
+kids = [ ExtResource( 6 ) ]
 
-[node name="Music" type="Node2D" parent="."]
+[node name="Music_players" type="Node2D" parent="."]
 
-[node name="music_player" type="AudioStreamPlayer" parent="Music"]
+[node name="music_player_0" type="AudioStreamPlayer" parent="Music_players"]
 
-[node name="SFX_player" type="Node2D" parent="."]
+[node name="SFX_players" type="Node2D" parent="."]
 
-[node name="sfx_player0" type="AudioStreamPlayer2D" parent="SFX_player"]
+[node name="sfx_player_0" type="AudioStreamPlayer" parent="SFX_players"]
 
-[node name="sfx_player1" type="AudioStreamPlayer2D" parent="SFX_player"]
+[node name="sfx_player_1" type="AudioStreamPlayer" parent="SFX_players"]
 
-[node name="sfx_player2" type="AudioStreamPlayer2D" parent="SFX_player"]
+[node name="sfx_player_2" type="AudioStreamPlayer" parent="SFX_players"]
+
+[node name="sfx_player_3" type="AudioStreamPlayer" parent="SFX_players"]
+
+[node name="SFX_players_stereo" type="Node2D" parent="."]
+visible = false
+
+[node name="sfx_player_0" type="AudioStreamPlayer2D" parent="SFX_players_stereo"]
+
+[node name="sfx_player_1" type="AudioStreamPlayer2D" parent="SFX_players_stereo"]
+
+[node name="sfx_player_2" type="AudioStreamPlayer2D" parent="SFX_players_stereo"]

@@ -14,48 +14,39 @@ export(Array, AudioStream) var kids
 var cur_sfx_player = 0
 var rng = RandomNumberGenerator.new()
 
+onready var sfx_player_0 = get_node("SFX_players/sfx_player_0")
+onready var sfx_player_1 = get_node("SFX_players/sfx_player_1")
+onready var sfx_player_2 = get_node("SFX_players/sfx_player_2")
+onready var sfx_player_3 = get_node("SFX_players/sfx_player_3")
+
 
 func _ready():
 	rng.randomize()
-	pass 
 	
 
 func play_muisic():
 	print_debug("Music")
-	$Music/music_player.play()
+	$Music_players/music_player_0.play()
 
 
 func play_sfx(val):
 	if cur_sfx_player == 1:
-		$SFX_player/sfx_player1.stream = get_audio_stream(val)
-		print_debug($SFX_player/sfx_player1.stream.resource_name)
-		$SFX_player/sfx_player1.play()
+		sfx_player_1.stream = get_audio_stream(val)
+		sfx_player_1.play()
 	elif cur_sfx_player == 2:
-		$SFX_player/sfx_player2.stream = get_audio_stream(val)
-		print_debug($SFX_player/sfx_player2.stream.resource_name)
-		$SFX_player/sfx_player2.play()
+		sfx_player_2.stream = get_audio_stream(val)
+		sfx_player_2.play()
+	elif cur_sfx_player == 3:
+		sfx_player_3.stream = get_audio_stream(val)
+		sfx_player_3.play()
 	else:
-		$SFX_player/sfx_player0.stream = get_audio_stream(val)
-		print_debug($SFX_player/sfx_player0.stream.resource_name)
-		$SFX_player/sfx_player0.play()
+		sfx_player_0.stream = get_audio_stream(val)
+		sfx_player_0.play()
 	# multiple sfx
 	cur_sfx_player += 1;
 	if cur_sfx_player >= 3:
 		cur_sfx_player = 0
 
-
-# values
-#	button_click = 0,
-#	walk = 1,
-#	jump = 2,
-#	keys = 10,
-#	switch = 11,
-#	star = 12,
-#	rune = 13,
-#	door = 14,
-#	warning = 20,
-#	parent = 31,
-#	kid = 32,
 
 func get_audio_stream(val):
 	match val:
@@ -81,5 +72,4 @@ func get_audio_stream(val):
 			return kids[rng.randi_range(0, kids.size()-1)]
 		GData.SFX.warning:
 			return sfx_warning
-	#if val == GData.SFX.button_click:
 
