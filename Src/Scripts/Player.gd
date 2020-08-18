@@ -2,11 +2,13 @@ extends KinematicBody2D
 
 export var is_kid = false
 export(NodePath) var parentP
+export(NodePath) var textureRectP
 export(Texture) var char_texture
 export(int) var threshold
+export var dangerDistance = 3
 
 var TARGET_FPS = 60
-
+var tile_size = Vector2(16, 16)
 var GRAVITY = 512
 var SPEED = 64
 var JUMP_SPEED = -192
@@ -28,7 +30,6 @@ var tilemap_cell_size
 # ------------------------------------------------------------------------------
 # Kid reddening effect
 # ------------------------------------------------------------------------------
-var dangerDistance = 15
 var reddenRate = 0.002
 var lightRate = 30
 var cameraThreshold = 35
@@ -37,11 +38,12 @@ var _timer = null
 onready var parent = get_node(parentP)
 onready var camera = parent.get_node("MainCamera")
 onready var light = get_node("KidEffects/Light2D")
-onready var red = get_node("KidEffects/TextureRect")
+onready var red_effect = get_node(textureRectP)
 # ------------------------------------------------------------------------------
 
 func _ready():
 	Engine.set_target_fps(TARGET_FPS)
+	dangerDistance = dangerDistance * tile_size.x
 	if is_kid == true:
 		GRAVITY = -GRAVITY
 		SPEED = SPEED #- childSpeedModifier
@@ -62,10 +64,12 @@ func _ready():
 		_timer.set_one_shot(false) # Make sure it loops
 		_timer.start()
 		 
-		red.modulate.a = 0
+		red_effect.modulate.a = 0
 # ------------------------------------------------------------------------------
 		# remove camera
 		$MainCamera.queue_free()
+		# set size of the color effect
+		red_effect.rect_min_size = Vector2(960, 540)
 	else:
 		# parent remove the kid effects 
 		$KidEffects.queue_free()
@@ -141,20 +145,19 @@ func _checkDistance():
 	if (distance > dangerDistance):
 		light.set("energy", distance / lightRate);
 		threshold -= 1;
-		if (red.modulate.a < 0.7):
-			red.modulate.a = reddenRate * distance
-			#print("red.modulate.a")
+		if (red_effect.modulate.a < 0.7):
+			red_effect.modulate.a = reddenRate * distance
+			#print("red_effect.modulate.a")
 		if (threshold < 0):
 			_gameOver()
 			
 		if (threshold < cameraThreshold):
 			camera.set_offset(Vector2( \
 		rand_range(-1.0, 1.0) * (cameraThreshold - threshold ) / 5, \
-		rand_range(-1.0, 1.0) * (cameraThreshold - threshold ) / 5 \
-	))
+		rand_range(-1.0, 1.0) * (cameraThreshold - threshold ) / 5))
 	else:
 		threshold = 50
-		red.modulate.a = 0
+		red_effect.modulate.a = 0
 		if light != null:
 			light.set("energy", 0)
 

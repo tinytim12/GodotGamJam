@@ -12,6 +12,7 @@ height = 4.61968
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 parentP = NodePath(".")
+textureRectP = NodePath("KidEffects/TextureRect")
 char_texture = ExtResource( 2 )
 
 [node name="MainCamera" type="Camera2D" parent="."]
@@ -36,11 +37,12 @@ texture = ExtResource( 2 )
 texture = ExtResource( 3 )
 
 [node name="TextureRect" type="TextureRect" parent="KidEffects"]
-margin_left = 196.004
-margin_top = 546.936
-margin_right = 1476.01
-margin_bottom = 1266.94
+margin_right = 1.0
+margin_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource( 4 )
+expand = true
 stretch_mode = 1
 __meta__ = {
 "_edit_use_anchors_": false
