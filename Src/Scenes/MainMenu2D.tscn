@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/MainMenu2D.gd" type="Script" id=1]
 [ext_resource path="res://Art/UI/PlayBtn.png" type="Texture" id=2]
@@ -8,6 +8,10 @@
 [ext_resource path="res://Art/Sprites/parent.png" type="Texture" id=6]
 [ext_resource path="res://Art/Sprites/kid.png" type="Texture" id=7]
 [ext_resource path="res://Art/Sprites/tiles/floor.png" type="Texture" id=8]
+[ext_resource path="res://Fonts/mago1.ttf" type="DynamicFontData" id=9]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 9 )
 
 [node name="MainMenu2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -34,7 +38,8 @@ texture = ExtResource( 5 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 480, 270 )
 
-[node name="GameName" type="Sprite" parent="."]
+[node name="GameNameSprite" type="Sprite" parent="."]
+visible = false
 position = Vector2( 240.024, 53.5435 )
 texture = ExtResource( 3 )
 
@@ -96,14 +101,33 @@ __meta__ = {
 }
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-margin_left = 220.0
-margin_top = 177.0
-margin_right = 266.0
-margin_bottom = 193.0
+margin_left = 226.0
+margin_top = 176.0
+margin_right = 272.0
+margin_bottom = 192.0
 mouse_filter = 2
+custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
-bbcode_text = "[rainbow]PLAY"
+bbcode_text = "[shake]PLAY[/shake]"
 text = "PLAY"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameName" type="RichTextLabel" parent="."]
+margin_left = 176.024
+margin_right = 250.024
+margin_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 2, 2 )
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 1 )
+custom_colors/default_color = Color( 0.87451, 0.443137, 0.14902, 1 )
+custom_colors/font_color_shadow = Color( 0.4, 0.223529, 0.192157, 1 )
+bbcode_enabled = true
+bbcode_text = "[shake rate=4 level=4]Foxy Family[/shake]"
+text = "Foxy Family"
 __meta__ = {
 "_edit_use_anchors_": false
 }
