@@ -129,10 +129,10 @@ func update_player():
 # ------------------------------------------------------------------------------
 
 func _checkDistance(delta):
-	var distance = abs(position.x - parent.position.x)
+	var distance = abs( position.x - parent.position.x )
 	if (distance > dangerDistance):
 		light.set("energy", distance *  delta );
-		threshold -= 10 * delta;
+		threshold -= 0.25 * distance * delta;
 		if (red_effect.modulate.a < 0.5):
 			red_effect.modulate.a = lerp(red_effect.modulate.a, reddenRate * distance * delta , 0.2)
 			#print("red_effect.modulate.a")
