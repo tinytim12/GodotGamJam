@@ -5,7 +5,7 @@ export(NodePath) var parentP
 export(NodePath) var textureRectP
 export(Texture) var char_texture
 export(int) var threshold
-export var dangerDistance = 3
+export var danger_tile_dist = 3.0
 
 var TARGET_FPS = 60
 var tile_size = Vector2(16, 16)
@@ -19,22 +19,23 @@ var jump_count = 0
 var MAX_JUMPS = 2
 var dir_vector = Vector2(1, 0) # default looking right
 
-var childSpeedModifier = 20
-
 onready var player_sprite = get_node("Sprite")
 onready var player_camera = get_node("MainCamera")
 
 var tilemap_rect
 var tilemap_cell_size
 
+# kid movement
+var childSpeedModifier = 20
+
 # ------------------------------------------------------------------------------
 # Kid reddening effect
 # ------------------------------------------------------------------------------
+var dangerDistance = 32
 var reddenRate = 0.002
 var lightRate = 30
 var cameraThreshold = 35
 var _timer = null
-
 onready var parent = get_node(parentP)
 onready var camera = parent.get_node("MainCamera")
 onready var light = get_node("KidEffects/Light2D")
@@ -43,7 +44,7 @@ onready var red_effect = get_node(textureRectP)
 
 func _ready():
 	Engine.set_target_fps(TARGET_FPS)
-	dangerDistance = dangerDistance * tile_size.x
+	dangerDistance = danger_tile_dist * tile_size.x
 	if is_kid == true:
 		GRAVITY = -GRAVITY
 		SPEED = SPEED #- childSpeedModifier
