@@ -27,10 +27,28 @@ func load_next_scene():
 func _OnInteraction(val):
 	print("_OnInteraction : " + str(val))
 	if val == "Switch":
+		
+		var gate = find_node_by_name(get_tree().get_root(), "Gate")
+		gate.queue_free()
 		print ("Switched on")
-	if val == "Door":
+	elif val == "Door":
 		load_next_scene()
 	elif val == "Star":
 		print ("Collected Star")
 	elif val == "Key":
 		print ("Collected Key")
+
+
+func find_node_by_name(root, name):
+
+	if(root.get_name() == name): return root
+
+	for child in root.get_children():
+		if(child.get_name() == name):
+			return child
+
+		var found = find_node_by_name(child, name)
+
+		if(found): return found
+
+	return null
