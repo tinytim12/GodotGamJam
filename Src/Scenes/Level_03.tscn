@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Art/Sprites/tiles/init_tileset.tres" type="TileSet" id=2]
@@ -8,6 +8,10 @@
 [ext_resource path="res://Scenes/NextLevelBtn.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Art/Sprites/tiles/door.png" type="Texture" id=7]
 [ext_resource path="res://Scripts/Level.gd" type="Script" id=8]
+[ext_resource path="res://Fonts/mago1.ttf" type="DynamicFontData" id=9]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 9 )
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 8 )
@@ -49,9 +53,10 @@ position = Vector2( 376, 28 )
 
 [node name="Label" type="Label" parent="."]
 margin_left = 64.0
-margin_right = 185.0
+margin_right = 128.0
 margin_bottom = 16.0
-text = "Level 03 : 480x270"
+custom_fonts/font = SubResource( 1 )
+text = "Level 03"
 align = 1
 valign = 1
 __meta__ = {
