@@ -11,6 +11,20 @@ var MUSIC_VOLUME = 0
 
 var GAME_PROGRESS = 0 # completed levels
 
+enum SFX { 
+	button_click = 0,
+	walk = 1,
+	jump = 2,
+	key = 10,
+	switch = 11,
+	star = 12,
+	rune = 13,
+	door = 14,
+	warning = 20,
+	parent = 31,
+	kid = 32,
+} 
+
 func _ready():
 	pass
 

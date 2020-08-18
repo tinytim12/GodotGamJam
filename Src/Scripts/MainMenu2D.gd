@@ -11,7 +11,8 @@ func _process(_delta):
 
 
 func _on_Play_button_up():
-	load_level()
+	$AudioMgr.play_sfx(GData.SFX.button_click)
+	#load_level()
 
 
 func load_level():

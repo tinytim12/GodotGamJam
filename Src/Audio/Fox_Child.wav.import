@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Fox_Child.wav-d67090b1236faee2ec9bd84e7c55c50f.sample"
+
+[deps]
+
+source_file="res://Audio/Fox_Child.wav"
+dest_files=[ "res://.import/Fox_Child.wav-d67090b1236faee2ec9bd84e7c55c50f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

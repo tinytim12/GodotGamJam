@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Rune_1.wav-bb50893aaa7f9ce3c63281e2111b045b.sample"
+
+[deps]
+
+source_file="res://Audio/Rune_1.wav"
+dest_files=[ "res://.import/Rune_1.wav-bb50893aaa7f9ce3c63281e2111b045b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
