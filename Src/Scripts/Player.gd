@@ -31,11 +31,10 @@ var childSpeedModifier = 20
 # ------------------------------------------------------------------------------
 # Kid reddening effect
 # ------------------------------------------------------------------------------
-var dangerDistance = 32
-var reddenRate = 0.002
+var dangerDistance = 45
+var reddenRate = 0.1
 var lightRate = 30
-var cameraThreshold = 35
-var _timer = null
+var cameraThreshold = 0.1
 onready var parent = get_node(parentP)
 onready var camera = parent.get_node("MainCamera")
 onready var light = get_node("KidEffects/Light2D")
@@ -56,15 +55,6 @@ func _ready():
 # ------------------------------------------------------------------------------
 		light.set("energy", 0.0)
 		threshold = 50
-		
-		_timer = Timer.new()
-		add_child(_timer)
-	
-		_timer.connect("timeout", self, "_on_Timer_timeout")
-		_timer.set_wait_time(0.2)
-		_timer.set_one_shot(false) # Make sure it loops
-		_timer.start()
-		 
 		red_effect.modulate.a = 0
 # ------------------------------------------------------------------------------
 		# remove camera
@@ -123,6 +113,7 @@ func _physics_process(delta):
 		is_grounded = false
 	# update the player art and animation
 	update_player()
+	_checkDistance(delta)
 
 
 # update the player art and animation
@@ -136,31 +127,27 @@ func update_player():
 # ------------------------------------------------------------------------------
 # kid reddening effect
 # ------------------------------------------------------------------------------
-func _on_Timer_timeout():
-	#print("Second!")
-	_checkDistance()
 
-
-func _checkDistance():
-	var distance = abs(position.x - parent.position.x)
+func _checkDistance(delta):
+	var distance = abs( position.x - parent.position.x )
 	if (distance > dangerDistance):
-		light.set("energy", distance / lightRate);
-		threshold -= 1;
-		if (red_effect.modulate.a < 0.7):
-			red_effect.modulate.a = reddenRate * distance
+		light.set("energy", distance *  delta );
+		threshold -= 0.25 * distance * delta;
+		if (red_effect.modulate.a < 0.5):
+			red_effect.modulate.a = lerp(red_effect.modulate.a, reddenRate * distance * delta , 0.2)
 			#print("red_effect.modulate.a")
 		if (threshold < 0):
 			_gameOver()
-			
-		if (threshold < cameraThreshold):
-			camera.set_offset(Vector2( \
-		rand_range(-1.0, 1.0) * (cameraThreshold - threshold ) / 5, \
-		rand_range(-1.0, 1.0) * (cameraThreshold - threshold ) / 5))
+		print_debug(threshold)
+		if (camera.trauma < 0.24):
+			camera.add_trauma(cameraThreshold * distance * delta)
+			print_debug("shake!!")
 	else:
 		threshold = 50
-		red_effect.modulate.a = 0
-		if light != null:
-			light.set("energy", 0)
+		if red_effect != null and red_effect.modulate.a > 0:
+			red_effect.modulate.a = lerp(red_effect.modulate.a, 0 , 0.2)
+		if light != null and light.energy > 0:
+			light.energy = lerp(light.energy, 0, 0.2)
 
 
 func _gameOver():
