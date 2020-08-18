@@ -7,8 +7,6 @@ export(Texture) var char_texture
 export(int) var threshold
 export var danger_tile_dist = 3.0
 
-var TARGET_FPS = 60
-var tile_size = Vector2(16, 16)
 var GRAVITY = 512
 var SPEED = 64
 var JUMP_SPEED = -192
@@ -44,8 +42,7 @@ onready var red_effect = get_node(textureRectP)
 
 func _ready():
 	_adjustChild()
-	Engine.set_target_fps(TARGET_FPS)
-	dangerDistance = danger_tile_dist * tile_size.x
+	dangerDistance = danger_tile_dist * GData.TILE_SIZE.x
 	if is_kid == true:
 		GRAVITY = -GRAVITY
 		SPEED = SPEED #- childSpeedModifier

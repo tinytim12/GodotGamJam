@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/MainMenu2D.gd" type="Script" id=1]
 [ext_resource path="res://Art/UI/PlayBtn.png" type="Texture" id=2]
-[ext_resource path="res://Art/Sprites/Heading.png" type="Texture" id=3]
 [ext_resource path="res://Art/Sprites/Interactables/Things.png" type="Texture" id=4]
 [ext_resource path="res://Art/Sprites/Bg/Mock_Up_1-Sheet.png" type="Texture" id=5]
 [ext_resource path="res://Art/Sprites/parent.png" type="Texture" id=6]
@@ -37,11 +36,6 @@ position = Vector2( 240.024, 135 )
 texture = ExtResource( 5 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 480, 270 )
-
-[node name="GameNameSprite" type="Sprite" parent="."]
-visible = false
-position = Vector2( 240.024, 53.5435 )
-texture = ExtResource( 3 )
 
 [node name="floor" type="TextureRect" parent="."]
 margin_top = 135.0
