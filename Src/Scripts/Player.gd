@@ -26,7 +26,8 @@ var tilemap_rect
 var tilemap_cell_size
 
 # kid movement
-var childSpeedModifier = 20
+var childSpeedModifier
+var childJumpModifier
 
 # ------------------------------------------------------------------------------
 # Kid reddening effect
@@ -42,6 +43,7 @@ onready var red_effect = get_node(textureRectP)
 # ------------------------------------------------------------------------------
 
 func _ready():
+	_adjustChild()
 	Engine.set_target_fps(TARGET_FPS)
 	dangerDistance = danger_tile_dist * tile_size.x
 	if is_kid == true:
@@ -74,17 +76,7 @@ func _ready():
 
 func _physics_process(delta):
 	# input handling
-	if Input.is_action_pressed("ui_left"):
-		if is_kid == true:
-			velocity.x = -SPEED + childSpeedModifier
-		else:
-			velocity.x = -SPEED
-	elif Input.is_action_pressed("ui_right"):
-		if is_kid == true:
-			velocity.x = SPEED - childSpeedModifier
-		else:
-			velocity.x = SPEED
-	elif is_kid == true:
+	if is_kid == true:
 		var distance = parent.position.x - position.x
 		if (abs(distance) > 1):
 			if (distance < 0):
@@ -94,12 +86,26 @@ func _physics_process(delta):
 				velocity.x = SPEED - childSpeedModifier
 		else: 
 			velocity.x = 0
+	elif Input.is_action_pressed("ui_left"):
+		if is_kid == true:
+			velocity.x = -SPEED + childSpeedModifier
+		else:
+			velocity.x = -SPEED
+	elif Input.is_action_pressed("ui_right"):
+		if is_kid == true:
+			velocity.x = SPEED - childSpeedModifier
+		else:
+			velocity.x = SPEED
+	
 	else:
 		velocity.x = 0
 	
 	# restrict to number of jumps
-	if Input.is_action_just_pressed("ui_up") and jump_count < MAX_JUMPS:
-		velocity.y = JUMP_SPEED
+	if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_accept") and jump_count < MAX_JUMPS:
+		if is_kid == true:
+			velocity.y = JUMP_SPEED - childJumpModifier
+		else:
+			velocity.y = JUMP_SPEED
 		jump_count += 1
 	# apply gravity
 	velocity.y += GRAVITY * delta
@@ -152,4 +158,15 @@ func _checkDistance(delta):
 
 func _gameOver():
 	get_tree().reload_current_scene()
+
+	
+func _adjustChild():
+	var sceneName = get_tree().get_current_scene().get_name();
+	if(sceneName == "FirstLevel" ):
+		childJumpModifier = 50
+		childSpeedModifier = 20
+		print("succeeded")
+	else:
+		childSpeedModifier = 20
+		childJumpModifier = 0
 
