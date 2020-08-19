@@ -92,10 +92,10 @@ position = Vector2( 263.652, -2.18198 )
 position = Vector2( 264.677, 76.6593 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-margin_left = 23.5907
-margin_top = 29.8979
-margin_right = 171.591
-margin_bottom = 68.8979
+margin_left = 25.0049
+margin_top = 20.7055
+margin_right = 173.005
+margin_bottom = 59.7055
 text = "Recently, I picked up this young cub"
 __meta__ = {
 "_edit_use_anchors_": false

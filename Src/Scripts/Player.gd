@@ -14,6 +14,8 @@ export(int) var childSpeedModifier;
 export(int) var adultJumpModifier;
 export(int) var adultSpeedModifier;
 
+export(bool)var kid_stronger;
+
 var TARGET_FPS = 60
 var tile_size = Vector2(16, 16)
 var GRAVITY = 512
@@ -52,6 +54,10 @@ onready var red_effect = get_node(textureRectP)
 func _ready():
 	Engine.set_target_fps(TARGET_FPS)
 	dangerDistance = danger_tile_dist * tile_size.x
+	if kid_stronger == true:
+		if is_kid == false:
+			#if child is stronger, remove camera from adult.
+			$MainCamera.queue_free()
 	if is_kid == true:
 		GRAVITY = -GRAVITY
 		SPEED = SPEED #- childSpeedModifier
@@ -60,13 +66,16 @@ func _ready():
 		player_sprite.texture = char_texture
 		player_camera.current = false
 		player_sprite.flip_v = true
+		print("WRONG")
 # ------------------------------------------------------------------------------
 		light.set("energy", 0.0)
 		threshold = 50
 		red_effect.modulate.a = 0
 # ------------------------------------------------------------------------------
 		# remove camera
-		$MainCamera.queue_free()
+		if kid_stronger == false:
+			print("queued")
+			$MainCamera.queue_free()
 		# set size of the color effect
 		red_effect.rect_min_size = Vector2(960, 540)
 	else:
@@ -82,36 +91,62 @@ func _ready():
 
 func _physics_process(delta):
 	# input handling
-	if is_kid == true:
-		var distance = parent.position.x - position.x
-		if (abs(distance) > 1):
-			if (distance < 0):
+	if kid_stronger == false:
+		if is_kid == true:
+			var distance = parent.position.x - position.x
+			if (abs(distance) > 1):
+				if (distance < 0):
+					velocity.x = -SPEED + childSpeedModifier
+					#print("too far")
+				else:
+					velocity.x = SPEED - childSpeedModifier
+			else: 
+				velocity.x = 0
+		elif Input.is_action_pressed("ui_left"):
+			if is_kid == true:
 				velocity.x = -SPEED + childSpeedModifier
-				#print("too far")
 			else:
+				velocity.x = -SPEED + adultSpeedModifier
+		elif Input.is_action_pressed("ui_right"):
+			if is_kid == true:
 				velocity.x = SPEED - childSpeedModifier
-		else: 
+			else:
+				velocity.x = SPEED - adultSpeedModifier
+		
+		else:
 			velocity.x = 0
-	elif Input.is_action_pressed("ui_left"):
-		if is_kid == true:
-			velocity.x = -SPEED + childSpeedModifier
+	#if this is the part of the game where the child is stronger than the adult 
+	else: 
+		
+		if Input.is_action_pressed("ui_left"):
+			if is_kid == true:
+				velocity.x = -SPEED + childSpeedModifier
+			else:
+				velocity.x = -SPEED + adultSpeedModifier
+		elif Input.is_action_pressed("ui_right"):
+			if is_kid == true:
+				velocity.x = SPEED - childSpeedModifier
+			else:
+				velocity.x = SPEED - adultSpeedModifier
+		elif is_kid == true:
+			var distance = parent.position.x - position.x
+			if (abs(distance) > 20):
+				if (distance < 0):
+					velocity.x = -SPEED + childSpeedModifier
+					#print("too far")
+				else:
+					velocity.x = SPEED - childSpeedModifier
+			else: 
+				velocity.x = 0
 		else:
-			velocity.x = -SPEED
-	elif Input.is_action_pressed("ui_right"):
-		if is_kid == true:
-			velocity.x = SPEED - childSpeedModifier
-		else:
-			velocity.x = SPEED
-	
-	else:
-		velocity.x = 0
+			velocity.x = 0
 	
 	# restrict to number of jumps
-	if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_accept") and jump_count < MAX_JUMPS:
+	if (Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_accept") ) and jump_count < MAX_JUMPS:
 		if is_kid == true:
 			velocity.y = JUMP_SPEED - childJumpModifier
 		else:
-			velocity.y = JUMP_SPEED
+			velocity.y = JUMP_SPEED + adultJumpModifier
 		jump_count += 1
 	# apply gravity
 	velocity.y += GRAVITY * delta

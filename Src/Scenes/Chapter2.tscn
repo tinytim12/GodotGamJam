@@ -78,7 +78,11 @@ margin_right = 36.0
 scene_path = "res://Scenes/Level_02.tscn"
 
 [node name="Switch" parent="." instance=ExtResource( 7 )]
-position = Vector2( 927.424, -5.52418 )
+position = Vector2( 934.915, 10.9572 )
+itype = "Switch"
+
+[node name="Switch2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 930.421, 264.171 )
 itype = "Switch"
 
 [node name="Gate" parent="." instance=ExtResource( 3 )]
@@ -120,6 +124,8 @@ __meta__ = {
 [connection signal="OnInteraction" from="Door_Kid" to="." method="_OnInteraction"]
 [connection signal="OnInteraction" from="Switch" to="." method="_OnInteraction"]
 [connection signal="body_entered" from="Switch" to="Switch" method="_on_Player_entered"]
+[connection signal="OnInteraction" from="Switch2" to="." method="_OnInteraction"]
+[connection signal="body_entered" from="Switch2" to="Switch2" method="_on_Player_entered"]
 
 [editable path="Door_Parent"]
 
