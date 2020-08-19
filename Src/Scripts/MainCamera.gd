@@ -18,13 +18,13 @@ onready var noise = OpenSimplexNoise.new()
 var noise_y = 0
 
 func _process(delta):
+	if trauma:
+		trauma = max(trauma - decay * delta, 0)
+		shake()
 	if target:
 		target_position = target.global_position
 	if target_position:
 		global_position = lerp(global_position, target_position, delta * follow_speed)
-	if trauma:
-		trauma = max(trauma - decay * delta, 0)
-		shake()
 
 func _ready():
 	randomize()
