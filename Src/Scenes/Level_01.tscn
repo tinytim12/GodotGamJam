@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Art/Sprites/tiles/init_tileset.tres" type="TileSet" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Art/Sprites/Interactables/Things.png" type="Texture" id=9]
 [ext_resource path="res://Fonts/mago1.ttf" type="DynamicFontData" id=10]
 [ext_resource path="res://Scenes/AudioMgr.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/MainCamera.tscn" type="PackedScene" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 10 )
@@ -19,6 +20,15 @@ font_data = ExtResource( 10 )
 script = ExtResource( 6 )
 prev_scene = "res://Scenes/MainMenu2D.tscn"
 next_scene = "res://Scenes/Level_02.tscn"
+
+[node name="MainCamera" parent="." instance=ExtResource( 12 )]
+limit_right = 1000
+limit_bottom = 230
+smoothing_enabled = false
+editor_draw_screen = false
+editor_draw_limits = true
+editor_draw_drag_margin = true
+max_offset = Vector2( 100, 0 )
 
 [node name="AudioMgr" parent="." instance=ExtResource( 11 )]
 
@@ -64,9 +74,11 @@ itype = "Door"
 [node name="Sprite" parent="Door_Kid" index="1"]
 texture = ExtResource( 8 )
 
-[node name="HUD" parent="." instance=ExtResource( 1 )]
+[node name="UI_layer" type="CanvasLayer" parent="."]
 
-[node name="Label" type="Label" parent="."]
+[node name="HUD" parent="UI_layer" instance=ExtResource( 1 )]
+
+[node name="Label" type="Label" parent="UI_layer"]
 margin_left = 40.4949
 margin_top = -0.749146
 margin_right = 104.495
@@ -79,7 +91,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NextLevelBtn" parent="." instance=ExtResource( 5 )]
+[node name="NextLevelBtn" parent="UI_layer" instance=ExtResource( 5 )]
 margin_left = 20.0
 margin_right = 36.0
 scene_path = "res://Scenes/Level_02.tscn"

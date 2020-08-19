@@ -18,7 +18,6 @@ var MAX_JUMPS = 2
 var dir_vector = Vector2(1, 0) # default looking right
 
 onready var player_sprite = get_node("Sprite")
-onready var player_camera = get_node("MainCamera")
 
 var tilemap_rect
 var tilemap_cell_size
@@ -35,7 +34,6 @@ var reddenRate = 0.1
 var lightRate = 30
 var cameraThreshold = 0.1
 onready var parent = get_node(parentP)
-onready var camera = parent.get_node("MainCamera")
 onready var light = get_node("KidEffects/Light2D")
 onready var red_effect = get_node(textureRectP)
 onready var AudioMgr = get_parent().get_node("AudioMgr")
@@ -51,15 +49,12 @@ func _ready():
 		JUMP_SPEED = -JUMP_SPEED
 		ground_normal = -ground_normal
 		player_sprite.texture = char_texture
-		player_camera.current = false
 		player_sprite.flip_v = true
 # ------------------------------------------------------------------------------
 		light.set("energy", 0.0)
 		threshold = 50
 		red_effect.modulate.a = 0
 # ------------------------------------------------------------------------------
-		# remove camera
-		$MainCamera.queue_free()
 		# set size of the color effect
 		red_effect.rect_min_size = Vector2(960, 540)
 	else:
@@ -70,7 +65,9 @@ func _ready():
 	if get_parent().get_node("TileMap") != null:
 		tilemap_rect = get_parent().get_node("TileMap").get_used_rect()
 		tilemap_cell_size = get_parent().get_node("TileMap").cell_size
-		player_camera.limit_right = tilemap_rect.end.x * tilemap_cell_size.x
+		if GM.mainCamera != null:
+			# what is this for ?
+			GM.mainCamera.limit_right = tilemap_rect.end.x * tilemap_cell_size.x
 
 
 func _physics_process(delta):
@@ -100,7 +97,7 @@ func _physics_process(delta):
 		velocity.x = 0
 	
 	# restrict to number of jumps
-	if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_accept") and jump_count < MAX_JUMPS:
+	if Input.is_action_just_pressed("player_jump") and jump_count < MAX_JUMPS:
 		if is_kid == true:
 			velocity.y = JUMP_SPEED - childJumpModifier
 		else:
@@ -120,7 +117,10 @@ func _physics_process(delta):
 		is_grounded = false
 	# update the player art and animation
 	update_player()
-	_checkDistance(delta)
+	
+	# Only the the kid requires to run this function:
+	if is_kid:
+		_checkDistance(delta)
 
 
 # update the player art and animation
@@ -137,18 +137,28 @@ func update_player():
 
 func _checkDistance(delta):
 	var distance = abs( position.x - parent.position.x )
+	
+	# Camera smooth zoom effect
+	if GM.mainCamera != null:
+		var distance_real = position.distance_to(parent.position) * 0.5
+		# Follow center point between parent and kid
+		GM.mainCamera.follow_center(global_position, parent.global_position)
+		# Update zoom
+		var next_zoom = Vector2.ONE * ( distance_real * delta )
+		GM.mainCamera.updateZoom(next_zoom)
+	
 	if (distance > dangerDistance):
 		light.set("energy", distance *  delta );
 		threshold -= 0.25 * distance * delta;
 		if (red_effect.modulate.a < 0.5):
 			red_effect.modulate.a = lerp(red_effect.modulate.a, reddenRate * distance * delta , 0.2)
-			#print("red_effect.modulate.a")
 		if (threshold < 0):
 			_gameOver()
-		print_debug(threshold)
-		if (camera.trauma < 0.24):
-			camera.add_trauma(cameraThreshold * distance * delta)
-			print_debug("shake!!")
+			
+		# Camera shake effect
+		if (GM.mainCamera != null and GM.mainCamera.trauma < 0.24):
+			GM.mainCamera.add_trauma(cameraThreshold * distance * delta)
+			
 	else:
 		threshold = 50
 		if red_effect != null and red_effect.modulate.a > 0:
