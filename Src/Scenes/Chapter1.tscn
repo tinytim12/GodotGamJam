@@ -33,8 +33,6 @@ is_kid = true
 parentP = NodePath("../../FirstLevel/Parent")
 textureRectP = NodePath("../../FirstLevel/Kid/KidEffects/TextureRect")
 char_texture = ExtResource( 9 )
-childJumpModifier = 50
-childSpeedModifier = 20
 
 [node name="Door_Parent" parent="." instance=ExtResource( 6 )]
 position = Vector2( 916, 120 )

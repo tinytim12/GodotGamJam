@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/MainCamera.gd" type="Script" id=1]
+
+[node name="MainCamera" type="Camera2D"]
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 1000
+limit_bottom = 230
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+drag_margin_left = 0.1
+drag_margin_right = 0.1
+editor_draw_limits = true
+editor_draw_drag_margin = true
+script = ExtResource( 1 )
+max_offset = Vector2( 100, 100 )

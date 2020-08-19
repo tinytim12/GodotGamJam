@@ -7,6 +7,8 @@ var mainmenu_scene = "res://Scenes/MainMenu2D.tscn"
 onready var AudioMgr = get_node("AudioMgr")
 
 func _ready():
+	# Find important sfuff: like main camera and players
+	GM.init_level()
 	pass # Replace with function body.
 
 
