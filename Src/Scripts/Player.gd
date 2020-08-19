@@ -32,10 +32,11 @@ var childJumpModifier
 # ------------------------------------------------------------------------------
 # Kid reddening effect
 # ------------------------------------------------------------------------------
-var dangerDistance = 45
+var dangerDistance = 60
 var reddenRate = 0.1
 var lightRate = 30
-var cameraThreshold = 0.1
+var thresholdRate = 0.1
+var shakeRate = 0.07
 onready var parent = get_node(parentP)
 onready var camera = parent.get_node("MainCamera")
 onready var light = get_node("KidEffects/Light2D")
@@ -138,7 +139,7 @@ func _checkDistance(delta):
 	var distance = abs( position.x - parent.position.x )
 	if (distance > dangerDistance):
 		light.set("energy", distance *  delta );
-		threshold -= 0.25 * distance * delta;
+		threshold -= thresholdRate * distance * delta;
 		if (red_effect.modulate.a < 0.5):
 			red_effect.modulate.a = lerp(red_effect.modulate.a, reddenRate * distance * delta , 0.2)
 			#print("red_effect.modulate.a")
@@ -146,7 +147,7 @@ func _checkDistance(delta):
 			_gameOver()
 		print_debug(threshold)
 		if (camera.trauma < 0.24):
-			camera.add_trauma(cameraThreshold * distance * delta)
+			camera.add_trauma(shakeRate * distance * delta)
 			print_debug("shake!!")
 	else:
 		threshold = 50
