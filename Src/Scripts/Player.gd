@@ -4,8 +4,15 @@ export var is_kid = false
 export(NodePath) var parentP
 export(NodePath) var textureRectP
 export(Texture) var char_texture
+
 export(int) var threshold
 export var danger_tile_dist = 3.0
+export(int) var childJumpModifier;
+export(int) var childSpeedModifier;
+
+#adult values
+export(int) var adultJumpModifier;
+export(int) var adultSpeedModifier;
 
 var TARGET_FPS = 60
 var tile_size = Vector2(16, 16)
@@ -26,16 +33,15 @@ var tilemap_rect
 var tilemap_cell_size
 
 # kid movement
-var childSpeedModifier
-var childJumpModifier
+
 
 # ------------------------------------------------------------------------------
 # Kid reddening effect
 # ------------------------------------------------------------------------------
 var dangerDistance = 60
-var reddenRate = 0.1
-var lightRate = 30
-var thresholdRate = 0.1
+var reddenRate = 0.05
+var lightRate = 20
+var thresholdRate = 0.05
 var shakeRate = 0.07
 onready var parent = get_node(parentP)
 onready var camera = parent.get_node("MainCamera")
@@ -44,7 +50,6 @@ onready var red_effect = get_node(textureRectP)
 # ------------------------------------------------------------------------------
 
 func _ready():
-	_adjustChild()
 	Engine.set_target_fps(TARGET_FPS)
 	dangerDistance = danger_tile_dist * tile_size.x
 	if is_kid == true:
@@ -159,15 +164,4 @@ func _checkDistance(delta):
 
 func _gameOver():
 	get_tree().reload_current_scene()
-
-	
-func _adjustChild():
-	var sceneName = get_tree().get_current_scene().get_name();
-	if(sceneName == "FirstLevel" ):
-		childJumpModifier = 50
-		childSpeedModifier = 20
-		print("succeeded")
-	else:
-		childSpeedModifier = 20
-		childJumpModifier = 0
 
