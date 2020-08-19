@@ -22,11 +22,6 @@ prev_scene = "res://Scenes/MainMenu2D.tscn"
 next_scene = "res://Scenes/Level_02.tscn"
 
 [node name="MainCamera" parent="." instance=ExtResource( 12 )]
-smoothing_speed = 5.0
-drag_margin_left = 0.1
-drag_margin_right = 0.1
-editor_draw_limits = true
-editor_draw_drag_margin = true
 
 [node name="AudioMgr" parent="." instance=ExtResource( 11 )]
 
