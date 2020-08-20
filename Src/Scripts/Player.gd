@@ -98,7 +98,6 @@ func _physics_process(delta):
 			velocity.x = max(velocity.x - SPEEDUP + adultSpeedModifier/100, -SPEED + adultSpeedModifier)
 	elif Input.is_action_pressed("ui_right"):
 		if is_kid == true:
-			print("Heyhey")
 			velocity.x = min(velocity.x+SPEEDUP - childSpeedModifier / 100, SPEED - childSpeedModifier)
 		else:
 			velocity.x = min(velocity.x+SPEEDUP - adultSpeedModifier / 100, SPEED - adultSpeedModifier)
