@@ -2,8 +2,8 @@
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Art/Sprites/parent.png" type="Texture" id=2]
-[ext_resource path="res://Art/Shaders/texture.png" type="Texture" id=3]
 [ext_resource path="res://Art/Shaders/red.png" type="Texture" id=4]
+[ext_resource path="res://Art/Sprites/fx/light.png" type="Texture" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.58307
@@ -15,6 +15,12 @@ parentP = NodePath(".")
 textureRectP = NodePath("KidEffects/TextureRect")
 char_texture = ExtResource( 2 )
 
+[node name="Light" type="Light2D" parent="."]
+texture = ExtResource( 5 )
+texture_scale = 1.5
+color = Color( 1, 0.831373, 0.541176, 1 )
+energy = 0.75
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
@@ -22,9 +28,6 @@ shape = SubResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="KidEffects" type="Node2D" parent="."]
-
-[node name="Light2D" type="Light2D" parent="KidEffects"]
-texture = ExtResource( 3 )
 
 [node name="TextureRect" type="TextureRect" parent="KidEffects"]
 margin_right = 1.0

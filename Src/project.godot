@@ -17,6 +17,7 @@ _global_script_class_icons={
 
 config/name="Family"
 run/main_scene="res://Scenes/MainMenu2D.tscn"
+boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 config/icon="res://icon.png"
 
 [autoload]
@@ -72,4 +73,5 @@ player_jump={
 
 [rendering]
 
+environment/default_clear_color=Color( 0.0745098, 0.321569, 0.286275, 1 )
 environment/default_environment="res://default_env.tres"

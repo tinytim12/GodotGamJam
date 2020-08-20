@@ -34,7 +34,6 @@ var reddenRate = 0.1
 var lightRate = 30
 var cameraThreshold = 0.1
 onready var parent = get_node(parentP)
-onready var light = get_node("KidEffects/Light2D")
 onready var red_effect = get_node(textureRectP)
 onready var AudioMgr = get_parent().get_node("AudioMgr")
 
@@ -51,7 +50,7 @@ func _ready():
 		player_sprite.texture = char_texture
 		player_sprite.flip_v = true
 # ------------------------------------------------------------------------------
-		light.set("energy", 0.0)
+		$Light.texture_scale = 1.2
 		threshold = 50
 		red_effect.modulate.a = 0
 # ------------------------------------------------------------------------------
@@ -131,26 +130,34 @@ func update_player():
 		player_sprite.flip_h = false
 
 
+# How far is player from each other based on tile size
+func get_height_level(height_distance, tiles):
+	var max_height = GData.TILE_SIZE.y * tiles
+	return floor(height_distance / max_height )
+
 # ------------------------------------------------------------------------------
 # kid reddening effect
 # ------------------------------------------------------------------------------
 
 func _checkDistance(delta):
-	var distance = abs( position.x - parent.position.x )
+	var distance = abs(position.x - parent.position.x)
+	var height = $Sprite.texture.get_height()
+	var height_distance = height + abs(global_position.y) - abs(parent.position.y)
 	
 	# Camera smooth zoom effect
 	if GM.mainCamera != null:
-		var distance_real = position.distance_to(parent.position) * 0.5
 		# Follow center point between parent and kid
 		GM.mainCamera.follow_center(global_position, parent.global_position)
 		# Update zoom
-		var next_zoom = Vector2.ONE * ( distance_real * delta )
-		GM.mainCamera.updateZoom(next_zoom)
+		var height_level = get_height_level(height_distance, 4)
+		var next_zoom = Vector2.ONE * height_level * 0.5
+		GM.mainCamera.updateZoom(next_zoom, delta)
 	
 	if (distance > dangerDistance):
-		light.set("energy", distance *  delta );
+		# Toggle lights
+		$Light.set("energy", distance *  delta );
 		threshold -= 0.25 * distance * delta;
-		if (red_effect.modulate.a < 0.5):
+		if (red_effect.modulate.a < 0.64):
 			red_effect.modulate.a = lerp(red_effect.modulate.a, reddenRate * distance * delta , 0.2)
 		if (threshold < 0):
 			_gameOver()
@@ -163,9 +170,8 @@ func _checkDistance(delta):
 		threshold = 50
 		if red_effect != null and red_effect.modulate.a > 0:
 			red_effect.modulate.a = lerp(red_effect.modulate.a, 0 , 0.2)
-		if light != null and light.energy > 0:
-			light.energy = lerp(light.energy, 0, 0.2)
-
+		if $Light.energy > 1:
+			$Light.energy = lerp($Light.energy, 1, 0.2)
 
 func _gameOver():
 	get_tree().reload_current_scene()

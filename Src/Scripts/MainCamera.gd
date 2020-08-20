@@ -7,9 +7,9 @@ var trauma = 0.0  # Current shake strength.
 var trauma_power = 2  # Trauma exponent. Use [2, 3].
 
 var max_zoom = 1
-var min_zoom = 0.7
-
-var follow_speed = 50
+var min_zoom = 0.64
+var zoom_speed = 1.4
+var follow_speed = 1.4
 
 var target = null
 var target_position = null
@@ -25,7 +25,6 @@ func _process(delta):
 		target_position = target.global_position
 	if target_position:
 		global_position = lerp(global_position, target_position, delta * follow_speed)
-
 func _ready():
 	randomize()
 	noise.seed = randi()
@@ -42,17 +41,16 @@ func shake():
 	offset.x = max_offset.x * amount * noise.get_noise_2d(noise.seed*2, noise_y)
 	offset.y = max_offset.y * amount * noise.get_noise_2d(noise.seed*3, noise_y)
 
-func updateZoom(new_zoom):
+func updateZoom(new_zoom, delta = 1):
 	var fixed_zoom = Vector2.ONE
 	# Horizontal zoom
 	fixed_zoom.x = clamp(new_zoom.x, min_zoom, max_zoom)
-	fixed_zoom.x = lerp(zoom.x, fixed_zoom.x, 0.04)
+	fixed_zoom.x = lerp(zoom.x, fixed_zoom.x, delta * zoom_speed)
 	# Vertical zoom
 	fixed_zoom.y = clamp(new_zoom.y, min_zoom, max_zoom)
-	fixed_zoom.y = lerp(zoom.y, fixed_zoom.y, 0.04)
+	fixed_zoom.y = lerp(zoom.y, fixed_zoom.y,  delta * zoom_speed)
 	# update zoom
 	zoom = fixed_zoom
-	
 
 func follow_center(a, b):
 	var center = Vector2.ZERO
