@@ -49,6 +49,7 @@ onready var parent = get_node(parentP)
 onready var red_effect = get_node(textureRectP)
 onready var AudioMgr = get_parent().get_node("AudioMgr")
 
+var childCatchingUp = false
 # ------------------------------------------------------------------------------
 
 func _ready():
@@ -91,6 +92,7 @@ func _ready():
 func _physics_process(delta):
 	# input handling
 	var friction = false
+	childCatchingUp = false
 	
 	if Input.is_action_pressed("ui_left"):
 		if is_kid == true:
@@ -104,6 +106,7 @@ func _physics_process(delta):
 			velocity.x = min(velocity.x+SPEEDUP - adultSpeedModifier / 100, SPEED - adultSpeedModifier)
 			
 	elif(get_distance_to_adult()):
+		childCatchingUp = true;
 		if (parent.position.x - position.x < 0):
 			velocity.x = max(velocity.x - SPEEDUP + childSpeedModifier / 100, -SPEED + childSpeedModifier)
 			#print("too far")
@@ -111,7 +114,7 @@ func _physics_process(delta):
 			velocity.x = min(velocity.x + SPEEDUP - childSpeedModifier / 100, SPEED - childSpeedModifier)
 			
 	else:
-		friction = true;
+		friction = true
 		
 	
 	# restrict to number of jumps
@@ -147,21 +150,22 @@ func _physics_process(delta):
 
 # update the player art and animation
 func update_player():
+	if velocity.y > 0:
+		player_anim.play("jumping")
+	elif velocity.y < 0:
+		player_anim.play("jumping")
 
-	if(Input.is_action_pressed("ui_left")):
+	elif(Input.is_action_pressed("ui_left") or (childCatchingUp and velocity.x <= 0)):
 		if(velocity.y == 0):
 			player_anim.play("walking")
 		player_anim.flip_h = true
 		player_sprite.flip_h = true	
-	elif(Input.is_action_pressed("ui_right")):
+	elif(Input.is_action_pressed("ui_right") or (childCatchingUp and velocity.x >= 0)):
 		if(velocity.y == 0):
 			player_anim.play("walking")
 		player_anim.flip_h = false
 		player_sprite.flip_h = false
-	elif velocity.y > 0:
-		player_anim.play("jumping")
-	elif velocity.y < 0:
-		player_anim.play("jumping")
+	
 	else:
 		player_anim.play("idle")
 		
@@ -173,6 +177,7 @@ func get_distance_to_adult():
 	var distance = parent.position.x - position.x
 	if (abs(distance) > 5):
 		return true;
+		
 
 # How far is player from each other based on tile size
 func get_height_level(height_distance, tiles):
