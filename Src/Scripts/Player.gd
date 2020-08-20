@@ -4,7 +4,6 @@ export var is_kid = false
 export(NodePath) var parentP
 export(NodePath) var textureRectP
 export(Texture) var char_texture
-export(int) var threshold
 export var danger_tile_dist = 3.0
 
 #movement modifiers
@@ -14,10 +13,13 @@ export(int) var adultSpeedModifier
 export(int) var adultJumpModifier
 
 export (bool) var kid_stronger
+export (bool) var kidCatchingUp
+
+var distanceThreshold
 
 var GRAVITY = 512
 var SPEED = 96
-var JUMP_SPEED = -192
+var JUMP_SPEED = -252
 var SPEEDUP = 3
 var velocity = Vector2.ZERO
 var ground_normal = Vector2(0, -1)
@@ -42,6 +44,7 @@ var dangerDistance = 45
 var reddenRate = 0.1
 var lightRate = 30
 var cameraThreshold = 0.1
+var threshold = 200
 onready var parent = get_node(parentP)
 onready var red_effect = get_node(textureRectP)
 onready var AudioMgr = get_parent().get_node("AudioMgr")
@@ -87,26 +90,25 @@ func _ready():
 			
 func _physics_process(delta):
 	# input handling
-	if is_kid == true:
-		var distance = parent.position.x - position.x
-		if (abs(distance) > 1):
-			if (distance < 0):
-				velocity.x = max(velocity.x - SPEEDUP + childSpeedModifier/10, -SPEED + childSpeedModifier)
-				#print("too far")
-			else:
-				velocity.x = min(velocity.x + SPEEDUP - childSpeedModifier / 10, SPEED - childSpeedModifier)
-		else: 
-			velocity.x = 0
-	elif Input.is_action_pressed("ui_left"):
+	
+	if Input.is_action_pressed("ui_left"):
 		if is_kid == true:
-			velocity.x = max(velocity.x - SPEEDUP + childSpeedModifier/10, -SPEED + childSpeedModifier)
+			velocity.x = max(velocity.x - SPEEDUP + childSpeedModifier/100, -SPEED + childSpeedModifier)
 		else:
-			velocity.x = max(velocity.x - SPEEDUP + adultSpeedModifier/10, -SPEED + adultSpeedModifier)
+			velocity.x = max(velocity.x - SPEEDUP + adultSpeedModifier/100, -SPEED + adultSpeedModifier)
 	elif Input.is_action_pressed("ui_right"):
 		if is_kid == true:
-			velocity.x = min(velocity.x+SPEEDUP - childSpeedModifier / 10, SPEED - childSpeedModifier)
+			print("Heyhey")
+			velocity.x = min(velocity.x+SPEEDUP - childSpeedModifier / 100, SPEED - childSpeedModifier)
 		else:
-			velocity.x = min(velocity.x+SPEEDUP - adultSpeedModifier / 10, SPEED - adultSpeedModifier)
+			velocity.x = min(velocity.x+SPEEDUP - adultSpeedModifier / 100, SPEED - adultSpeedModifier)
+			
+	elif(get_distance_to_adult()):
+		if (parent.position.x - position.x < 0):
+			velocity.x = max(velocity.x - SPEEDUP + childSpeedModifier / 100, -SPEED + childSpeedModifier)
+			#print("too far")
+		else:
+			velocity.x = min(velocity.x + SPEEDUP - childSpeedModifier / 100, SPEED - childSpeedModifier)
 			
 	else:
 		velocity.x = 0
@@ -144,12 +146,12 @@ func update_player():
 		player_anim.play("jumping")
 	elif velocity.y < 0:
 		player_anim.play("jumping")
-	if(Input.is_action_pressed("ui_left")):
+	if(velocity.x < 0):
 		if(velocity.y == 0):
 			player_anim.play("walking")
 		player_anim.flip_h = true
 		player_sprite.flip_h = true	
-	elif(Input.is_action_pressed("ui_right")):
+	elif(velocity.x > 0):
 		if(velocity.y == 0):
 			player_anim.play("walking")
 		player_anim.flip_h = false
@@ -158,6 +160,12 @@ func update_player():
 	elif velocity == Vector2.ZERO:
 		player_anim.play("idle")
 
+func get_distance_to_adult():
+	if (!is_kid):
+		return false
+	var distance = parent.position.x - position.x
+	if (abs(distance) > 1):
+		return true;
 
 # How far is player from each other based on tile size
 func get_height_level(height_distance, tiles):
@@ -185,7 +193,7 @@ func _checkDistance(delta):
 	if (distance > dangerDistance):
 		# Toggle lights
 		$Light.set("energy", distance *  delta );
-		threshold -= 0.25 * distance * delta;
+		threshold -= 0.01 * distance * delta;
 		if (red_effect.modulate.a < 0.64):
 			red_effect.modulate.a = lerp(red_effect.modulate.a, reddenRate * distance * delta , 0.2)
 		if (threshold < 0):

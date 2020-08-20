@@ -30,8 +30,9 @@ func load_next_scene():
 func _OnInteraction(val):
 	print("_OnInteraction : " + str(val))
 	if val == "Switch":
-		var gate = find_node_by_name(get_tree().get_root(), "Gate")
-		gate.queue_free()
+		var gates = get_tree().get_nodes_in_group ("Gate")
+		for gate in gates:
+			gate.queue_free()
 		print_debug("_OnInteraction : Switch")
 		if AudioMgr != null:
 			AudioMgr.play_sfx(GData.SFX.switch)

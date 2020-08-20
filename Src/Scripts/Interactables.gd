@@ -19,3 +19,6 @@ func _on_Player_entered(body):
 		print_debug("OnInteraction : " + itype + " : emit_signal")
 		emit_signal("OnInteraction", itype)
 		self.queue_free()
+	if (body.name == "Kid" and itype == "Switch"):
+		emit_signal("OnInteraction", itype)
+		self.queue_free()
