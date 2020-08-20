@@ -87,13 +87,12 @@ func _ready():
 			if(is_kid and kid_stronger):
 				GM.mainCamera.target = self
 			elif(!is_kid and !kid_stronger):
+
 				GM.mainCamera.target = self
 			
 func _physics_process(delta):
 	# input handling
 	var friction = false
-	childCatchingUp = false
-	
 	if Input.is_action_pressed("ui_left"):
 		if is_kid == true:
 			velocity.x = max(velocity.x - SPEEDUP + childSpeedModifier/100, -SPEED + childSpeedModifier)
@@ -105,7 +104,7 @@ func _physics_process(delta):
 		else:
 			velocity.x = min(velocity.x+SPEEDUP - adultSpeedModifier / 100, SPEED - adultSpeedModifier)
 			
-	elif(get_distance_to_adult()):
+	elif(is_kid and get_distance_to_adult()):
 		childCatchingUp = true;
 		if (parent.position.x - position.x < 0):
 			velocity.x = max(velocity.x - SPEEDUP + childSpeedModifier / 100, -SPEED + childSpeedModifier)
@@ -150,23 +149,33 @@ func _physics_process(delta):
 
 # update the player art and animation
 func update_player():
+	
 	if velocity.y > 0:
 		player_anim.play("jumping")
 	elif velocity.y < 0:
 		player_anim.play("jumping")
 
-	elif(Input.is_action_pressed("ui_left") or (childCatchingUp and velocity.x <= 0)):
+	elif(Input.is_action_pressed("ui_left") or (childCatchingUp)):
 		if(velocity.y == 0):
 			player_anim.play("walking")
-		player_anim.flip_h = true
-		player_sprite.flip_h = true	
-	elif(Input.is_action_pressed("ui_right") or (childCatchingUp and velocity.x >= 0)):
+		if(velocity.x < 0):
+			player_anim.flip_h = true
+			player_sprite.flip_h = true	
+		elif(velocity.x > 0):
+			player_anim.flip_h = false
+			player_sprite.flip_h = false	
+	elif(Input.is_action_pressed("ui_right") or (childCatchingUp)):
 		if(velocity.y == 0):
 			player_anim.play("walking")
-		player_anim.flip_h = false
-		player_sprite.flip_h = false
+		if(velocity.x < 0):
+			player_anim.flip_h = true
+			player_sprite.flip_h = true	
+		elif(velocity.x > 0):
+			player_anim.flip_h = false
+			player_sprite.flip_h = false	
 	
 	else:
+
 		player_anim.play("idle")
 		
 
@@ -176,7 +185,12 @@ func get_distance_to_adult():
 		return false
 	var distance = parent.position.x - position.x
 	if (abs(distance) > 5):
+		
 		return true;
+	else:
+		if(childCatchingUp and is_kid):
+			childCatchingUp = false
+		return false
 		
 
 # How far is player from each other based on tile size

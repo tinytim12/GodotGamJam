@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Level.gd" type="Script" id=1]
 [ext_resource path="res://Art/Sprites/tiles/init_tileset.tres" type="TileSet" id=2]
@@ -10,11 +10,17 @@
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Art/Sprites/kid.png" type="Texture" id=9]
 [ext_resource path="res://Art/Sprites/tiles/door.png" type="Texture" id=10]
+[ext_resource path="res://Scenes/MainCamera.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/AudioMgr.tscn" type="PackedScene" id=12]
 
 [node name="FirstLevel" type="Node2D"]
 script = ExtResource( 1 )
 prev_scene = "res://Scenes/MainMenu2D.tscn"
 next_scene = "res://Scenes/Level_02.tscn"
+
+[node name="AudioMgr" parent="." instance=ExtResource( 12 )]
+
+[node name="MainCamera" parent="." instance=ExtResource( 11 )]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
@@ -26,6 +32,8 @@ tile_data = PoolIntArray( 0, 5, 0, 65536, 5, 0, 65594, 4, 0, 65595, 4, 0, 65596,
 position = Vector2( 40.4949, 104 )
 parentP = NodePath("../../FirstLevel/Parent")
 textureRectP = NodePath("../../FirstLevel/Parent/KidEffects/TextureRect")
+adultSpeedModifier = 30
+adultJumpModifier = 50
 
 [node name="Kid" parent="." instance=ExtResource( 4 )]
 position = Vector2( 40.4949, 162 )
@@ -33,8 +41,8 @@ is_kid = true
 parentP = NodePath("../../FirstLevel/Parent")
 textureRectP = NodePath("../../FirstLevel/Kid/KidEffects/TextureRect")
 char_texture = ExtResource( 9 )
-childJumpModifier = 50
-childSpeedModifier = 20
+childSpeedModifier = 50
+childJumpModifier = 110
 
 [node name="Door_Parent" parent="." instance=ExtResource( 6 )]
 position = Vector2( 916, 120 )
