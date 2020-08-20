@@ -1,13 +1,15 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Art/Sprites/parent.png" type="Texture" id=2]
+[ext_resource path="res://Art/Sprites/Parent_Anim.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://Art/Shaders/red.png" type="Texture" id=4]
 [ext_resource path="res://Art/Sprites/fx/light.png" type="Texture" id=5]
+[ext_resource path="res://Art/Sprites/Kid_Anim.tres" type="SpriteFrames" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.58307
-height = 4.61968
+height = 4.43133
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -21,11 +23,25 @@ texture_scale = 1.5
 color = Color( 1, 0.831373, 0.541176, 1 )
 energy = 0.75
 
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 2, -5 )
+frames = ExtResource( 3 )
+animation = "idle"
+playing = true
+
+[node name="AnimatedSprite_Kid" type="AnimatedSprite" parent="."]
+position = Vector2( 2, 4 )
+frames = ExtResource( 6 )
+animation = "walking"
+playing = true
+flip_v = true
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
 
 [node name="KidEffects" type="Node2D" parent="."]
 

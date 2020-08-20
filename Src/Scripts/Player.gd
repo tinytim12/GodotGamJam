@@ -18,6 +18,7 @@ var MAX_JUMPS = 2
 var dir_vector = Vector2(1, 0) # default looking right
 
 onready var player_sprite = get_node("Sprite")
+onready var player_anim = get_node("AnimatedSprite")
 
 var tilemap_rect
 var tilemap_cell_size
@@ -47,8 +48,11 @@ func _ready():
 		SPEED = SPEED #- childSpeedModifier
 		JUMP_SPEED = -JUMP_SPEED
 		ground_normal = -ground_normal
-		player_sprite.texture = char_texture
-		player_sprite.flip_v = true
+		if player_sprite != null:
+			#player_sprite.texture = char_texture
+			player_anim = get_node("AnimatedSprite_Kid")
+			player_sprite.flip_v = true
+			player_anim.flip_v = true
 # ------------------------------------------------------------------------------
 		$Light.texture_scale = 1.2
 		threshold = 50
@@ -56,9 +60,11 @@ func _ready():
 # ------------------------------------------------------------------------------
 		# set size of the color effect
 		red_effect.rect_min_size = Vector2(960, 540)
+		$AnimatedSprite.queue_free()
 	else:
 		# parent remove the kid effects 
 		$KidEffects.queue_free()
+		$AnimatedSprite_Kid.queue_free()
 	
 	# camera settings for parent
 	if get_parent().get_node("TileMap") != null:
@@ -90,8 +96,7 @@ func _physics_process(delta):
 		if is_kid == true:
 			velocity.x = SPEED - childSpeedModifier
 		else:
-			velocity.x = SPEED
-	
+			velocity.x = SPEED	
 	else:
 		velocity.x = 0
 	
@@ -124,10 +129,23 @@ func _physics_process(delta):
 
 # update the player art and animation
 func update_player():
+	if velocity.y > 0:
+		player_anim.play("jumping")
+	elif velocity.y < 0:
+		player_anim.play("jumping")
 	if(velocity.x < 0):
+		if(velocity.y == 0):
+			player_anim.play("walking")
+		player_anim.flip_h = true
 		player_sprite.flip_h = true	
 	elif(velocity.x > 0):
+		if(velocity.y == 0):
+			player_anim.play("walking")
+		player_anim.flip_h = false
 		player_sprite.flip_h = false
+		
+	if velocity == Vector2.ZERO:
+		player_anim.play("idle")
 
 
 # How far is player from each other based on tile size

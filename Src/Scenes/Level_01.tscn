@@ -27,6 +27,7 @@ glow_strength = 0.5
 glow_blend_mode = 0
 
 [node name="Level" type="Node2D"]
+position = Vector2( 1, 0 )
 script = ExtResource( 6 )
 prev_scene = "res://Scenes/MainMenu2D.tscn"
 next_scene = "res://Scenes/Level_02.tscn"
