@@ -90,6 +90,7 @@ func _ready():
 			
 func _physics_process(delta):
 	# input handling
+	var friction = false
 	
 	if Input.is_action_pressed("ui_left"):
 		if is_kid == true:
@@ -110,7 +111,8 @@ func _physics_process(delta):
 			velocity.x = min(velocity.x + SPEEDUP - childSpeedModifier / 100, SPEED - childSpeedModifier)
 			
 	else:
-		velocity.x = 0
+		friction = true;
+		
 	
 	# restrict to number of jumps
 	if Input.is_action_just_pressed("player_jump") and jump_count < MAX_JUMPS:
@@ -127,9 +129,13 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, ground_normal)
 	# check for ground
 	if is_on_floor():
+		if(friction==true):
+			velocity.x = lerp(velocity.x, 0, 0.2)
 		is_grounded = true
 		jump_count = 0
 	else:
+		if(friction==true):
+			velocity.x = lerp(velocity.x, 0, 0.05)
 		is_grounded = false
 	# update the player art and animation
 	update_player()
@@ -141,29 +147,31 @@ func _physics_process(delta):
 
 # update the player art and animation
 func update_player():
-	if velocity.y > 0:
-		player_anim.play("jumping")
-	elif velocity.y < 0:
-		player_anim.play("jumping")
-	if(velocity.x < 0):
+
+	if(Input.is_action_pressed("ui_left")):
 		if(velocity.y == 0):
 			player_anim.play("walking")
 		player_anim.flip_h = true
 		player_sprite.flip_h = true	
-	elif(velocity.x > 0):
+	elif(Input.is_action_pressed("ui_right")):
 		if(velocity.y == 0):
 			player_anim.play("walking")
 		player_anim.flip_h = false
 		player_sprite.flip_h = false
-		
-	elif velocity == Vector2.ZERO:
+	elif velocity.y > 0:
+		player_anim.play("jumping")
+	elif velocity.y < 0:
+		player_anim.play("jumping")
+	else:
 		player_anim.play("idle")
+		
+
 
 func get_distance_to_adult():
 	if (!is_kid):
 		return false
 	var distance = parent.position.x - position.x
-	if (abs(distance) > 1):
+	if (abs(distance) > 5):
 		return true;
 
 # How far is player from each other based on tile size
