@@ -28,15 +28,15 @@ visible = false
 texture = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 2, -5 )
+position = Vector2( 0, -5 )
 frames = ExtResource( 3 )
 animation = "idle"
 playing = true
 
 [node name="AnimatedSprite_Kid" type="AnimatedSprite" parent="."]
-position = Vector2( 2, 4 )
+position = Vector2( 0, 4 )
 frames = ExtResource( 6 )
-animation = "walking"
+animation = "idle"
 playing = true
 flip_v = true
 
