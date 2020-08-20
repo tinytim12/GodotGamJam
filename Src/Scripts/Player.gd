@@ -7,9 +7,18 @@ export(Texture) var char_texture
 export(int) var threshold
 export var danger_tile_dist = 3.0
 
+#movement modifiers
+export(int) var childSpeedModifier
+export(int) var childJumpModifier
+export(int) var adultSpeedModifier
+export(int) var adultJumpModifier
+
+export (bool) var kid_stronger
+
 var GRAVITY = 512
-var SPEED = 64
+var SPEED = 96
 var JUMP_SPEED = -192
+var SPEEDUP = 3
 var velocity = Vector2.ZERO
 var ground_normal = Vector2(0, -1)
 var is_grounded = false
@@ -24,8 +33,7 @@ var tilemap_rect
 var tilemap_cell_size
 
 # kid movement
-var childSpeedModifier
-var childJumpModifier
+
 
 # ------------------------------------------------------------------------------
 # Kid reddening effect
@@ -41,7 +49,6 @@ onready var AudioMgr = get_parent().get_node("AudioMgr")
 # ------------------------------------------------------------------------------
 
 func _ready():
-	_adjustChild()
 	dangerDistance = danger_tile_dist * GData.TILE_SIZE.x
 	if is_kid == true:
 		GRAVITY = -GRAVITY
@@ -73,30 +80,34 @@ func _ready():
 		if GM.mainCamera != null:
 			# what is this for ?
 			GM.mainCamera.limit_right = tilemap_rect.end.x * tilemap_cell_size.x
-
-
+			if(is_kid and kid_stronger):
+				GM.mainCamera.target = self
+			elif(!is_kid and !kid_stronger):
+				GM.mainCamera.target = self
+			
 func _physics_process(delta):
 	# input handling
 	if is_kid == true:
 		var distance = parent.position.x - position.x
 		if (abs(distance) > 1):
 			if (distance < 0):
-				velocity.x = -SPEED + childSpeedModifier
+				velocity.x = max(velocity.x - SPEEDUP + childSpeedModifier/10, -SPEED + childSpeedModifier)
 				#print("too far")
 			else:
-				velocity.x = SPEED - childSpeedModifier
+				velocity.x = min(velocity.x + SPEEDUP - childSpeedModifier / 10, SPEED - childSpeedModifier)
 		else: 
 			velocity.x = 0
 	elif Input.is_action_pressed("ui_left"):
 		if is_kid == true:
-			velocity.x = -SPEED + childSpeedModifier
+			velocity.x = max(velocity.x - SPEEDUP + childSpeedModifier/10, -SPEED + childSpeedModifier)
 		else:
-			velocity.x = -SPEED
+			velocity.x = max(velocity.x - SPEEDUP + adultSpeedModifier/10, -SPEED + adultSpeedModifier)
 	elif Input.is_action_pressed("ui_right"):
 		if is_kid == true:
-			velocity.x = SPEED - childSpeedModifier
+			velocity.x = min(velocity.x+SPEEDUP - childSpeedModifier / 10, SPEED - childSpeedModifier)
 		else:
-			velocity.x = SPEED	
+			velocity.x = min(velocity.x+SPEEDUP - adultSpeedModifier / 10, SPEED - adultSpeedModifier)
+			
 	else:
 		velocity.x = 0
 	
@@ -105,7 +116,7 @@ func _physics_process(delta):
 		if is_kid == true:
 			velocity.y = JUMP_SPEED - childJumpModifier
 		else:
-			velocity.y = JUMP_SPEED
+			velocity.y = JUMP_SPEED + adultJumpModifier
 			if AudioMgr!= null:
 				AudioMgr.play_sfx(GData.SFX.jump)
 		jump_count += 1
@@ -133,18 +144,18 @@ func update_player():
 		player_anim.play("jumping")
 	elif velocity.y < 0:
 		player_anim.play("jumping")
-	if(velocity.x < 0):
+	if(Input.is_action_pressed("ui_left")):
 		if(velocity.y == 0):
 			player_anim.play("walking")
 		player_anim.flip_h = true
 		player_sprite.flip_h = true	
-	elif(velocity.x > 0):
+	elif(Input.is_action_pressed("ui_right")):
 		if(velocity.y == 0):
 			player_anim.play("walking")
 		player_anim.flip_h = false
 		player_sprite.flip_h = false
 		
-	if velocity == Vector2.ZERO:
+	elif velocity == Vector2.ZERO:
 		player_anim.play("idle")
 
 
@@ -195,13 +206,4 @@ func _gameOver():
 	get_tree().reload_current_scene()
 
 
-func _adjustChild():
-	var sceneName = get_tree().get_current_scene().get_name();
-	if(sceneName == "FirstLevel" ):
-		childJumpModifier = 50
-		childSpeedModifier = 20
-		print("succeeded")
-	else:
-		childSpeedModifier = 20
-		childJumpModifier = 0
 
