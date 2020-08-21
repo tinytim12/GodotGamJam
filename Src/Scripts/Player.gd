@@ -54,6 +54,13 @@ onready var AudioMgr = get_parent().get_node("AudioMgr")
 var childCatchingUp = false
 # ------------------------------------------------------------------------------
 
+
+# Camera state
+
+enum FOLLOW_STATE { CENTER , TOP, BOTTOM }
+
+var current_follow_state = FOLLOW_STATE.CENTER
+
 func _ready():
 	dangerDistance = danger_tile_dist * GData.TILE_SIZE.x
 	if is_kid == true:
@@ -84,12 +91,24 @@ func _ready():
 	if get_parent().get_node("TileMap") != null:
 		if GM.mainCamera != null:
 			if(is_kid and kid_stronger):
-				GM.mainCamera.target = self
+				GM.mainCamera.follow(self)
 			elif(!is_kid and !kid_stronger):
 
 				GM.mainCamera.target = self
 			
 func _physics_process(delta):
+	# Handle camera testing
+	if is_kid && Input.is_action_just_pressed("camera_switch"):
+		if current_follow_state == FOLLOW_STATE.CENTER:
+			GM.mainCamera.follow(parent)
+			current_follow_state = FOLLOW_STATE.TOP
+		elif current_follow_state == FOLLOW_STATE.TOP:
+			GM.mainCamera.follow(self)
+			current_follow_state = FOLLOW_STATE.BOTTOM
+		elif current_follow_state == FOLLOW_STATE.BOTTOM:
+			GM.mainCamera.follow(null)
+			current_follow_state = FOLLOW_STATE.CENTER
+		
 	# input handling
 	var friction = false
 	var nearWall = false

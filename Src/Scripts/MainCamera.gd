@@ -57,3 +57,6 @@ func follow_center(a, b):
 	center.x = (a.x + b.x) / 2
 	center.y = (a.y + b.y) / 2
 	target_position = center
+
+func follow(new_target):
+	target = new_target
