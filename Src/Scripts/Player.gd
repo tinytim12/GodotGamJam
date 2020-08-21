@@ -153,6 +153,11 @@ func update_player():
 	elif(velocity.x > 0):
 		player_anim.flip_h = false
 		player_sprite.flip_h = false
+	# idle
+	if velocity == Vector2.ZERO:
+		print("Idle")
+		player_anim.play("idle")
+		return
 	# jumping
 	if velocity.y != 0:
 		print("jumping")
@@ -161,10 +166,6 @@ func update_player():
 	if (velocity.y == 0) and (velocity.x != 0):
 		print("walking : ")
 		player_anim.play("walking")
-	# idle
-	if velocity == Vector2.ZERO:
-		print("Idle")
-		player_anim.play("idle")
 
 
 func get_distance_to_adult():
