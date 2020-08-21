@@ -41,6 +41,7 @@ playing = true
 flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2( 0.8, 0.8 )
 shape = SubResource( 1 )
 
 [node name="KidEffects" type="Node2D" parent="."]

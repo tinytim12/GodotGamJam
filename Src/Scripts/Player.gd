@@ -98,21 +98,7 @@ func _physics_process(delta):
 			if (is_kid):
 				print("Hey")
 			nearWall = true
-	
-	if(is_kid and get_distance_to_adult()):
-		childCatchingUp = true;
-		if (parent.position.x - position.x < 0):
-			if (player_anim.flip_h == true and nearWall):
-				velocity.x = 0
-			else:
-				velocity.x = max(velocity.x - SPEEDUP + childSpeedModifier / 100, -SPEED + childSpeedModifier)
-			#print("too far")
-		else:
-			if (player_anim.flip_h == false and nearWall):
-				velocity.x = 0
-			else:		
-				velocity.x = min(velocity.x + SPEEDUP - childSpeedModifier / 100, SPEED - childSpeedModifier)
-	elif Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("ui_left"):
 		if (player_anim.flip_h == true and nearWall):
 			velocity.x = 0
 		else:
@@ -128,6 +114,20 @@ func _physics_process(delta):
 				velocity.x = min(velocity.x+SPEEDUP - childSpeedModifier / 100, SPEED - childSpeedModifier)
 			else:
 				velocity.x = min(velocity.x+SPEEDUP - adultSpeedModifier / 100, SPEED - adultSpeedModifier)
+	elif(is_kid and get_distance_to_adult()):
+		childCatchingUp = true;
+		if (parent.position.x - position.x < 0):
+			if (player_anim.flip_h == true and nearWall):
+				velocity.x = 0
+			else:
+				velocity.x = max(velocity.x - SPEEDUP + childSpeedModifier / 100, -SPEED + childSpeedModifier)
+			#print("too far")
+		else:
+			if (player_anim.flip_h == false and nearWall):
+				velocity.x = 0
+			else:		
+				velocity.x = min(velocity.x + SPEEDUP - childSpeedModifier / 100, SPEED - childSpeedModifier)
+	
 
 	else:
 		friction = true
