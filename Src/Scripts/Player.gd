@@ -36,8 +36,10 @@ onready var player_anim = get_node("AnimatedSprite")
 var tilemap_rect
 var tilemap_cell_size
 
-# kid movement
-
+var warning_sound = false
+var walk_sound = false
+var walk_timer
+var walk_sound_time = 0.6
 
 # ------------------------------------------------------------------------------
 # Kid reddening effect
@@ -86,6 +88,12 @@ func _ready():
 		# parent remove the kid effects 
 		$KidEffects.queue_free()
 		$AnimatedSprite_Kid.queue_free()
+		
+	walk_timer = Timer.new()
+	add_child(walk_timer)
+	walk_timer.autostart = true
+	walk_timer.wait_time = walk_sound_time
+	walk_timer.connect("timeout", self, "walk_timeout")
 	
 	# camera settings for parent
 	if get_parent().get_node("TileMap") != null:
@@ -93,7 +101,6 @@ func _ready():
 			if(is_kid and kid_stronger):
 				GM.mainCamera.follow(self)
 			elif(!is_kid and !kid_stronger):
-
 				GM.mainCamera.target = self
 			
 func _physics_process(delta):
@@ -159,8 +166,8 @@ func _physics_process(delta):
 			velocity.y = JUMP_SPEED - childJumpModifier
 		else:
 			velocity.y = JUMP_SPEED + adultJumpModifier
-			if AudioMgr!= null:
-				AudioMgr.play_sfx(GData.SFX.jump)
+			# play the jump Audio
+			GM.audio_mgr.play_sfx(GData.SFX.jump)
 		jump_count += 1
 	# apply gravity
 	velocity.y += GRAVITY * delta
@@ -205,19 +212,37 @@ func update_player():
 	if velocity.y != 0:
 		print("jumping")
 		player_anim.play("jumping")
+		# resetting walk sound
+		walk_sound = false
 	elif (abs(velocity.x) < 1):
 		print("Idle")
 		player_anim.play("idle")
+		# resetting walk sound
+		walk_sound = false
 		return
 	# jumping
 	
 	elif (velocity.y == 0) and (abs(velocity.x)>1):
 		print("walking : ")
 		player_anim.play("walking")
-	
+		if is_kid == false:
+			if walk_sound == false:
+				walk_sound = true
+				# play sound
+				GM.audio_mgr.play_sfx(GData.SFX.walk)
+				# set timer
+				walk_timer.start(walk_sound_time)
 	else: 
 		player_anim.play("idle")
+		# resetting walk sound
+		walk_sound = false
 	# walking
+
+# walking sound timer 
+func walk_timeout():
+	walk_sound = false
+	walk_timer.stop()
+
 
 func get_distance_to_adult():
 	if (!is_kid):
@@ -265,11 +290,18 @@ func _checkDistance(delta):
 			
 		# Camera shake effect
 		if (threshold < 45):
+			# restrict playing sound once since it is 8 sec long
+			if warning_sound == false:
+				warning_sound = true
+				# print("warning sfx")
+				GM.audio_mgr.play_sfx(GData.SFX.warning)
 			if (GM.mainCamera != null and GM.mainCamera.trauma < 0.24):
 				GM.mainCamera.add_trauma(cameraThreshold * distance * delta)
 	else:
 		print("reached")
 		threshold = 50
+		# reset for warning soung
+		warning_sound = false
 		if red_effect != null and red_effect.modulate.a > 0:
 			red_effect.modulate.a = lerp(red_effect.modulate.a, 0 , 0.2)
 		if $Light.energy > 1:

@@ -13,7 +13,8 @@ func _ready():
 	GM.init_level()
 	# initialize HUD
 	hud.init_hud(prev_scene, next_scene, mainmenu_scene)
-	GM.audio_mgr.play_sfx(GData.SFX.kid)
+	# should this neede to be enabled ?
+	#GM.audio_mgr.play_sfx(GData.SFX.kid)
 
 
 # load main menu

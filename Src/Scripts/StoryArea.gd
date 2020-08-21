@@ -12,6 +12,7 @@ func _ready():
 func _on_player_entered(body):
 	if body.name == "Parent":
 		story_content.show()
+		GM.audio_mgr.play_sfx(GData.SFX.parent)
 
 
 func _on_player_exited(body):
