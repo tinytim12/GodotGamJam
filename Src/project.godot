@@ -78,5 +78,5 @@ quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
 quality/2d/use_pixel_snap=true
 batching/precision/uv_contract=true
-environment/default_clear_color=Color( 0.0745098, 0.321569, 0.286275, 1 )
+environment/default_clear_color=Color( 0.0666667, 0.160784, 0.156863, 1 )
 environment/default_environment="res://default_env.tres"

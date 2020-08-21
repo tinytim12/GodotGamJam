@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scripts/Level.gd" type="Script" id=1]
 [ext_resource path="res://Art/Sprites/tiles/init_tileset.tres" type="TileSet" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Switch.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Art/Sprites/kid.png" type="Texture" id=9]
+[ext_resource path="res://Scenes/WorldEnvironment.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/MainCamera.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/AudioMgr.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Fonts/Mago_1.tres" type="DynamicFont" id=13]
@@ -22,7 +23,10 @@ script = ExtResource( 1 )
 prev_scene = "res://Scenes/MainMenu2D.tscn"
 next_scene = "res://Scenes/Chapter2.tscn"
 
+[node name="WorldEnvironment" parent="." instance=ExtResource( 10 )]
+
 [node name="MainCamera" parent="." instance=ExtResource( 11 )]
+limit_right = 1400
 
 [node name="AudioMgr" parent="." instance=ExtResource( 12 )]
 

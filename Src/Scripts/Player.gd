@@ -79,11 +79,7 @@ func _ready():
 	
 	# camera settings for parent
 	if get_parent().get_node("TileMap") != null:
-		tilemap_rect = get_parent().get_node("TileMap").get_used_rect()
-		tilemap_cell_size = get_parent().get_node("TileMap").cell_size
 		if GM.mainCamera != null:
-			# what is this for ?
-			GM.mainCamera.limit_right = tilemap_rect.end.x * tilemap_cell_size.x
 			if(is_kid and kid_stronger):
 				GM.mainCamera.target = self
 			elif(!is_kid and !kid_stronger):
