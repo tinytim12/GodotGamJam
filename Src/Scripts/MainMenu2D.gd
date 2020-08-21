@@ -3,7 +3,7 @@ extends Node2D
 
 func _ready():
 	Engine.target_fps = GData.TARGET_FPS
-	$AudioMgr.play_sfx(GData.SFX.kid)
+	$AudioMgr.play_sfx(GData.SFX.parent)
 
 
 func _process(_delta):
@@ -17,5 +17,5 @@ func _on_Play_button_up():
 
 
 func load_level():
-	get_tree().change_scene("res://Scenes/Level_01.tscn")
+	get_tree().change_scene("res://Scenes/Chapter1.tscn")
 

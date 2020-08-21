@@ -5,11 +5,15 @@ export (String, FILE) var next_scene
 var mainmenu_scene = "res://Scenes/MainMenu2D.tscn"
 
 onready var AudioMgr = get_node("AudioMgr")
+onready var hud = get_node("HUD")
+
 
 func _ready():
 	# Find important sfuff: like main camera and players
 	GM.init_level()
-	pass # Replace with function body.
+	# initialize HUD
+	hud.init_hud(prev_scene, next_scene, mainmenu_scene)
+	GM.audio_mgr.play_sfx(GData.SFX.kid)
 
 
 # load main menu

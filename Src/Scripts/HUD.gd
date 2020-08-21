@@ -1,21 +1,45 @@
-extends Control
+extends Node2D
+
+export(String) var level_name
+
+var prev_scene
+var next_scene
+var mainmenu_scene
+ 
+onready var AudioMgr = get_parent().get_node("AudioMgr")
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$CanvasLayer/LevelName.text = level_name
+	pass 
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func init_hud(prev_scene_val, next_scene_val, mainmenu_scene_val):
+	prev_scene = prev_scene_val
+	next_scene = next_scene_val
+	mainmenu_scene = mainmenu_scene_val
 
 
-func _on_HomeBtn_up():
-	get_tree().change_scene("res://Scenes/MainMenu2D.tscn")
+# load main menu
+func _on_main_menu():
+	if mainmenu_scene != null:
+		get_tree().change_scene(mainmenu_scene)
+	if AudioMgr != null:
+		AudioMgr.play_sfx(GData.SFX.button_click)
+
+
+# load prev scene
+func _on_prev_scene():
+	if prev_scene != null:
+		get_tree().change_scene(prev_scene)
+	if AudioMgr != null:
+		AudioMgr.play_sfx(GData.SFX.button_click)
+
+
+# load next scene
+func _on_next_scene ():
+	if next_scene != null:
+		get_tree().change_scene(next_scene)
+	if AudioMgr != null:
+		AudioMgr.play_sfx(GData.SFX.button_click)
 
