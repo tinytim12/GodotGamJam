@@ -57,7 +57,7 @@ var childCatchingUp = false
 func _ready():
 	dangerDistance = danger_tile_dist * GData.TILE_SIZE.x
 	if is_kid == true:
-		shootRayH.set_cast_to(Vector2(0, -10))
+		shootRayV.set_cast_to(Vector2(0, -10))
 		GRAVITY = -GRAVITY
 		SPEED = SPEED #- childSpeedModifier
 		JUMP_SPEED = -JUMP_SPEED
@@ -95,16 +95,23 @@ func _physics_process(delta):
 	var nearWall = false
 	if (shootRayH.is_colliding() and shootRayV.is_colliding()):
 		if (shootRayH.get_collider().get_name() == "TileMap" and (shootRayV.get_collider().get_name() == "TileMap")):
-			print(shootRayH.get_collider().get_name())
+			if (is_kid):
+				print("Hey")
 			nearWall = true
 	
 	if(is_kid and get_distance_to_adult()):
 		childCatchingUp = true;
 		if (parent.position.x - position.x < 0):
-			velocity.x = max(velocity.x - SPEEDUP + childSpeedModifier / 100, -SPEED + childSpeedModifier)
+			if (player_anim.flip_h == true and nearWall):
+				velocity.x = 0
+			else:
+				velocity.x = max(velocity.x - SPEEDUP + childSpeedModifier / 100, -SPEED + childSpeedModifier)
 			#print("too far")
 		else:
-			velocity.x = min(velocity.x + SPEEDUP - childSpeedModifier / 100, SPEED - childSpeedModifier)
+			if (player_anim.flip_h == false and nearWall):
+				velocity.x = 0
+			else:		
+				velocity.x = min(velocity.x + SPEEDUP - childSpeedModifier / 100, SPEED - childSpeedModifier)
 	elif Input.is_action_pressed("ui_left"):
 		if (player_anim.flip_h == true and nearWall):
 			velocity.x = 0
@@ -168,13 +175,13 @@ func update_player():
 	if(velocity.x < 0):
 		player_anim.flip_h = true
 		player_sprite.flip_h = true
-		shootRayV.set_cast_to(Vector2( -10,0 ))
+		shootRayH.set_cast_to(Vector2( -10,0 ))
 		if (!is_kid):
 			print("set")
 	elif(velocity.x > 0):
 		player_anim.flip_h = false
 		player_sprite.flip_h = false
-		shootRayV.set_cast_to(Vector2( 10,0 ))
+		shootRayH.set_cast_to(Vector2( 10,0 ))
 	# idle
 
 	if (abs(velocity.x) < 1):
