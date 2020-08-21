@@ -8,8 +8,8 @@
 [ext_resource path="res://Art/Sprites/Kid_Anim.tres" type="SpriteFrames" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 5.58307
-height = 4.43133
+radius = 5.5
+height = 5.0
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -41,6 +41,7 @@ playing = true
 flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2( 0.8, 0.8 )
 shape = SubResource( 1 )
 
 [node name="KidEffects" type="Node2D" parent="."]
@@ -56,3 +57,11 @@ stretch_mode = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="RayCastH" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 10, 0 )
+
+[node name="RayCastV" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 10 )
