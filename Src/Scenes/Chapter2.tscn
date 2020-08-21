@@ -4,6 +4,7 @@
 [ext_resource path="res://Art/Sprites/tiles/init_tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://Gate.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/StoryArea.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Interactables.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Switch.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=8]
@@ -11,7 +12,6 @@
 [ext_resource path="res://Art/Sprites/tiles/door.png" type="Texture" id=10]
 [ext_resource path="res://Scenes/MainCamera.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/AudioMgr.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Fonts/Mago_1.tres" type="DynamicFont" id=13]
 
 [node name="FirstLevel" type="Node2D"]
 script = ExtResource( 1 )
@@ -83,38 +83,17 @@ position = Vector2( 239.206, 73.6627 )
 [node name="HUD" parent="." instance=ExtResource( 8 )]
 level_name = "Chapter 02"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-margin_left = 23.5907
-margin_top = 29.8979
-margin_right = 171.591
-margin_bottom = 68.8979
-custom_fonts/normal_font = ExtResource( 13 )
-text = "He doesn't do much but cry, though."
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="StoryArea" parent="." instance=ExtResource( 5 )]
+position = Vector2( 141.98, 46.4475 )
+story_text = "He doesn't do much but cry, though."
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="."]
-margin_left = 495.149
-margin_top = 3.9203
-margin_right = 643.149
-margin_bottom = 53.9203
-custom_fonts/normal_font = ExtResource( 13 )
-text = "He really slows me down."
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="StoryArea2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 515.075, 46.4475 )
+story_text = "Travelling with him feels like I'm dragging a deadweight."
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="."]
-margin_left = 989.144
-margin_top = -99.8337
-margin_right = 1137.14
-margin_bottom = -49.8337
-custom_fonts/normal_font = ExtResource( 13 )
-text = "But could I really find it in myself to abandon him?"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="StoryArea3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 853.74, 40.4543 )
+story_text = "He can't even reach the places I can."
 [connection signal="OnInteraction" from="Door_Parent" to="." method="_OnInteraction"]
 [connection signal="OnInteraction" from="Door_Kid" to="." method="_OnInteraction"]
 [connection signal="OnInteraction" from="Switch" to="." method="_OnInteraction"]

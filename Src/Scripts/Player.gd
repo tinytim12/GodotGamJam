@@ -45,8 +45,8 @@ var tilemap_cell_size
 var dangerDistance = 45
 var reddenRate = 0.1
 var lightRate = 30
-var cameraThreshold = 0.1
-var threshold = 200
+var cameraThreshold = 0.01
+var threshold = 50
 onready var parent = get_node(parentP)
 onready var red_effect = get_node(textureRectP)
 onready var AudioMgr = get_parent().get_node("AudioMgr")
@@ -183,8 +183,10 @@ func update_player():
 		player_sprite.flip_h = false
 		shootRayH.set_cast_to(Vector2( 10,0 ))
 	# idle
-
-	if (abs(velocity.x) < 1):
+	if velocity.y != 0:
+		print("jumping")
+		player_anim.play("jumping")
+	elif (abs(velocity.x) < 1):
 		print("Idle")
 		player_anim.play("idle")
 		return
@@ -193,9 +195,7 @@ func update_player():
 	elif (velocity.y == 0) and (abs(velocity.x)>1):
 		print("walking : ")
 		player_anim.play("walking")
-	elif velocity.y != 0:
-		print("jumping")
-		player_anim.play("jumping")
+	
 	else: 
 		player_anim.play("idle")
 	# walking
@@ -238,16 +238,18 @@ func _checkDistance(delta):
 	if (distance > dangerDistance):
 		# Toggle lights
 		$Light.set("energy", distance *  delta );
-		threshold -= 0.01 * distance * delta;
+		threshold -= 0.03 * distance * delta;
 		if (red_effect.modulate.a < 0.64):
 			red_effect.modulate.a = lerp(red_effect.modulate.a, reddenRate * distance * delta , 0.2)
 		if (threshold < 0):
 			_gameOver()
 			
 		# Camera shake effect
-		if (GM.mainCamera != null and GM.mainCamera.trauma < 0.24):
-			GM.mainCamera.add_trauma(cameraThreshold * distance * delta)
+		if (threshold < 45):
+			if (GM.mainCamera != null and GM.mainCamera.trauma < 0.24):
+				GM.mainCamera.add_trauma(cameraThreshold * distance * delta)
 	else:
+		print("reached")
 		threshold = 50
 		if red_effect != null and red_effect.modulate.a > 0:
 			red_effect.modulate.a = lerp(red_effect.modulate.a, 0 , 0.2)
