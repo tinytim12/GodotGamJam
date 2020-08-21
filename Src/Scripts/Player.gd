@@ -16,6 +16,8 @@ export (bool) var kid_stronger
 export (bool) var kidCatchingUp
 
 var distanceThreshold
+onready var shootRayH = get_node("RayCastH")
+onready var shootRayV = get_node("RayCastV")
 
 var GRAVITY = 512
 var SPEED = 96
@@ -55,6 +57,7 @@ var childCatchingUp = false
 func _ready():
 	dangerDistance = danger_tile_dist * GData.TILE_SIZE.x
 	if is_kid == true:
+		shootRayH.set_cast_to(Vector2(0, -10))
 		GRAVITY = -GRAVITY
 		SPEED = SPEED #- childSpeedModifier
 		JUMP_SPEED = -JUMP_SPEED
@@ -89,25 +92,40 @@ func _ready():
 func _physics_process(delta):
 	# input handling
 	var friction = false
-	if Input.is_action_pressed("ui_left"):
-		if is_kid == true:
-			velocity.x = max(velocity.x - SPEEDUP + childSpeedModifier/100, -SPEED + childSpeedModifier)
-		else:
-			velocity.x = max(velocity.x - SPEEDUP + adultSpeedModifier/100, -SPEED + adultSpeedModifier)
-	elif Input.is_action_pressed("ui_right"):
-		if is_kid == true:
-			velocity.x = min(velocity.x+SPEEDUP - childSpeedModifier / 100, SPEED - childSpeedModifier)
-		else:
-			velocity.x = min(velocity.x+SPEEDUP - adultSpeedModifier / 100, SPEED - adultSpeedModifier)
-	elif(is_kid and get_distance_to_adult()):
+	var nearWall = false
+	if (shootRayH.is_colliding() and shootRayV.is_colliding()):
+		if (shootRayH.get_collider().get_name() == "TileMap" and (shootRayV.get_collider().get_name() == "TileMap")):
+			print(shootRayH.get_collider().get_name())
+			nearWall = true
+	
+	if(is_kid and get_distance_to_adult()):
 		childCatchingUp = true;
 		if (parent.position.x - position.x < 0):
 			velocity.x = max(velocity.x - SPEEDUP + childSpeedModifier / 100, -SPEED + childSpeedModifier)
 			#print("too far")
 		else:
 			velocity.x = min(velocity.x + SPEEDUP - childSpeedModifier / 100, SPEED - childSpeedModifier)
+	elif Input.is_action_pressed("ui_left"):
+		if (player_anim.flip_h == true and nearWall):
+			velocity.x = 0
+		else:
+			if is_kid == true:
+				velocity.x = max(velocity.x - SPEEDUP + childSpeedModifier/100, -SPEED + childSpeedModifier)
+			else:
+				velocity.x = max(velocity.x - SPEEDUP + adultSpeedModifier/100, -SPEED + adultSpeedModifier)
+	elif Input.is_action_pressed("ui_right"):
+		if (player_anim.flip_h == false and nearWall):
+			velocity.x = 0
+		else:
+			if is_kid == true:
+				velocity.x = min(velocity.x+SPEEDUP - childSpeedModifier / 100, SPEED - childSpeedModifier)
+			else:
+				velocity.x = min(velocity.x+SPEEDUP - adultSpeedModifier / 100, SPEED - adultSpeedModifier)
+
 	else:
 		friction = true
+		
+	
 	
 	# restrict to number of jumps
 	if Input.is_action_just_pressed("player_jump") and jump_count < MAX_JUMPS:
@@ -150,23 +168,30 @@ func update_player():
 	if(velocity.x < 0):
 		player_anim.flip_h = true
 		player_sprite.flip_h = true
+		shootRayV.set_cast_to(Vector2( -10,0 ))
+		if (!is_kid):
+			print("set")
 	elif(velocity.x > 0):
 		player_anim.flip_h = false
 		player_sprite.flip_h = false
+		shootRayV.set_cast_to(Vector2( 10,0 ))
 	# idle
-	if velocity == Vector2.ZERO:
+
+	if (abs(velocity.x) < 1):
 		print("Idle")
 		player_anim.play("idle")
 		return
 	# jumping
-	if velocity.y != 0:
-		print("jumping")
-		player_anim.play("jumping")
-	# walking
-	if (velocity.y == 0) and (velocity.x != 0):
+	
+	elif (velocity.y == 0) and (abs(velocity.x)>1):
 		print("walking : ")
 		player_anim.play("walking")
-
+	elif velocity.y != 0:
+		print("jumping")
+		player_anim.play("jumping")
+	else: 
+		player_anim.play("idle")
+	# walking
 
 func get_distance_to_adult():
 	if (!is_kid):

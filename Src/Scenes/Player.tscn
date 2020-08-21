@@ -56,3 +56,11 @@ stretch_mode = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="RayCastH" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 10, 0 )
+
+[node name="RayCastV" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 10 )

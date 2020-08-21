@@ -161,6 +161,7 @@ position = Vector2( 8, 0 )
 [node name="RichTextLabel" parent="StoryArea2" index="1"]
 margin_top = -8.0
 margin_bottom = 31.0
+text = "He can't stop following me around"
 
 [node name="StoryArea3" parent="." instance=ExtResource( 15 )]
 position = Vector2( 832, 64 )
@@ -169,6 +170,7 @@ story_text = "For some reason I ended up looking out for him"
 [node name="RichTextLabel" parent="StoryArea3" index="1"]
 margin_top = -8.0
 margin_bottom = 31.0
+text = "Though there are some places he can't follow me to."
 [connection signal="OnInteraction" from="Door_Parent" to="." method="_OnInteraction"]
 [connection signal="OnInteraction" from="Door_Kid" to="." method="_OnInteraction"]
 [connection signal="OnInteraction" from="Switch" to="." method="_OnInteraction"]
