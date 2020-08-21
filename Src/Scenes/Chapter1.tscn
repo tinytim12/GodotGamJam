@@ -152,8 +152,11 @@ margin_right = 53.0001
 margin_bottom = 31.0
 
 [node name="StoryArea2" parent="." instance=ExtResource( 15 )]
-position = Vector2( 488, 64 )
+position = Vector2( 448, 64 )
 story_text = "He's a real crybaby who can't be left alone for too long"
+
+[node name="CollisionShape2D" parent="StoryArea2" index="0"]
+position = Vector2( 8, 0 )
 
 [node name="RichTextLabel" parent="StoryArea2" index="1"]
 margin_top = -8.0
