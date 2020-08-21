@@ -14,6 +14,8 @@ export(Array, AudioStream) var kids
 var cur_sfx_player = 0
 var rng = RandomNumberGenerator.new()
 
+onready var music_player_0 = get_node("Music_players/music_player_0")
+
 onready var sfx_player_0 = get_node("SFX_players/sfx_player_0")
 onready var sfx_player_1 = get_node("SFX_players/sfx_player_1")
 onready var sfx_player_2 = get_node("SFX_players/sfx_player_2")
@@ -22,11 +24,12 @@ onready var sfx_player_3 = get_node("SFX_players/sfx_player_3")
 
 func _ready():
 	rng.randomize()
+	play_muisic()
 	
 
 func play_muisic():
 	print_debug("Music")
-	$Music_players/music_player_0.play()
+	music_player_0.play()
 
 
 func play_sfx(val):
