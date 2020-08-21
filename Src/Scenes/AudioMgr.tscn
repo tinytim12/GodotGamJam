@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scripts/AudioMgr.gd" type="Script" id=1]
 [ext_resource path="res://Audio/Footstep_1.wav" type="AudioStream" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://Audio/Footstep_2.wav" type="AudioStream" id=17]
 [ext_resource path="res://Audio/Footstep_4.wav" type="AudioStream" id=18]
 [ext_resource path="res://Audio/Jump_4.wav" type="AudioStream" id=19]
+[ext_resource path="res://Audio/Music/Fox_Song.ogg" type="AudioStream" id=20]
 
 [node name="AudioMgr" type="Node2D"]
 position = Vector2( 240, 135 )
@@ -35,6 +36,7 @@ kids = [ ExtResource( 6 ) ]
 [node name="Music_players" type="Node2D" parent="."]
 
 [node name="music_player_0" type="AudioStreamPlayer" parent="Music_players"]
+stream = ExtResource( 20 )
 
 [node name="SFX_players" type="Node2D" parent="."]
 

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Fox_Song.ogg-c0fe440567b4363b7217d7fcedaacf14.oggstr"
+
+[deps]
+
+source_file="res://Audio/Music/Fox_Song.ogg"
+dest_files=[ "res://.import/Fox_Song.ogg-c0fe440567b4363b7217d7fcedaacf14.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
