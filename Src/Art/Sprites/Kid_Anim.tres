@@ -20,11 +20,11 @@ region = Rect2( 63, 125, 21, 25 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
-region = Rect2( 42, 125, 21, 25 )
+region = Rect2( 0, 100, 21, 25 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
-region = Rect2( 63, 125, 21, 25 )
+region = Rect2( 21, 100, 21, 25 )
 
 [resource]
 animations = [ {
