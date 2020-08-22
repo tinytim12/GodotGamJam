@@ -121,8 +121,6 @@ func _physics_process(delta):
 	var nearWall = false
 	if (shootRayH.is_colliding() and shootRayV.is_colliding()):
 		if (shootRayH.get_collider().get_name() == "TileMap" and (shootRayV.get_collider().get_name() == "TileMap")):
-			if (is_kid):
-				print("Hey")
 			nearWall = true
 	if Input.is_action_pressed("ui_left"):
 		if (player_anim.flip_h == true and nearWall):
@@ -147,7 +145,7 @@ func _physics_process(delta):
 				velocity.x = 0
 			else:
 				velocity.x = max(velocity.x - SPEEDUP + childSpeedModifier / 100, -SPEED + childSpeedModifier)
-			#print("too far")
+			##print_debug("too far")
 		else:
 			if (player_anim.flip_h == false and nearWall):
 				velocity.x = 0
@@ -202,20 +200,18 @@ func update_player():
 		player_anim.flip_h = true
 		player_sprite.flip_h = true
 		shootRayH.set_cast_to(Vector2( -10,0 ))
-		if (!is_kid):
-			print("set")
 	elif(velocity.x > 0):
 		player_anim.flip_h = false
 		player_sprite.flip_h = false
 		shootRayH.set_cast_to(Vector2( 10,0 ))
 	# idle
 	if velocity.y != 0:
-		print("jumping")
+		#print_debug("jumping")
 		player_anim.play("jumping")
 		# resetting walk sound
 		walk_sound = false
 	elif (abs(velocity.x) < 1):
-		print("Idle")
+		#print_debug("Idle")
 		player_anim.play("idle")
 		# resetting walk sound
 		walk_sound = false
@@ -223,7 +219,7 @@ func update_player():
 	# jumping
 	
 	elif (velocity.y == 0) and (abs(velocity.x)>1):
-		print("walking : ")
+		#print_debug("walking : ")
 		player_anim.play("walking")
 		if is_kid == false:
 			if walk_sound == false:
@@ -298,7 +294,7 @@ func _checkDistance(delta):
 			if (GM.mainCamera != null and GM.mainCamera.trauma < 0.24):
 				GM.mainCamera.add_trauma(cameraThreshold * distance * delta)
 	else:
-		print("reached")
+		#print_debug("reached")
 		threshold = 50
 		# reset for warning soung
 		warning_sound = false
