@@ -120,7 +120,8 @@ func _physics_process(delta):
 	var friction = false
 	var nearWall = false
 	if (shootRayH.is_colliding() and shootRayV.is_colliding()):
-		if (shootRayH.get_collider().get_name() == "TileMap" and (shootRayV.get_collider().get_name() == "TileMap")):
+		print(shootRayV.get_collider().get_name())
+		if (shootRayH.get_collider().get_name() == "TileMap" or (shootRayH.get_collider().is_in_group("Gate"))) and ((shootRayV.get_collider().get_name() == "TileMap")):
 			nearWall = true
 	if Input.is_action_pressed("ui_left"):
 		if (player_anim.flip_h == true and nearWall):
