@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/Level.gd" type="Script" id=1]
 [ext_resource path="res://Art/Sprites/tiles/init_tileset.tres" type="TileSet" id=2]
@@ -12,11 +12,8 @@
 [ext_resource path="res://Scenes/WorldEnvironment.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/MainCamera.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/AudioMgr.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Art/Sprites/Bg/forest/forest_light.png" type="Texture" id=13]
-[ext_resource path="res://Art/Sprites/Bg/forest/forest_middle_light.png" type="Texture" id=14]
-[ext_resource path="res://Art/Sprites/Bg/forest/forest_middle_dark.png" type="Texture" id=15]
+[ext_resource path="res://Art/Sprites/Bg/forest.png" type="Texture" id=13]
 [ext_resource path="res://Scenes/Traps/Spike.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Art/Sprites/Bg/forest/forest_dark.png" type="Texture" id=17]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 5 )
@@ -26,6 +23,15 @@ region = Rect2( 4, 16, 22, 32 )
 script = ExtResource( 1 )
 prev_scene = "res://Scenes/MainMenu2D.tscn"
 next_scene = "res://Scenes/Chapter2.tscn"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 1400.0
+margin_bottom = 270.0
+texture = ExtResource( 13 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="WorldEnvironment" parent="." instance=ExtResource( 10 )]
 
@@ -100,67 +106,12 @@ position = Vector2( 476.808, 72.1249 )
 wait_time = 0.5
 
 [node name="Spike2" parent="." instance=ExtResource( 16 )]
-margin_left = 144.67
-margin_top = 93.2678
-margin_right = 156.67
-margin_bottom = 128.267
+margin_left = 147.192
+margin_top = 93.478
+margin_right = 159.192
+margin_bottom = 128.478
 wait_time = 0.5
 active_time = 0.1
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-layer = -10
-scroll_ignore_camera_zoom = true
-
-[node name="ParallaxLayer_1" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_offset = Vector2( 1, 1 )
-motion_mirroring = Vector2( 1, 1 )
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer_1"]
-margin_right = 480.0
-margin_bottom = 270.0
-size_flags_horizontal = 0
-size_flags_vertical = 2
-texture = ExtResource( 13 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ParallaxLayer_2" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2( 1, 1 )
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer_2"]
-margin_right = 480.0
-margin_bottom = 270.0
-texture = ExtResource( 14 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ParallaxLayer_3" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2( 1, 1 )
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer_3"]
-margin_right = 480.0
-margin_bottom = 270.0
-texture = ExtResource( 15 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ParallaxLayer_4" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2( 1, 1 )
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer_4"]
-margin_right = 480.0
-margin_bottom = 270.0
-texture = ExtResource( 17 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 [connection signal="OnInteraction" from="Door_Parent" to="." method="_OnInteraction"]
 [connection signal="OnInteraction" from="Door_Kid" to="." method="_OnInteraction"]
 [connection signal="OnInteraction" from="Switch" to="." method="_OnInteraction"]
