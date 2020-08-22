@@ -26,6 +26,7 @@ var SPEEDUP = 3
 var velocity = Vector2.ZERO
 var ground_normal = Vector2(0, -1)
 var is_grounded = false
+var is_just_grounded = false 
 var jump_count = 0
 var MAX_JUMPS = 2
 var dir_vector = Vector2(1, 0) # default looking right
@@ -84,6 +85,13 @@ func _ready():
 		# set size of the color effect
 		red_effect.rect_min_size = Vector2(960, 540)
 		$AnimatedSprite.queue_free()
+		# particle effects
+		var ppos = $CPUParticles2D.get_position_in_parent()
+		$CPUParticles2D.set_position(Vector2(0, -8))
+		$CPUParticles2D.direction = Vector2(0, 1)
+		$CPUParticles2D.set_emission_rect_extents(Vector2(8, 2))
+		$CPUParticles2D.initial_velocity = 10
+		$CPUParticles2D.amount = 32
 	else:
 		# parent remove the kid effects 
 		$KidEffects.queue_free()
@@ -178,11 +186,17 @@ func _physics_process(delta):
 		if(friction==true):
 			velocity.x = lerp(velocity.x, 0, 0.2)
 		is_grounded = true
+		if jump_count > 0:
+			print ("jump_count >>> : " + str(jump_count))
+		if is_just_grounded == false and jump_count > 0:
+			print ("jump_count----------- : " + str(jump_count))
+			is_just_grounded = true
 		jump_count = 0
 	else:
 		if(friction==true):
 			velocity.x = lerp(velocity.x, 0, 0.05)
 		is_grounded = false
+		is_just_grounded = false
 	# fix
 	if abs(velocity.x) < 0.01:
 		velocity.x = 0
@@ -196,6 +210,14 @@ func _physics_process(delta):
 
 # update the player art and animation
 func update_player():
+	# player just grounded
+	if is_just_grounded:
+		print("is_just_grounded")
+		$CPUParticles2D.emitting = true
+		is_just_grounded = false
+	if jump_count > 0:
+		$CPUParticles2D.emitting = false
+		
 	# update direction
 	if(velocity.x < 0):
 		player_anim.flip_h = true
@@ -234,6 +256,7 @@ func update_player():
 		# resetting walk sound
 		walk_sound = false
 	# walking
+
 
 # walking sound timer 
 func walk_timeout():
