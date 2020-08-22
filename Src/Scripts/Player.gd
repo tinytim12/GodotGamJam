@@ -238,7 +238,7 @@ func _checkDistance(delta):
 	if (distance > dangerDistance):
 		# Toggle lights
 		$Light.set("energy", distance *  delta );
-		threshold -= 0.03 * distance * delta;
+		threshold -= 0.035 * distance * delta;
 		if (red_effect.modulate.a < 0.64):
 			red_effect.modulate.a = lerp(red_effect.modulate.a, reddenRate * distance * delta , 0.2)
 		if (threshold < 0):

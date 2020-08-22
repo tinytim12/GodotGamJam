@@ -4,6 +4,7 @@
 [ext_resource path="res://Art/Sprites/tiles/init_tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://Scenes/Interactables.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/StoryArea.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scripts/Level.gd" type="Script" id=6]
 [ext_resource path="res://Art/Sprites/kid.png" type="Texture" id=7]
 [ext_resource path="res://Art/Sprites/tiles/door.png" type="Texture" id=8]
@@ -11,7 +12,6 @@
 [ext_resource path="res://Switch.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/AudioMgr.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/MainCamera.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Fonts/Mago_1.tres" type="DynamicFont" id=13]
 
 [node name="FirstLevel" type="Node2D"]
 script = ExtResource( 6 )
@@ -86,38 +86,17 @@ position = Vector2( 14.7201, 72.5891 )
 [node name="HUD" parent="." instance=ExtResource( 1 )]
 level_name = "Chapter 06"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-margin_left = 104.0
-margin_top = 45.0
-margin_right = 214.0
-margin_bottom = 184.0
-custom_fonts/normal_font = ExtResource( 13 )
-text = "I looked away for a moment and you're suddenly all grown up."
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="StoryArea" parent="." instance=ExtResource( 5 )]
+position = Vector2( 148.671, 83.1548 )
+story_text = "I looked away for a moment and you're all grown up."
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="."]
-margin_left = 511.345
-margin_top = 86.4435
-margin_right = 659.345
-margin_bottom = 156.443
-custom_fonts/normal_font = ExtResource( 13 )
-text = "Just go for it, kid. No need to be afraid,"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="StoryArea2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 652.639, 102.054 )
+story_text = "Just go for it, kid. No need to be afraid."
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="."]
-margin_left = 887.037
-margin_top = 151.131
-margin_right = 1035.04
-margin_bottom = 201.131
-custom_fonts/normal_font = ExtResource( 13 )
-text = "I'll always be waiting for you."
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="StoryArea3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 910.922, 172.609 )
+story_text = "I'll always be waiting for you."
 [connection signal="OnInteraction" from="Door_Parent" to="." method="_OnInteraction"]
 [connection signal="OnInteraction" from="Door_Kid" to="." method="_OnInteraction"]
 [connection signal="OnInteraction" from="Switch" to="." method="_OnInteraction"]

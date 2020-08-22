@@ -9,7 +9,7 @@
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.5
-height = 5.0
+height = 8.37448
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -41,6 +41,7 @@ playing = true
 flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 0.216187 )
 scale = Vector2( 0.8, 0.8 )
 shape = SubResource( 1 )
 
