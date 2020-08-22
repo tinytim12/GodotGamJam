@@ -1,24 +1,18 @@
 extends Node2D
-
 export(String) var level_name
 
 var prev_scene
 var next_scene
 var mainmenu_scene
- 
 onready var AudioMgr = get_parent().get_node("AudioMgr")
-
 
 func _ready():
 	$CanvasLayer/LevelName.text = level_name
-	pass 
-
 
 func init_hud(prev_scene_val, next_scene_val, mainmenu_scene_val):
 	prev_scene = prev_scene_val
 	next_scene = next_scene_val
 	mainmenu_scene = mainmenu_scene_val
-
 
 # load main menu
 func _on_main_menu():
