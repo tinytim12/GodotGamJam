@@ -1,0 +1,101 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/trap.gd" type="Script" id=1]
+[ext_resource path="res://Art/Sprites/traps/spike.png" type="Texture" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "DOWN"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 6, 18 ), Vector2( 6, 40 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Area2D/CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -15 ), Vector2( 0, 5 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "UP"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 6, 40 ), Vector2( 6, 18 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Area2D/CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 5 ), Vector2( 0, -15 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 5, 12 )
+
+[node name="Spike" type="Panel"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 188.074
+margin_top = 93.4642
+margin_right = 200.074
+margin_bottom = 128.464
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 7, 16 )
+rect_clip_content = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+wait_time = 0.7
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 6, 40 )
+texture = ExtResource( 2 )
+flip_h = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/DOWN = SubResource( 1 )
+anims/UP = SubResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Active_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 6, 30 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, 5 )
+shape = SubResource( 3 )

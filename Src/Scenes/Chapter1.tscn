@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scripts/Level.gd" type="Script" id=1]
 [ext_resource path="res://Art/Sprites/tiles/init_tileset.tres" type="TileSet" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Fonts/Mago_1.tres" type="DynamicFont" id=13]
 [ext_resource path="res://Art/Sprites/Bg/Tree_01.png" type="Texture" id=14]
 [ext_resource path="res://Scenes/StoryArea.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Traps/Spike.tscn" type="PackedScene" id=16]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 5 )
@@ -178,6 +179,17 @@ position = Vector2( 31.1128, 2.82843 )
 margin_top = -8.0
 margin_bottom = 41.0
 text = ""
+
+[node name="Spike" parent="." instance=ExtResource( 16 )]
+wait_time = 0.5
+
+[node name="Spike2" parent="." instance=ExtResource( 16 )]
+margin_left = 143.479
+margin_top = 91.6804
+margin_right = 155.479
+margin_bottom = 126.68
+wait_time = 0.5
+active_time = 0.1
 [connection signal="OnInteraction" from="Door_Parent" to="." method="_OnInteraction"]
 [connection signal="OnInteraction" from="Door_Kid" to="." method="_OnInteraction"]
 [connection signal="OnInteraction" from="Switch" to="." method="_OnInteraction"]

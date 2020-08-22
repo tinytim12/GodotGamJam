@@ -12,7 +12,9 @@
 radius = 5.5
 height = 8.37448
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"player",
+]]
 script = ExtResource( 1 )
 parentP = NodePath(".")
 textureRectP = NodePath("KidEffects/TextureRect")

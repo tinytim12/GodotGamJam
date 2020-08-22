@@ -1,0 +1,53 @@
+extends Panel
+export var wait_time = 0.5
+export var active_time = 0.5
+export var jump_required = true
+# Declare member variables here. Examples:
+# var a = 2
+# var b = "text"
+
+var active = false
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	$Timer.wait_time = wait_time
+	$Timer.connect("timeout", self, "handle_time_out")
+	$Active_timer.wait_time = active_time
+	$Active_timer.connect("timeout", self, "handle_active_out")
+	$Area2D.connect("body_entered", self, "handle_body_entered")
+	$AnimationPlayer.connect("animation_finished", self, "handle_animation_finished")
+	$Timer.start()
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+
+func activate():
+	$Timer.start()
+
+func desactive():
+	$Active_timer.start()
+	
+	
+func handle_body_entered(body):
+	if body.is_in_group("player"):
+		if jump_required or (!jump_required and active): 
+			body._gameOver()
+
+func handle_animation_finished(anim):
+	if anim == "UP":
+		desactive()
+	if anim == "DOWN":
+		active = false
+		activate()
+		
+		
+func handle_time_out():
+	active = true
+	$AnimationPlayer.play("UP")
+	
+func handle_active_out():
+	$AnimationPlayer.play("DOWN")
+	
