@@ -142,7 +142,7 @@ position = Vector2( -1.48264, 71.7749 )
 level_name = "Chapter 03"
 
 [node name="StoryArea" parent="." instance=ExtResource( 5 )]
-position = Vector2( 144.504, 51.5982 )
+position = Vector2( 148.076, 95.2517 )
 story_text = "The kid' even too stupid to get past the hunter's traps on his own."
 
 [node name="StoryArea2" parent="." instance=ExtResource( 5 )]
