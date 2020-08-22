@@ -2,6 +2,7 @@ extends Node2D
 
 export(AudioStream) var button_click
 export(AudioStream) var sfx_warning
+export(AudioStream) var trap
 
 export(Array, AudioStream) var walks
 export(Array, AudioStream) var jumps
@@ -28,7 +29,7 @@ func _ready():
 	
 
 func play_muisic():
-	print_debug("Music")
+	#print_debug("Music")
 	music_player_0.play()
 
 
@@ -67,6 +68,8 @@ func get_audio_stream(val):
 			return keys[rng.randi_range(0, keys.size()-1)]
 		GData.SFX.door:
 			return runes[rng.randi_range(0, runes.size()-1)]
+		GData.SFX.trap:
+			return trap
 		GData.SFX.rune:
 			return runes[rng.randi_range(0, runes.size()-1)]
 		GData.SFX.parent:

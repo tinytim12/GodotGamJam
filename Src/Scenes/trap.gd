@@ -47,6 +47,10 @@ func handle_animation_finished(anim):
 func handle_time_out():
 	active = true
 	$AnimationPlayer.play("UP")
+	# play sound
+	if GM.audio_mgr != null and GM.fox_cub != null:
+		if abs(GM.fox_cub.position.x - get_position().x) < (GData.TILE_SIZE.x * 10):
+			GM.audio_mgr.play_sfx(GData.SFX.trap)
 	
 func handle_active_out():
 	$AnimationPlayer.play("DOWN")
