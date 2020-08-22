@@ -257,8 +257,7 @@ func _checkDistance(delta):
 		if (red_effect.modulate.a < 0.64):
 			red_effect.modulate.a = lerp(red_effect.modulate.a, reddenRate * distance * delta , 0.2)
 		if (threshold < 0):
-			# _gameOver()
-			pass
+			_gameOver()
 			
 		# Camera shake effect
 		if (threshold < 45):
