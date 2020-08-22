@@ -77,10 +77,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 wait_time = 1.5
-jump_required = false
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 6, 18 )
+position = Vector2( 6, 40 )
 texture = ExtResource( 2 )
 flip_h = true
 
@@ -98,5 +97,5 @@ one_shot = true
 position = Vector2( 6, 30 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 0, -15 )
+position = Vector2( 0, 5 )
 shape = SubResource( 3 )
