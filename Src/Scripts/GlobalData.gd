@@ -20,6 +20,7 @@ enum SFX {
 	star = 12,
 	rune = 13,
 	door = 14,
+	trap = 15,
 	warning = 20,
 	parent = 31,
 	kid = 32,

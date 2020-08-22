@@ -185,9 +185,9 @@ wait_time = 0.5
 
 [node name="Spike2" parent="." instance=ExtResource( 16 )]
 margin_left = 143.479
-margin_top = 91.6804
+margin_top = 92.6804
 margin_right = 155.479
-margin_bottom = 126.68
+margin_bottom = 127.68
 wait_time = 0.5
 active_time = 0.1
 [connection signal="OnInteraction" from="Door_Parent" to="." method="_OnInteraction"]
