@@ -24,9 +24,9 @@ uniform sampler2D vignette;
 void fragment() {
 	vec3 vignette_color = texture(vignette, UV).rgb;
 	// Screen texture stores gaussian blurred copies on mipmaps.
-	COLOR.rgba = textureLod(SCREEN_TEXTURE, SCREEN_UV, (0.8 - vignette_color.r) * 2.0).rgba;
+	COLOR.rgba = textureLod(SCREEN_TEXTURE, SCREEN_UV, (1.0 - vignette_color.r) * 2.0).rgba;
 	COLOR.rgba *= texture(vignette, UV).rgba;
-	COLOR.a = 0.5;
+	COLOR.a = 0.54;
 }
 "
 custom_defines = ""
