@@ -17,15 +17,15 @@
 [ext_resource path="res://Audio/Warning_1.wav" type="AudioStream" id=15]
 [ext_resource path="res://Audio/ButtonClick.wav" type="AudioStream" id=16]
 [ext_resource path="res://Audio/Footstep_2.wav" type="AudioStream" id=17]
-[ext_resource path="res://Audio/Footstep_4.wav" type="AudioStream" id=18]
 [ext_resource path="res://Audio/Jump_4.wav" type="AudioStream" id=19]
+[ext_resource path="res://Audio/Music/Fox_Song.ogg" type="AudioStream" id=20]
 
 [node name="AudioMgr" type="Node2D"]
 position = Vector2( 240, 135 )
 script = ExtResource( 1 )
 button_click = ExtResource( 16 )
 sfx_warning = ExtResource( 15 )
-walks = [ ExtResource( 2 ), ExtResource( 17 ), ExtResource( 14 ), ExtResource( 18 ) ]
+walks = [ ExtResource( 2 ), ExtResource( 17 ), ExtResource( 14 ) ]
 jumps = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 19 ), ExtResource( 8 ) ]
 keys = [ ExtResource( 9 ), ExtResource( 13 ), ExtResource( 10 ) ]
 runes = [ ExtResource( 11 ), ExtResource( 12 ) ]
@@ -35,6 +35,7 @@ kids = [ ExtResource( 6 ) ]
 [node name="Music_players" type="Node2D" parent="."]
 
 [node name="music_player_0" type="AudioStreamPlayer" parent="Music_players"]
+stream = ExtResource( 20 )
 
 [node name="SFX_players" type="Node2D" parent="."]
 
