@@ -15,12 +15,7 @@ func _ready():
 
 
 func _on_Player_entered(body):
-	print("Hey")
 	if (body.name == "Kid"):
 		emit_signal("OnInteraction", itype, "Kid")
 	elif (body.name == "Parent"):
 		emit_signal("OnInteraction", itype, "Parent")
-	if (itype != "Door"):
-		self.queue_free()
-
-	
