@@ -49,25 +49,25 @@ childSpeedModifier = 40
 childJumpModifier = 100
 
 [node name="Door_Parent" parent="." instance=ExtResource( 3 )]
-position = Vector2( 914.941, 121.059 )
+position = Vector2( 1202.94, 121.059 )
 itype = "Door"
 
 [node name="CollisionShape2D" parent="Door_Parent" index="0"]
-position = Vector2( 289.595, -6.73483 )
+position = Vector2( 1.595, -6.73483 )
 
 [node name="Sprite" parent="Door_Parent" index="1"]
-position = Vector2( 287.106, -9 )
+position = Vector2( -0.894012, -9 )
 texture = ExtResource( 2 )
 
 [node name="Door_Kid" parent="." instance=ExtResource( 3 )]
-position = Vector2( 917.123, 154.245 )
+position = Vector2( 1206.12, 153.245 )
 itype = "Door"
 
 [node name="CollisionShape2D" parent="Door_Kid" index="0"]
-position = Vector2( 284.983, -1.12247 )
+position = Vector2( -3.017, -1.12247 )
 
 [node name="Sprite" parent="Door_Kid" index="1"]
-position = Vector2( 283.86, 5.83 )
+position = Vector2( -4.14001, 5.82999 )
 scale = Vector2( 1, -1 )
 texture = ExtResource( 2 )
 
@@ -79,10 +79,10 @@ position = Vector2( 843.534, 230.374 )
 scale = Vector2( 1, -1 )
 
 [node name="Gate" parent="." instance=ExtResource( 9 )]
-position = Vector2( 502.936, 96.6137 )
+position = Vector2( 950.936, 96.6137 )
 
 [node name="Gate2" parent="." instance=ExtResource( 9 )]
-position = Vector2( 503.292, 175.838 )
+position = Vector2( 951.292, 175.838 )
 scale = Vector2( 1, -1 )
 
 [node name="HUD" parent="." instance=ExtResource( 1 )]

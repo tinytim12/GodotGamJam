@@ -95,10 +95,10 @@ margin_bottom = 117.473
 rect_rotation = -179.898
 
 [node name="Gate" parent="." instance=ExtResource( 9 )]
-position = Vector2( 771.048, 96 )
+position = Vector2( 955.048, 96 )
 
 [node name="Gate2" parent="." instance=ExtResource( 9 )]
-position = Vector2( 771.477, 175 )
+position = Vector2( 955.477, 175 )
 scale = Vector2( 1, -1 )
 
 [node name="HUD" parent="." instance=ExtResource( 1 )]
