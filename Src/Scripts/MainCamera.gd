@@ -12,6 +12,7 @@ var zoom_speed = 1.4
 var follow_speed = 1.4
 
 var target = null
+var target_rotation = null
 var target_position = null
 
 onready var noise = OpenSimplexNoise.new()
@@ -25,6 +26,10 @@ func _process(delta):
 		target_position = target.global_position
 	if target_position:
 		global_position = lerp(global_position, target_position, delta * follow_speed)
+	if target_rotation and target_rotation != 0:
+		rotation_degrees = lerp(rotation_degrees, target_rotation, delta * 3)
+	else: 
+		rotation_degrees = lerp(rotation_degrees, 0, delta * 3)
 func _ready():
 	randomize()
 	noise.seed = randi()
@@ -60,3 +65,6 @@ func follow_center(a, b):
 
 func follow(new_target):
 	target = new_target
+	
+func smooth_rotate(new_rotation):
+	target_rotation = new_rotation

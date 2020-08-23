@@ -77,7 +77,7 @@ func _ready():
 			player_sprite.flip_v = true
 			player_anim.flip_v = true
 # ------------------------------------------------------------------------------
-		$Light.texture_scale = 1.2
+		$Light.texture_scale = 0.8
 		threshold = 50
 		red_effect.modulate.a = 0
 # ------------------------------------------------------------------------------
@@ -94,13 +94,13 @@ func _ready():
 	walk_timer.autostart = true
 	walk_timer.wait_time = walk_sound_time
 	walk_timer.connect("timeout", self, "walk_timeout")
-	
+	# This doesn't work properly on the new level
 	# camera settings for parent
 	if get_parent().get_node("TileMap") != null:
 		if GM.mainCamera != null:
 			if(is_kid and kid_stronger):
 				GM.mainCamera.follow(self)
-			elif(!is_kid and !kid_stronger):
+			if(!is_kid and !kid_stronger):
 				GM.mainCamera.target = self
 			
 func _physics_process(delta):
@@ -108,12 +108,15 @@ func _physics_process(delta):
 	if is_kid && Input.is_action_just_pressed("camera_switch"):
 		if current_follow_state == FOLLOW_STATE.CENTER:
 			GM.mainCamera.follow(parent)
+			# GM.mainCamera.smooth_rotate(0)
 			current_follow_state = FOLLOW_STATE.TOP
 		elif current_follow_state == FOLLOW_STATE.TOP:
 			GM.mainCamera.follow(self)
+			# GM.mainCamera.smooth_rotate(180.0)
 			current_follow_state = FOLLOW_STATE.BOTTOM
 		elif current_follow_state == FOLLOW_STATE.BOTTOM:
 			GM.mainCamera.follow(null)
+			# GM.mainCamera.smooth_rotate(0.0)
 			current_follow_state = FOLLOW_STATE.CENTER
 		
 	# input handling
