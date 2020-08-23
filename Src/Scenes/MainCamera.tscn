@@ -3,6 +3,7 @@
 [ext_resource path="res://Scripts/MainCamera.gd" type="Script" id=1]
 
 [node name="MainCamera" type="Camera2D"]
+rotating = true
 current = true
 limit_left = 0
 limit_top = 0

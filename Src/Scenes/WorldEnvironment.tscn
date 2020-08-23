@@ -5,15 +5,21 @@
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
+auto_exposure_scale = 0.1
+auto_exposure_max_luma = 4.0
+auto_exposure_speed = 0.25
 glow_enabled = true
+glow_levels/1 = true
 glow_levels/2 = true
 glow_levels/4 = true
 glow_levels/7 = true
-glow_intensity = 1.2
-glow_strength = 0.5
-glow_blend_mode = 0
-glow_hdr_threshold = 0.8
+glow_intensity = 1.1
+glow_strength = 0.4
+glow_blend_mode = 1
+glow_hdr_threshold = 0.68
+glow_hdr_luminance_cap = 8.0
 glow_hdr_scale = 1.5
+glow_bicubic_upscale = true
 
 [sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
@@ -24,9 +30,9 @@ uniform sampler2D vignette;
 void fragment() {
 	vec3 vignette_color = texture(vignette, UV).rgb;
 	// Screen texture stores gaussian blurred copies on mipmaps.
-	COLOR.rgba = textureLod(SCREEN_TEXTURE, SCREEN_UV, (1.0 - vignette_color.r) * 2.0).rgba;
+	COLOR.rgba = textureLod(SCREEN_TEXTURE, SCREEN_UV, (0.8 - vignette_color.r) * 1.4).rgba;
 	COLOR.rgba *= texture(vignette, UV).rgba;
-	COLOR.a = 0.54;
+	COLOR.a = 0.75;
 }
 "
 custom_defines = ""

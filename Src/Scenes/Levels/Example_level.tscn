@@ -1,7 +1,6 @@
 [gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/Level.gd" type="Script" id=1]
-[ext_resource path="res://Art/Sprites/tiles/init_tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://Switch.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Art/Sprites/Interactables/Things.png" type="Texture" id=5]
@@ -13,6 +12,7 @@
 [ext_resource path="res://Scenes/MainCamera.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/AudioMgr.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Art/Sprites/Bg/forest.png" type="Texture" id=13]
+[ext_resource path="res://Tilemaps/forest_map.tres" type="TileSet" id=14]
 [ext_resource path="res://Scenes/Traps/Spike.tscn" type="PackedScene" id=16]
 
 [sub_resource type="AtlasTexture" id=1]
@@ -37,51 +37,39 @@ __meta__ = {
 
 [node name="MainCamera" parent="." instance=ExtResource( 11 )]
 limit_right = 1400
+drag_margin_left = 0.0
+drag_margin_right = 0.0
 
 [node name="AudioMgr" parent="." instance=ExtResource( 12 )]
 
-[node name="TileMap" type="TileMap" parent="."]
-tile_set = ExtResource( 2 )
-cell_size = Vector2( 16, 16 )
-format = 1
-tile_data = PoolIntArray( 0, 5, 0, 65536, 5, 0, 131072, 5, 0, 196608, 5, 0, 262144, 5, 0, 327680, 5, 0, 327739, 5, 0, 327740, 5, 0, 393216, 5, 0, 393274, 5, 0, 393275, 5, 0, 393276, 5, 0, 458752, 5, 0, 458802, 5, 0, 458810, 5, 0, 458811, 5, 0, 458812, 5, 0, 524288, 7, 0, 524289, 5, 0, 524290, 5, 0, 524291, 5, 0, 524292, 5, 0, 524293, 5, 0, 524294, 5, 0, 524295, 5, 0, 524296, 5, 0, 524297, 5, 0, 524298, 5, 0, 524299, 5, 0, 524300, 5, 0, 524301, 5, 0, 524302, 5, 0, 524303, 5, 0, 524304, 5, 0, 524305, 5, 0, 524306, 5, 0, 524307, 5, 0, 524308, 5, 0, 524309, 5, 0, 524310, 5, 0, 524311, 5, 0, 524312, 5, 0, 524313, 5, 0, 524314, 5, 0, 524315, 5, 0, 524316, 5, 0, 524317, 5, 0, 524318, 5, 0, 524319, 5, 0, 524320, 5, 0, 524321, 5, 0, 524322, 5, 0, 524323, 5, 0, 524324, 5, 0, 524325, 5, 0, 524326, 5, 0, 524327, 5, 0, 524328, 5, 0, 524329, 5, 0, 524330, 5, 0, 524331, 5, 0, 524332, 5, 0, 524333, 7, 0, 524334, 5, 0, 524335, 5, 0, 524336, 5, 0, 524337, 5, 0, 524338, 5, 0, 524339, 5, 0, 524340, 5, 0, 524341, 5, 0, 524342, 5, 0, 524343, 5, 0, 524344, 5, 0, 524345, 5, 0, 524346, 5, 0, 524347, 5, 0, 524348, 5, 0, 524349, 5, 0, 524350, 5, 0, 524351, 5, 0, 524352, 5, 0, 524353, 5, 0, 524354, 5, 0, 524355, 5, 0, 524356, 5, 0, 524357, 5, 0, 524358, 5, 0, 524359, 5, 0, 524360, 5, 0, 524361, 5, 0, 524362, 5, 0, 524363, 5, 0, 524364, 5, 0, 524365, 5, 0, 524366, 5, 0, 524367, 5, 0, 524368, 5, 0, 524369, 5, 0, 524370, 5, 0, 524371, 5, 0, 524372, 5, 0, 524373, 5, 0, 524374, 5, 0, 589824, 5, 0, 589874, 5, 0, 589882, 5, 0, 589883, 5, 0, 589884, 5, 0, 655360, 5, 0, 655418, 5, 0, 655419, 5, 0, 655420, 5, 0, 720896, 5, 0, 720955, 5, 0, 720956, 5, 0, 786432, 5, 0, 851968, 5, 0, 917504, 5, 0, 983040, 5, 0, 1048576, 5, 0 )
-
 [node name="Parent" parent="." instance=ExtResource( 4 )]
-position = Vector2( 40.4949, 104 )
+position = Vector2( 60, 110 )
 parentP = NodePath("../../FirstLevel/Parent")
 textureRectP = NodePath("../../FirstLevel/Parent/KidEffects/TextureRect")
-adultSpeedModifier = 30
-adultJumpModifier = 50
+adultSpeedModifier = 32
+adultJumpModifier = 72
 
 [node name="Kid" parent="." instance=ExtResource( 4 )]
-position = Vector2( 40.4949, 162 )
+position = Vector2( 60, 160 )
 is_kid = true
 parentP = NodePath("../../FirstLevel/Parent")
 textureRectP = NodePath("../../FirstLevel/Kid/KidEffects/TextureRect")
 char_texture = ExtResource( 9 )
-childSpeedModifier = 50
-childJumpModifier = 110
+childSpeedModifier = 58
+childJumpModifier = 79
 
 [node name="Door_Parent" parent="." instance=ExtResource( 6 )]
-position = Vector2( 916, 120 )
+position = Vector2( 287.43, 96.0344 )
 itype = "Door"
 
-[node name="CollisionShape2D" parent="Door_Parent" index="0"]
-position = Vector2( 282, -6.7 )
-
 [node name="Sprite" parent="Door_Parent" index="1"]
-position = Vector2( 282, -8.245 )
 texture = SubResource( 1 )
 
 [node name="Door_Kid" parent="." instance=ExtResource( 6 )]
-position = Vector2( 916, 154 )
+position = Vector2( 288.691, 175.443 )
 itype = "Door"
 
-[node name="CollisionShape2D" parent="Door_Kid" index="0"]
-position = Vector2( 282, -1.1 )
-
 [node name="Sprite" parent="Door_Kid" index="1"]
-position = Vector2( 282, 5.755 )
 scale = Vector2( 1, -1 )
 texture = SubResource( 1 )
 
@@ -103,15 +91,40 @@ position = Vector2( 476.264, -2.82843 )
 position = Vector2( 476.808, 72.1249 )
 
 [node name="Spike" parent="." instance=ExtResource( 16 )]
+margin_left = 184.083
+margin_top = 93.1496
+margin_right = 196.083
+margin_bottom = 128.149
+wait_time = 0.5
+
+[node name="Spike3" parent="." instance=ExtResource( 16 )]
+margin_left = 236.469
+margin_top = 93.1107
+margin_right = 248.469
+margin_bottom = 128.11
 wait_time = 0.5
 
 [node name="Spike2" parent="." instance=ExtResource( 16 )]
-margin_left = 147.192
-margin_top = 93.478
-margin_right = 159.192
-margin_bottom = 128.478
+margin_left = 220.144
+margin_top = 92.5941
+margin_right = 232.144
+margin_bottom = 127.594
 wait_time = 0.5
 active_time = 0.1
+
+[node name="Spike4" parent="." instance=ExtResource( 16 )]
+margin_left = 202.466
+margin_top = 92.5941
+margin_right = 214.466
+margin_bottom = 127.594
+wait_time = 0.5
+active_time = 0.1
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 14 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 65535, 1073741832, 0, 131071, 1073741832, 0, 196607, 1073741832, 0, 262143, 1073741832, 0, 327679, 1073741832, 0, 393215, 1073741832, 0, 458751, 1073741832, 0, 524287, 1073741832, 0, 458758, -1610612734, 0, 458759, 6, 0, 458760, 5, 0, 458761, 536870918, 0, 458762, -2147483646, 0, 458768, 12, 0, 458769, 14, 0, 458770, 14, 0, 458771, 536870924, 0, 589823, 1073741832, 0, 524288, 1073741827, 0, 524289, 1073741824, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, -1073741811, 0, 524295, 8, 0, 524296, 8, 0, 524297, 8, 0, 524298, -1610612723, 0, 524299, 14, 0, 524300, 14, 0, 524301, 14, 0, 524302, 14, 0, 524303, 14, 0, 524304, -2147483631, 0, 524305, -536870904, 0, 524306, -536870904, 0, 524307, -536870898, 0, 655359, 1073741832, 0, 589830, 2, 0, 589831, 1610612742, 0, 589832, 1610612741, 0, 589833, 1610612742, 0, 589834, 536870914, 0, 589840, 1073741836, 0, 589841, 1610612750, 0, 589842, 1610612750, 0, 589843, 1610612748, 0, 720895, 1073741832, 0, 786431, 1073741832, 0, 851967, 1073741832, 0, 917503, 1073741832, 0, 983039, 1073741832, 0, 1048575, 1073741832, 0, 1114111, 1073741832, 0 )
 [connection signal="OnInteraction" from="Door_Parent" to="." method="_OnInteraction"]
 [connection signal="OnInteraction" from="Door_Kid" to="." method="_OnInteraction"]
 [connection signal="OnInteraction" from="Switch" to="." method="_OnInteraction"]
