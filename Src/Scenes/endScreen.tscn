@@ -1,0 +1,145 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Scripts/Level.gd" type="Script" id=1]
+[ext_resource path="res://Tilemaps/forest_map.tres" type="TileSet" id=2]
+[ext_resource path="res://Switch.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Art/Sprites/Interactables/Things.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/Interactables.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Gate.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/WorldEnvironment.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/MainCamera.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/AudioMgr.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Fonts/Mago_1.tres" type="DynamicFont" id=13]
+[ext_resource path="res://Scenes/StoryArea.tscn" type="PackedScene" id=15]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 5 )
+region = Rect2( 4, 16, 22, 32 )
+
+[node name="FirstLevel" type="Node2D"]
+script = ExtResource( 1 )
+prev_scene = "res://Scenes/MainMenu2D.tscn"
+next_scene = "res://Scenes/Chapter2.tscn"
+
+[node name="WorldEnvironment" parent="." instance=ExtResource( 10 )]
+
+[node name="MainCamera" parent="." instance=ExtResource( 11 )]
+position = Vector2( -52.0587, -72.7488 )
+limit_right = 1400
+
+[node name="AudioMgr" parent="." instance=ExtResource( 12 )]
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2( 36, 0 )
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( -196608, -1610612736, 0, -196592, -1610612736, 0, -131072, -1610612736, 0, -131056, -1610612736, 0, -65536, -1610612736, 0, -65520, -1610612736, 0, 0, -1610612736, 0, 16, -1610612736, 0, 65536, -1610612736, 0, 65552, -1610612736, 0, 131072, -1610612736, 0, 131088, -1610612736, 0, 196608, -1610612736, 0, 196624, -1610612736, 0, 262144, -1610612736, 0, 262147, 5, 0, 262148, 5, 0, 262156, 5, 0, 262157, 5, 0, 262160, -1610612736, 0, 327680, -1610612736, 0, 327696, -1610612736, 0, 327739, 5, 0, 327740, 5, 0, 393216, -1610612736, 0, 393222, -1610612733, 0, 393226, -1610612733, 0, 393232, -1610612736, 0, 393274, 5, 0, 393275, 5, 0, 393276, 5, 0, 458752, -1610612736, 0, 458758, -1610612736, 0, 458762, -1610612736, 0, 458768, -1610612736, 0, 458802, 5, 0, 458810, 5, 0, 458811, 5, 0, 458812, 5, 0, 524288, -1610612736, 0, 524289, 5, 0, 524290, 5, 0, 524291, 5, 0, 524292, 5, 0, 524293, 6, 0, 524294, 17, 0, 524295, 5, 0, 524296, 5, 0, 524297, 5, 0, 524298, 8, 0, 524299, 5, 0, 524300, 5, 0, 524301, 5, 0, 524302, 5, 0, 524303, 5, 0, 524304, 1610612744, 0, 524314, 5, 0, 524315, 5, 0, 524316, 5, 0, 524317, 5, 0, 524318, 5, 0, 524319, 5, 0, 524320, 5, 0, 524321, 5, 0, 524322, 5, 0, 524323, 5, 0, 524324, 5, 0, 524325, 5, 0, 524326, 5, 0, 524327, 5, 0, 524328, 5, 0, 524329, 5, 0, 524330, 5, 0, 524331, 5, 0, 524332, 5, 0, 524333, 7, 0, 524334, 5, 0, 524335, 5, 0, 524336, 5, 0, 524337, 5, 0, 524338, 5, 0, 524339, 5, 0, 524340, 5, 0, 524341, 5, 0, 524342, 5, 0, 524343, 5, 0, 524344, 5, 0, 524345, 5, 0, 524346, 5, 0, 524347, 5, 0, 524348, 5, 0, 524349, 5, 0, 524350, 5, 0, 524351, 5, 0, 524352, 5, 0, 524353, 5, 0, 524354, 5, 0, 524355, 5, 0, 524356, 5, 0, 524357, 5, 0, 524358, 5, 0, 524359, 5, 0, 524360, 5, 0, 524361, 5, 0, 524362, 5, 0, 524363, 5, 0, 524364, 5, 0, 524365, 5, 0, 524366, 5, 0, 524367, 5, 0, 524368, 5, 0, 524369, 5, 0, 524370, 5, 0, 524371, 5, 0, 524372, 5, 0, 524373, 5, 0, 524374, 5, 0, 524375, 5, 0, 524376, 5, 0, 524377, 5, 0, 524378, 5, 0, 524379, 5, 0, 524380, 5, 0, 589874, 5, 0, 589882, 5, 0, 589883, 5, 0, 589884, 5, 0, 655418, 5, 0, 655419, 5, 0, 655420, 5, 0, 720955, 5, 0, 720956, 5, 0 )
+
+[node name="Parent" parent="." instance=ExtResource( 4 )]
+position = Vector2( 71.4492, 104.794 )
+parentP = NodePath("../../FirstLevel/Parent")
+textureRectP = NodePath("../../FirstLevel/Parent/KidEffects/TextureRect")
+adultSpeedModifier = 30
+adultJumpModifier = 50
+
+[node name="Kid" parent="." instance=ExtResource( 4 )]
+position = Vector2( 244.978, 102.792 )
+is_kid = true
+parentP = NodePath("../../FirstLevel/Parent")
+textureRectP = NodePath("../../FirstLevel/Parent/KidEffects/TextureRect")
+adultSpeedModifier = 30
+adultJumpModifier = 50
+kidFinished = true
+
+[node name="Door_Parent" parent="." instance=ExtResource( 6 )]
+position = Vector2( 916, 120 )
+itype = "Door"
+
+[node name="CollisionShape2D" parent="Door_Parent" index="0"]
+position = Vector2( 282, -6.7 )
+
+[node name="Sprite" parent="Door_Parent" index="1"]
+position = Vector2( 282, -8.245 )
+texture = SubResource( 1 )
+
+[node name="Door_Kid" parent="." instance=ExtResource( 6 )]
+position = Vector2( 916, 154 )
+itype = "Door"
+
+[node name="CollisionShape2D" parent="Door_Kid" index="0"]
+position = Vector2( 282, -1.1 )
+
+[node name="Sprite" parent="Door_Kid" index="1"]
+position = Vector2( 282, 5.755 )
+scale = Vector2( 1, -1 )
+texture = SubResource( 1 )
+
+[node name="HUD" parent="." instance=ExtResource( 8 )]
+level_name = "Chapter 01"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+visible = false
+margin_left = 432.0
+margin_top = 56.0
+margin_right = 580.0
+margin_bottom = 106.0
+custom_fonts/normal_font = ExtResource( 13 )
+text = "He's a real crybaby who can't be left alone for too long"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="."]
+visible = false
+margin_left = 768.0
+margin_top = 56.0
+margin_right = 916.0
+margin_bottom = 106.0
+custom_fonts/normal_font = ExtResource( 13 )
+text = "He's "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Switch" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1069.01, 116.463 )
+itype = "Switch"
+
+[node name="Switch2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1070.43, 154.647 )
+itype = "Switch"
+
+[node name="Gate" parent="." instance=ExtResource( 7 )]
+position = Vector2( 476.264, -2.82843 )
+
+[node name="Gate2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 476.808, 72.1249 )
+
+[node name="StoryArea" parent="." instance=ExtResource( 15 )]
+position = Vector2( 182.37, 70.9296 )
+story_text = "THE END "
+
+[node name="CollisionShape2D" parent="StoryArea" index="0"]
+position = Vector2( 3.50288, -9.34387 )
+
+[node name="RichTextLabel" parent="StoryArea" index="1"]
+margin_left = -62.2421
+margin_top = -38.8681
+margin_right = 85.758
+margin_bottom = 0.131943
+text = ""
+[connection signal="OnInteraction" from="Door_Parent" to="." method="_OnInteraction"]
+[connection signal="OnInteraction" from="Door_Kid" to="." method="_OnInteraction"]
+[connection signal="OnInteraction" from="Switch" to="." method="_OnInteraction"]
+[connection signal="body_entered" from="Switch" to="Switch" method="_on_Player_entered"]
+[connection signal="OnInteraction" from="Switch2" to="." method="_OnInteraction"]
+[connection signal="body_entered" from="Switch2" to="Switch2" method="_on_Player_entered"]
+
+[editable path="Door_Parent"]
+
+[editable path="Door_Kid"]
+
+[editable path="StoryArea"]
