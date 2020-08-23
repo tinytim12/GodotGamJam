@@ -145,10 +145,10 @@ position = Vector2( 31.1128, 2.82843 )
 margin_top = -8.0
 margin_bottom = 41.0
 text = ""
-[connection signal="OnInteraction" from="Door_Kid" to="." method="_OnInteractionDoor"]
 [connection signal="OnInteraction" from="Door_Kid" to="." method="_OnInteraction"]
-[connection signal="OnInteraction" from="Door_Kid2" to="." method="_OnInteractionDoor"]
+[connection signal="OnInteraction" from="Door_Kid" to="." method="_OnInteractionDoor"]
 [connection signal="OnInteraction" from="Door_Kid2" to="." method="_OnInteraction"]
+[connection signal="OnInteraction" from="Door_Kid2" to="." method="_OnInteractionDoor"]
 [connection signal="OnInteraction" from="Switch" to="." method="_OnInteraction"]
 [connection signal="body_entered" from="Switch" to="Switch" method="_on_Player_entered"]
 [connection signal="OnInteraction" from="Switch2" to="." method="_OnInteraction"]

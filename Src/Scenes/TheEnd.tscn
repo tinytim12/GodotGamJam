@@ -1,0 +1,250 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Scripts/Level.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/BG_Parallax.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Fonts/Mago_1.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Art/UI/white.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=6]
+[ext_resource path="res://Art/Sprites/parent.png" type="Texture" id=7]
+[ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Art/Shaders/red.png" type="Texture" id=9]
+[ext_resource path="res://Scenes/WorldEnvironment.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/AudioMgr.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Art/Sprites/fx/light.png" type="Texture" id=13]
+[ext_resource path="res://Art/Sprites/Kid_Anim.tres" type="SpriteFrames" id=14]
+[ext_resource path="res://Art/Sprites/Parent_Anim.tres" type="SpriteFrames" id=15]
+[ext_resource path="res://Art/Sprites/tiles/new_tileset.tres" type="TileSet" id=17]
+[ext_resource path="res://Scenes/StoryArea.tscn" type="PackedScene" id=18]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 5.5
+height = 8.37448
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 96, 120 )
+
+[node name="FirstLevel" type="Node2D"]
+script = ExtResource( 1 )
+prev_scene = "res://Scenes/Chapter6.tscn"
+next_scene = "res://Scenes/MainMenu2D.tscn"
+
+[node name="WorldEnvironment" parent="." instance=ExtResource( 10 )]
+
+[node name="BG_Parallax" parent="." instance=ExtResource( 2 )]
+
+[node name="AudioMgr" parent="." instance=ExtResource( 12 )]
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2( 1, 0 )
+tile_set = ExtResource( 17 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 0, -1610612736, 0, 65536, -1610612736, 0, 131072, -1610612736, 0, 196608, -1610612736, 0, 262144, -1610612736, 0, 327680, -1610612736, 0, 393216, -1610612736, 0, 393274, -1610612736, 2, 393275, 0, 196609, 393276, 1610612736, 2, 458752, -1610612736, 0, 458802, 0, 131073, 458810, -1073741824, 65538, 458811, -1610612736, 196611, 458812, -1610612736, 65538, 524288, 0, 196609, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0, 524299, 0, 0, 524300, 0, 0, 524301, 0, 0, 524302, 0, 0, 524303, 0, 0, 524304, 0, 0, 524305, 0, 0, 524306, 0, 0, 524307, 0, 0, 524308, 0, 0, 524309, 0, 0, 524310, 0, 0, 524311, 0, 0, 524312, 0, 0, 524313, 0, 0, 524314, 0, 0, 524315, 0, 0, 524316, 0, 0, 524317, 0, 0, 524318, 0, 0, 524319, 0, 0, 524320, 0, 0, 524321, 0, 0, 524322, 0, 0, 524323, 0, 0, 524324, 0, 0, 524325, 0, 0, 524326, 0, 0, 524327, 0, 0, 524328, 0, 0, 524329, 0, 0, 524330, 0, 0, 524331, 0, 0, 524332, 0, 0, 524333, 0, 0, 524334, 0, 0, 524335, 1610612736, 0, 524336, 1610612736, 0, 524337, 1610612736, 0, 524338, 1610612736, 65539, 524339, 1610612736, 0, 524340, 1610612736, 0, 524341, 1610612736, 0, 524342, 0, 0, 524343, 0, 0, 524344, 0, 0, 524345, 0, 0, 524346, -1073741824, 196610, 524347, -1610612736, 196609, 524348, -1610612736, 196610, 524349, 0, 0, 524350, 0, 0, 524351, 0, 0, 524352, 0, 0, 524353, 0, 0, 524354, 0, 0, 524355, 0, 0, 524356, 0, 0, 524357, 0, 0, 524358, 0, 0, 524359, 0, 0, 524360, 0, 0, 524361, 0, 0, 524362, 0, 0, 524363, 0, 0, 524364, 0, 0, 524365, 0, 0, 524366, 0, 0, 524367, 0, 0, 524368, 0, 0, 524369, 0, 0, 524370, 0, 0, 524371, 0, 0, 524372, 0, 0, 524373, 0, 0, 524374, 0, 0, 524375, 0, 0, 524376, 0, 0, 524377, 0, 0, 524378, 0, 0, 524379, 0, 0, 524380, 0, 0, 589824, -1610612736, 0, 589874, 1610612736, 131073, 589882, -1073741824, 65538, 589883, -1610612736, 196611, 589884, -1610612736, 65538, 655360, -1610612736, 0, 655418, 0, 2, 655419, 0, 196609, 655420, -1073741824, 2, 720896, -1610612736, 0, 786432, -1610612736, 0, 851968, -1610612736, 0, 917504, -1610612736, 0, 983040, -1610612736, 0, 1048576, -1610612736, 0, 1114112, 5, 0, 1179648, 2, 0, 1179649, 2, 0, 1179650, 2, 0, 1179651, 2, 0, 1179652, 2, 0, 1179653, 2, 0, 1179654, 2, 0, 1179655, 2, 0, 1179656, 2, 0, 1179657, 2, 0, 1179658, 2, 0, 1179659, 2, 0, 1179660, 2, 0, 1179661, 2, 0, 1179662, 2, 0, 1179663, 2, 0, 1179664, 2, 0, 1179665, 2, 0, 1179666, 2, 0, 1179667, 2, 0, 1179688, 2, 0, 1179689, 2, 0, 1179690, 2, 0, 1179691, 2, 0, 1179692, 2, 0, 1179693, 2, 0, 1179694, 2, 0, 1179695, 2, 0, 1179696, 2, 0, 1179697, 2, 0, 1179698, 2, 0, 1179699, 2, 0, 1179700, 2, 0, 1179701, 2, 0, 1179702, 2, 0, 1179703, 2, 0, 1179704, 2, 0, 1245184, 2, 0, 1245185, 2, 0, 1245186, 2, 0, 1245187, 2, 0, 1245188, 2, 0, 1245189, 2, 0, 1245190, 2, 0, 1245191, 2, 0, 1245192, 2, 0, 1245193, 2, 0, 1245194, 2, 0, 1245195, 2, 0, 1245196, 2, 0, 1245197, 2, 0, 1245198, 2, 0, 1245199, 2, 0, 1245200, 2, 0, 1245201, 2, 0, 1245202, 2, 0, 1245203, 2, 0, 1245204, 2, 0, 1245205, 2, 0, 1245206, 2, 0, 1245207, 2, 0, 1245208, 2, 0, 1245209, 2, 0, 1245210, 2, 0, 1245211, 2, 0, 1245212, 2, 0, 1245213, 2, 0, 1245214, 2, 0, 1245215, 2, 0, 1245216, 2, 0, 1245217, 2, 0, 1245218, 2, 0, 1245219, 2, 0, 1245220, 2, 0, 1245221, 2, 0, 1245222, 2, 0, 1245223, 2, 0, 1245224, 2, 0, 1245225, 2, 0, 1245226, 2, 0, 1245227, 2, 0, 1245228, 2, 0, 1245229, 2, 0, 1245230, 2, 0, 1245231, 2, 0, 1245232, 2, 0, 1245233, 2, 0, 1245234, 2, 0, 1245235, 2, 0, 1245236, 2, 0, 1245237, 2, 0, 1245242, 2, 0, 1245243, 2, 0, 1310740, 2, 0, 1310741, 2, 0, 1310742, 2, 0, 1310743, 2, 0, 1310744, 2, 0, 1310745, 2, 0, 1310746, 2, 0, 1310747, 2, 0, 1310748, 2, 0, 1310749, 2, 0, 1310750, 2, 0, 1310751, 2, 0, 1310752, 2, 0, 1310753, 2, 0, 1310754, 2, 0, 1310755, 2, 0, 1310756, 2, 0, 1310757, 2, 0, 1310758, 2, 0, 1310759, 2, 0 )
+
+[node name="Parent" type="KinematicBody2D" parent="." groups=[
+"player",
+]]
+position = Vector2( 64.4949, 104 )
+script = ExtResource( 6 )
+parentP = NodePath("../../FirstLevel/Parent")
+textureRectP = NodePath("../../FirstLevel/Parent/KidEffects/TextureRect")
+char_texture = ExtResource( 7 )
+adultSpeedModifier = 30
+adultJumpModifier = 50
+
+[node name="Light" type="Light2D" parent="Parent"]
+texture = ExtResource( 13 )
+texture_scale = 1.15
+color = Color( 1, 0.862745, 0.560784, 1 )
+energy = 0.74
+shadow_color = Color( 0, 0, 0, 1 )
+
+[node name="Sprite" type="Sprite" parent="Parent"]
+visible = false
+texture = ExtResource( 7 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Parent"]
+position = Vector2( 0, -5 )
+frames = ExtResource( 15 )
+animation = "idle"
+playing = true
+
+[node name="AnimatedSprite_Kid" type="AnimatedSprite" parent="Parent"]
+position = Vector2( 0, 4 )
+frames = ExtResource( 14 )
+animation = "idle"
+playing = true
+flip_v = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Parent"]
+position = Vector2( 0, 0.216187 )
+scale = Vector2( 0.8, 0.8 )
+shape = SubResource( 1 )
+
+[node name="KidEffects" type="Node2D" parent="Parent"]
+
+[node name="TextureRect" type="TextureRect" parent="Parent/KidEffects"]
+margin_right = 1.0
+margin_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RayCastH" type="RayCast2D" parent="Parent"]
+enabled = true
+cast_to = Vector2( 10, 0 )
+
+[node name="RayCastV" type="RayCast2D" parent="Parent"]
+enabled = true
+cast_to = Vector2( 0, 10 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Parent"]
+position = Vector2( 0, 8 )
+emitting = false
+amount = 64
+lifetime = 0.2
+one_shot = true
+emission_shape = 2
+emission_rect_extents = Vector2( 12, 4 )
+direction = Vector2( 0, -1 )
+spread = 16.0
+gravity = Vector2( 0, 50 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+scale_amount = 2.0
+scale_amount_random = 1.0
+color = Color( 0.376471, 0.329412, 0.294118, 1 )
+
+[node name="Parent2" type="KinematicBody2D" parent="." groups=[
+"player",
+]]
+position = Vector2( 112.495, 104 )
+script = ExtResource( 6 )
+parentP = NodePath("../../FirstLevel/Parent")
+textureRectP = NodePath("../../FirstLevel/Parent/KidEffects/TextureRect")
+char_texture = ExtResource( 7 )
+adultSpeedModifier = 30
+adultJumpModifier = 50
+
+[node name="Light" type="Light2D" parent="Parent2"]
+texture = ExtResource( 13 )
+texture_scale = 1.15
+color = Color( 1, 0.862745, 0.560784, 1 )
+energy = 0.74
+shadow_color = Color( 0, 0, 0, 1 )
+
+[node name="Sprite" type="Sprite" parent="Parent2"]
+visible = false
+texture = ExtResource( 7 )
+
+[node name="AnimatedSprite_Kid" type="AnimatedSprite" parent="Parent2"]
+position = Vector2( 0, -5 )
+frames = ExtResource( 15 )
+animation = "idle"
+playing = true
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Parent2"]
+position = Vector2( 0, -5 )
+frames = ExtResource( 14 )
+animation = "idle"
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Parent2"]
+position = Vector2( 0, 0.216187 )
+scale = Vector2( 0.8, 0.8 )
+shape = SubResource( 1 )
+
+[node name="KidEffects" type="Node2D" parent="Parent2"]
+
+[node name="TextureRect" type="TextureRect" parent="Parent2/KidEffects"]
+margin_right = 1.0
+margin_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RayCastH" type="RayCast2D" parent="Parent2"]
+enabled = true
+cast_to = Vector2( 10, 0 )
+
+[node name="RayCastV" type="RayCast2D" parent="Parent2"]
+enabled = true
+cast_to = Vector2( 0, 10 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Parent2"]
+position = Vector2( 0, 8 )
+emitting = false
+amount = 64
+lifetime = 0.2
+one_shot = true
+emission_shape = 2
+emission_rect_extents = Vector2( 12, 4 )
+direction = Vector2( 0, -1 )
+spread = 16.0
+gravity = Vector2( 0, 50 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+scale_amount = 2.0
+scale_amount_random = 1.0
+color = Color( 0.376471, 0.329412, 0.294118, 1 )
+
+[node name="HUD" parent="." instance=ExtResource( 8 )]
+level_name = "The End - Happy Family"
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.00784314, 0.156863, 0.121569, 0.627451 )
+position = Vector2( 324, 200 )
+scale = Vector2( 10.3125, 7.5 )
+texture = ExtResource( 5 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = 271.0
+margin_top = 151.0
+margin_right = 419.0
+margin_bottom = 255.0
+custom_fonts/normal_font = ExtResource( 3 )
+bbcode_enabled = true
+bbcode_text = "Game by,
+@Bernkastel
+@BurntRobot
+@paruthidotexe
+@btzr
+@JackMc"
+text = "Game by,
+@Bernkastel
+@BurntRobot
+@paruthidotexe
+@btzr
+@JackMc"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StoryArea" parent="." instance=ExtResource( 18 )]
+position = Vector2( 287, 66 )
+story_text = "The jouney continues"
+
+[node name="Level End" type="Area2D" parent="."]
+position = Vector2( 504, 120 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level End"]
+position = Vector2( -8, 0 )
+shape = SubResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 240, 136 )
+current = true
+zoom = Vector2( 0.8, 0.8 )
+[connection signal="body_entered" from="Level End" to="." method="on_game_over"]
+
+[editable path="StoryArea"]

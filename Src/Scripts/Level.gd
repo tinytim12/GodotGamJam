@@ -36,6 +36,14 @@ func load_next_scene():
 	get_tree().change_scene(next_scene)
 
 
+# load next scene
+func on_game_over(body):
+	if body.name == "Parent":
+		if AudioMgr != null:
+			AudioMgr.play_sfx(GData.SFX.gameover)
+		get_tree().change_scene(next_scene)
+	
+
 func _OnInteraction(val, player):
 	print("_OnInteraction : " + str(val) + str(player))
 	if val == "Switch":
