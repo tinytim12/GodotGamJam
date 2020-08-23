@@ -14,6 +14,7 @@ export(int) var adultJumpModifier
 
 export (bool) var kid_stronger
 export (bool) var kidCatchingUp
+export (bool) var kidFinished
 
 var distanceThreshold
 onready var shootRayH = get_node("RayCastH")
@@ -68,15 +69,15 @@ func _ready():
 	dangerDistance = danger_tile_dist * GData.TILE_SIZE.x
 	if is_kid == true:
 		shootRayV.set_cast_to(Vector2(0, -10))
-		GRAVITY = -GRAVITY
-		SPEED = SPEED #- childSpeedModifier
-		JUMP_SPEED = -JUMP_SPEED
-		ground_normal = -ground_normal
+		if(!kidFinished):
+			GRAVITY = -GRAVITY
+			SPEED = SPEED #- childSpeedModifier
+			JUMP_SPEED = -JUMP_SPEED
+			ground_normal = -ground_normal
 		if player_sprite != null:
 			#player_sprite.texture = char_texture
 			player_anim = get_node("AnimatedSprite_Kid")
-			player_sprite.flip_v = true
-			player_anim.flip_v = true
+			
 # ------------------------------------------------------------------------------
 		$Light.texture_scale = 0.8
 		threshold = 50
@@ -206,7 +207,7 @@ func _physics_process(delta):
 	update_player()
 	
 	# Only the the kid requires to run this function:
-	if is_kid:
+	if is_kid and !kidFinished:
 		_checkDistance(delta)
 
 
