@@ -3,6 +3,8 @@ extends Node2D
 export(AudioStream) var button_click
 export(AudioStream) var sfx_warning
 export(AudioStream) var trap
+export(AudioStream) var death
+export(AudioStream) var gameover
 
 export(Array, AudioStream) var walks
 export(Array, AudioStream) var jumps
@@ -70,6 +72,10 @@ func get_audio_stream(val):
 			return runes[rng.randi_range(0, runes.size()-1)]
 		GData.SFX.trap:
 			return trap
+		GData.SFX.death:
+			return death
+		GData.SFX.gameover:
+			return gameover
 		GData.SFX.rune:
 			return runes[rng.randi_range(0, runes.size()-1)]
 		GData.SFX.parent:

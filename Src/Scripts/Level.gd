@@ -29,6 +29,8 @@ func load_prev_scene():
 
 # load next scene
 func load_next_scene():
+	if AudioMgr != null:
+		AudioMgr.play_sfx(GData.SFX.gameover)
 	get_tree().change_scene(next_scene)
 
 

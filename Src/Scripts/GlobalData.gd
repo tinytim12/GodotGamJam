@@ -22,6 +22,8 @@ enum SFX {
 	door = 14,
 	trap = 15,
 	warning = 20,
+	death = 21,
+	gameover = 22,
 	parent = 31,
 	kid = 32,
 } 

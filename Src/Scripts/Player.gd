@@ -331,6 +331,8 @@ func _checkDistance(delta):
 			$Light.energy = lerp($Light.energy, 1, 0.2)
 
 func _gameOver():
+	# play the player death Audio
+	GM.audio_mgr.play_sfx(GData.SFX.death)
 	get_tree().reload_current_scene()
 
 
