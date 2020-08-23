@@ -87,10 +87,10 @@ scale = Vector2( 1, -1 )
 texture = ExtResource( 8 )
 
 [node name="Switch" parent="." instance=ExtResource( 10 )]
-position = Vector2( 714.355, 25.7826 )
+position = Vector2( 738.355, 25.7826 )
 
 [node name="Switch2" parent="." instance=ExtResource( 10 )]
-position = Vector2( 712.901, 246.398 )
+position = Vector2( 1256.9, 246.398 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike" parent="." instance=ExtResource( 13 )]
@@ -164,10 +164,10 @@ margin_bottom = 182.344
 rect_rotation = 180.0
 
 [node name="Gate" parent="." instance=ExtResource( 9 )]
-position = Vector2( 629.047, 96.2636 )
+position = Vector2( 645.047, 96.2636 )
 
 [node name="Gate2" parent="." instance=ExtResource( 9 )]
-position = Vector2( 629.517, 175.775 )
+position = Vector2( 645.517, 175.775 )
 scale = Vector2( 1, -1 )
 
 [node name="HUD" parent="." instance=ExtResource( 1 )]
