@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/Level.gd" type="Script" id=1]
 [ext_resource path="res://Art/Sprites/tiles/init_tileset.tres" type="TileSet" id=2]
@@ -14,17 +14,21 @@
 [ext_resource path="res://Scenes/AudioMgr.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Art/Sprites/tiles/new_tileset.tres" type="TileSet" id=13]
 [ext_resource path="res://Art/Sprites/Door.tres" type="Texture" id=14]
+[ext_resource path="res://Scenes/BG_Parallax.tscn" type="PackedScene" id=15]
 
 [node name="FirstLevel" type="Node2D"]
 script = ExtResource( 1 )
 prev_scene = "res://Scenes/Chapter1.tscn"
 next_scene = "res://Scenes/Chapter3.tscn"
 
+[node name="BG_Parallax" parent="." instance=ExtResource( 15 )]
+
 [node name="AudioMgr" parent="." instance=ExtResource( 12 )]
 
 [node name="MainCamera" parent="." instance=ExtResource( 11 )]
 
 [node name="TileMap" type="TileMap" parent="."]
+visible = false
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 16, 16 )
 format = 1
@@ -53,14 +57,14 @@ childSpeedModifier = 50
 childJumpModifier = 110
 
 [node name="Door_Parent" parent="." instance=ExtResource( 6 )]
-position = Vector2( 911.838, 113.459 )
+position = Vector2( 1199.84, 114.459 )
 itype = "Door"
 
 [node name="CollisionShape2D" parent="Door_Parent" index="0"]
-position = Vector2( 289.595, -6.73483 )
+position = Vector2( 4.59497, -6.73483 )
 
 [node name="Sprite" parent="Door_Parent" index="1"]
-position = Vector2( 285.106, -2.24493 )
+position = Vector2( 0.105957, -2.24493 )
 texture = ExtResource( 14 )
 
 [node name="Spike" parent="." instance=ExtResource( 10 )]
@@ -77,30 +81,30 @@ margin_bottom = 182.287
 rect_rotation = 179.526
 
 [node name="Door_Kid" parent="." instance=ExtResource( 6 )]
-position = Vector2( 917.123, 160.191 )
+position = Vector2( 1197.12, 158.191 )
 itype = "Door"
 
 [node name="CollisionShape2D" parent="Door_Kid" index="0"]
-position = Vector2( 283.983, -1.12247 )
+position = Vector2( 3.983, -1.12247 )
 
 [node name="Sprite" parent="Door_Kid" index="1"]
-position = Vector2( 282.86, 1.12247 )
+position = Vector2( 2.85999, 1.12247 )
 scale = Vector2( 1, -1 )
 texture = ExtResource( 14 )
 
 [node name="Switch" parent="." instance=ExtResource( 7 )]
-position = Vector2( 994.206, 71.4603 )
-itype = "Switch"
+position = Vector2( 994.206, 73.4603 )
 
 [node name="Switch2" parent="." instance=ExtResource( 7 )]
-position = Vector2( 994.256, 203.62 )
-itype = "Switch"
+position = Vector2( 994.256, 198.62 )
+scale = Vector2( 1, -1 )
 
 [node name="Gate" parent="." instance=ExtResource( 3 )]
-position = Vector2( 239.679, -3.6803 )
+position = Vector2( 900.679, 96.3197 )
 
 [node name="Gate2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 239.206, 73.6627 )
+position = Vector2( 900.206, 175.663 )
+scale = Vector2( 1, -1 )
 
 [node name="HUD" parent="." instance=ExtResource( 8 )]
 level_name = "Chapter 02"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tilemaps/forest_map.tres" type="TileSet" id=2]
@@ -13,11 +13,18 @@
 [ext_resource path="res://Scenes/AudioMgr.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/MainCamera.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Traps/Spike.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/BG_Parallax.tscn" type="PackedScene" id=14]
 
 [node name="FirstLevel" type="Node2D"]
 script = ExtResource( 6 )
 prev_scene = "res://Scenes/Chapter5.tscn"
 next_scene = "res://Scenes/MainMenu2D.tscn"
+
+[node name="BG_Parallax" parent="." instance=ExtResource( 14 )]
+
+[node name="AudioMgr" parent="." instance=ExtResource( 11 )]
+
+[node name="MainCamera" parent="." instance=ExtResource( 12 )]
 
 [node name="Spike" parent="." instance=ExtResource( 13 )]
 margin_left = 242.839
@@ -41,9 +48,9 @@ rect_rotation = 180.0
 
 [node name="Spike4" parent="." instance=ExtResource( 13 )]
 margin_left = 305.223
-margin_top = 147.561
+margin_top = 146.561
 margin_right = 317.223
-margin_bottom = 182.561
+margin_bottom = 181.561
 rect_rotation = 180.0
 
 [node name="Spike2" parent="." instance=ExtResource( 13 )]
@@ -92,10 +99,6 @@ margin_top = 147.918
 margin_right = 750.338
 margin_bottom = 182.918
 rect_rotation = -180.399
-
-[node name="MainCamera" parent="." instance=ExtResource( 12 )]
-
-[node name="AudioMgr" parent="." instance=ExtResource( 11 )]
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2( 2, 0 )
@@ -146,18 +149,18 @@ scale = Vector2( 1, -1 )
 texture = ExtResource( 8 )
 
 [node name="Switch" parent="." instance=ExtResource( 10 )]
-position = Vector2( 884.197, 54.8514 )
-itype = "Switch"
+position = Vector2( 890.197, 56.8514 )
 
 [node name="Switch2" parent="." instance=ExtResource( 10 )]
-position = Vector2( 883.576, 203.791 )
-itype = "Switch"
+position = Vector2( 889.576, 198.791 )
+scale = Vector2( 1, -1 )
 
 [node name="Gate" parent="." instance=ExtResource( 9 )]
-position = Vector2( 14.435, 0.201517 )
+position = Vector2( 670.435, 96.2015 )
 
 [node name="Gate2" parent="." instance=ExtResource( 9 )]
-position = Vector2( 14.7201, 72.5891 )
+position = Vector2( 670.72, 175.589 )
+scale = Vector2( 1, -1 )
 
 [node name="HUD" parent="." instance=ExtResource( 1 )]
 level_name = "Chapter 06"
