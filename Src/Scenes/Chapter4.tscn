@@ -1,12 +1,12 @@
 [gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Art/Sprites/Door.tres" type="Texture" id=2]
 [ext_resource path="res://Scenes/Interactables.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/StoryArea.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scripts/Level.gd" type="Script" id=6]
 [ext_resource path="res://Art/Sprites/kid.png" type="Texture" id=7]
-[ext_resource path="res://Art/Sprites/tiles/door.png" type="Texture" id=8]
 [ext_resource path="res://Gate.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Switch.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/MainCamera.tscn" type="PackedScene" id=11]
@@ -53,19 +53,20 @@ itype = "Door"
 position = Vector2( 289.595, -6.73483 )
 
 [node name="Sprite" parent="Door_Parent" index="1"]
-position = Vector2( 285.106, -2.24493 )
-texture = ExtResource( 8 )
+position = Vector2( 287.106, -9 )
+texture = ExtResource( 2 )
 
 [node name="Door_Kid" parent="." instance=ExtResource( 3 )]
 position = Vector2( 917.123, 154.245 )
 itype = "Door"
 
 [node name="CollisionShape2D" parent="Door_Kid" index="0"]
-position = Vector2( 283.983, -1.12247 )
+position = Vector2( 284.983, -1.12247 )
 
 [node name="Sprite" parent="Door_Kid" index="1"]
-position = Vector2( 282.86, 1.12247 )
-texture = ExtResource( 8 )
+position = Vector2( 283.86, 5.83 )
+scale = Vector2( 1, -1 )
+texture = ExtResource( 2 )
 
 [node name="Switch" parent="." instance=ExtResource( 10 )]
 position = Vector2( 845.653, 43.7297 )

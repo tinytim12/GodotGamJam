@@ -84,7 +84,7 @@ itype = "Door"
 position = Vector2( 282, -1.1 )
 
 [node name="Sprite" parent="Door_Kid" index="1"]
-position = Vector2( 282, 5.755 )
+position = Vector2( 282, 3.755 )
 scale = Vector2( 1, -1 )
 texture = ExtResource( 5 )
 
@@ -96,8 +96,7 @@ itype = "Door"
 position = Vector2( 282, -1.1 )
 
 [node name="Sprite" parent="Door_Kid2" index="1"]
-position = Vector2( 282, 5.755 )
-scale = Vector2( 1, -1 )
+position = Vector2( 282, -8.245 )
 texture = ExtResource( 5 )
 
 [node name="HUD" parent="." instance=ExtResource( 8 )]

@@ -127,10 +127,10 @@ position = Vector2( 916, 120 )
 itype = "Door"
 
 [node name="CollisionShape2D" parent="Door_Parent" index="0"]
-position = Vector2( 152.836, -0.788815 )
+position = Vector2( 156.836, -3.78882 )
 
 [node name="Sprite" parent="Door_Parent" index="1"]
-position = Vector2( 154.364, -9.1745 )
+position = Vector2( 156.364, -8.1745 )
 texture = ExtResource( 8 )
 
 [node name="Door_Kid" parent="." instance=ExtResource( 3 )]
@@ -138,11 +138,11 @@ position = Vector2( 917.123, 154.245 )
 itype = "Door"
 
 [node name="CollisionShape2D" parent="Door_Kid" index="0"]
-position = Vector2( 150.792, -4.69007 )
+position = Vector2( 155.792, 0.30993 )
 
 [node name="Sprite" parent="Door_Kid" index="1"]
-position = Vector2( 155.756, 7.7757 )
-rotation = -3.145
+position = Vector2( 155.756, 5.7757 )
+scale = Vector2( 1, -1 )
 texture = ExtResource( 8 )
 
 [node name="Switch" parent="." instance=ExtResource( 10 )]

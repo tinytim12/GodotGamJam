@@ -68,7 +68,7 @@ position = Vector2( 283.983, -1.12247 )
 
 [node name="Sprite" parent="Door_Kid" index="1"]
 position = Vector2( 285.36, 6.12247 )
-rotation = -3.15113
+scale = Vector2( 1, -1 )
 texture = ExtResource( 8 )
 
 [node name="Switch" parent="." instance=ExtResource( 10 )]
