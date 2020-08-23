@@ -7,6 +7,8 @@ var mainmenu_scene = "res://Scenes/MainMenu2D.tscn"
 onready var AudioMgr = get_node("AudioMgr")
 onready var hud = get_node("HUD")
 
+var kid
+var parent
 
 func _ready():
 	# Find important sfuff: like main camera and players
@@ -34,8 +36,8 @@ func load_next_scene():
 	get_tree().change_scene(next_scene)
 
 
-func _OnInteraction(val):
-	print("_OnInteraction : " + str(val))
+func _OnInteraction(val, player):
+	print("_OnInteraction : " + str(val) + str(player))
 	if val == "Switch":
 		var gates = get_tree().get_nodes_in_group ("Gate")
 		for gate in gates:
@@ -44,10 +46,18 @@ func _OnInteraction(val):
 		if AudioMgr != null:
 			AudioMgr.play_sfx(GData.SFX.switch)
 	elif val == "Door":
+		print("Door")
 		print_debug("_OnInteraction : Door")
 		if AudioMgr != null:
 			AudioMgr.play_sfx(GData.SFX.rune)
-		load_next_scene()
+		if(player == "Parent"):
+			parent = true
+		if(player == "Kid"):
+			kid = true
+		if (kid and player):
+			kid = false
+			player = false
+			load_next_scene()
 	elif val == "Star":
 		print_debug ("_OnInteraction : Collected Star")
 		if AudioMgr != null:
@@ -56,7 +66,8 @@ func _OnInteraction(val):
 		print_debug ("_OnInteraction : Collected Key")
 		if AudioMgr != null:
 			AudioMgr.play_sfx(GData.SFX.star)
-
+			
+		
 
 func find_node_by_name(root, name):
 	if(root.get_name() == name): 
