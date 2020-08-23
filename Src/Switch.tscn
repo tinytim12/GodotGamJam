@@ -1,19 +1,20 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Interactables.gd" type="Script" id=1]
-[ext_resource path="res://Art/Shaders/switchtile.png" type="Texture" id=2]
+[ext_resource path="res://Art/Sprites/Interactables/Things2.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 [node name="Switch" type="Area2D"]
-position = Vector2( 184.055, 23.1249 )
+gravity = 0.0
 script = ExtResource( 1 )
 itype = "Key"
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 7.55127, -8.39233e-05 )
 texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 32, 2, 16, 14 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 6.60736, -0.472069 )
+position = Vector2( 0, -3 )
 shape = SubResource( 1 )

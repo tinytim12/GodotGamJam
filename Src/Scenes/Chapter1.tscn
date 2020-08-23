@@ -103,18 +103,20 @@ texture = ExtResource( 5 )
 level_name = "Chapter 01"
 
 [node name="Switch" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1069.01, 116.463 )
+position = Vector2( 1069.01, 121.463 )
 itype = "Switch"
 
 [node name="Switch2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1068.17, 154.303 )
+position = Vector2( 1068.17, 150.303 )
+scale = Vector2( 1, -1 )
 itype = "Switch"
 
 [node name="Gate" parent="." instance=ExtResource( 7 )]
-position = Vector2( 476.264, -2.82843 )
+position = Vector2( 1140, 96.172 )
 
 [node name="Gate2" parent="." instance=ExtResource( 7 )]
-position = Vector2( 476.808, 72.1249 )
+position = Vector2( 1140, 176.125 )
+scale = Vector2( 1, -1 )
 
 [node name="StoryArea" parent="." instance=ExtResource( 15 )]
 position = Vector2( 183, 64 )
