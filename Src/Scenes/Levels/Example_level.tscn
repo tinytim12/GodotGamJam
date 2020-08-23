@@ -46,8 +46,8 @@ drag_margin_right = 0.0
 position = Vector2( 60, 110 )
 parentP = NodePath("../../FirstLevel/Parent")
 textureRectP = NodePath("../../FirstLevel/Parent/KidEffects/TextureRect")
-adultSpeedModifier = 32
-adultJumpModifier = 72
+adultSpeedModifier = 30
+adultJumpModifier = 62
 
 [node name="Kid" parent="." instance=ExtResource( 4 )]
 position = Vector2( 60, 160 )
