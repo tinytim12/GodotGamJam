@@ -113,9 +113,9 @@ margin_bottom = 128.129
 
 [node name="Spike9" parent="." instance=ExtResource( 13 )]
 margin_left = 736.273
-margin_top = 60.3848
+margin_top = 62.3848
 margin_right = 748.273
-margin_bottom = 95.3846
+margin_bottom = 97.3846
 
 [node name="Spike7" parent="." instance=ExtResource( 13 )]
 margin_left = 458.088
@@ -137,9 +137,9 @@ margin_bottom = 128.294
 
 [node name="Spike2" parent="." instance=ExtResource( 13 )]
 margin_left = 133.826
-margin_top = 146.965
+margin_top = 145.965
 margin_right = 145.826
-margin_bottom = 181.965
+margin_bottom = 180.965
 rect_rotation = 180.0
 
 [node name="Spike11" parent="." instance=ExtResource( 13 )]

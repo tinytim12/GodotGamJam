@@ -102,9 +102,9 @@ story_text = "If it doesn't heal, what's going to happen to us?"
 
 [node name="Spike3" parent="." instance=ExtResource( 13 )]
 margin_left = 609.144
-margin_top = 163.465
+margin_top = 162.465
 margin_right = 621.144
-margin_bottom = 198.464
+margin_bottom = 197.464
 rect_rotation = 180.0
 
 [node name="Spike4" parent="." instance=ExtResource( 13 )]
