@@ -8,7 +8,7 @@
 [node name="Switch" type="Area2D"]
 gravity = 0.0
 script = ExtResource( 1 )
-itype = "Key"
+itype = "Switch"
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
