@@ -2,10 +2,8 @@ extends Panel
 export var wait_time = 0.5
 export var active_time = 0.5
 export var jump_required = true
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
+export var sequence_index = 0
+export var delay_sequence = 0.25
 var active = false
 
 # Called when the node enters the scene tree for the first time.
@@ -16,6 +14,9 @@ func _ready():
 	$Active_timer.connect("timeout", self, "handle_active_out")
 	$Area2D.connect("body_entered", self, "handle_body_entered")
 	$AnimationPlayer.connect("animation_finished", self, "handle_animation_finished")
+	if sequence_index <= 0:
+		sequence_index = 1
+	yield(get_tree().create_timer(delay_sequence * sequence_index), "timeout")
 	$Timer.start()
 	pass # Replace with function body.
 
