@@ -75,10 +75,11 @@ scale = Vector2( 1, -1 )
 texture = ExtResource( 8 )
 
 [node name="Switch" parent="." instance=ExtResource( 10 )]
-position = Vector2( 815.615, 55.7576 )
+position = Vector2( 815, 57.758 )
 
 [node name="Switch2" parent="." instance=ExtResource( 10 )]
-position = Vector2( 813.896, 218.426 )
+position = Vector2( 815, 214 )
+scale = Vector2( 1, -1 )
 
 [node name="Spike" parent="." instance=ExtResource( 13 )]
 margin_left = 688.409
