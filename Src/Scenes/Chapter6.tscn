@@ -18,7 +18,7 @@
 [node name="FirstLevel" type="Node2D"]
 script = ExtResource( 6 )
 prev_scene = "res://Scenes/Chapter5.tscn"
-next_scene = "res://Scenes/MainMenu2D.tscn"
+next_scene = "res://Scenes/TheEnd.tscn"
 
 [node name="BG_Parallax" parent="." instance=ExtResource( 14 )]
 
