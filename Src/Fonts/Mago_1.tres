@@ -3,4 +3,6 @@
 [ext_resource path="res://Fonts/mago1.ttf" type="DynamicFontData" id=1]
 
 [resource]
+outline_size = 1
+outline_color = Color( 0.0196078, 0.2, 0.129412, 1 )
 font_data = ExtResource( 1 )

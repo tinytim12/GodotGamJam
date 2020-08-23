@@ -99,7 +99,11 @@ story_text = "Recently this young cub started following me around."
 [node name="CollisionShape2D" parent="StoryArea" index="0"]
 position = Vector2( -31.1127, 0 )
 
-[node name="RichTextLabel" parent="StoryArea" index="1"]
+[node name="Sprite" parent="StoryArea" index="1"]
+modulate = Color( 0.0263672, 0.28125, 0.221069, 0.501961 )
+position = Vector2( -20, 11 )
+
+[node name="RichTextLabel" parent="StoryArea" index="2"]
 margin_left = -95.0
 margin_top = -8.0
 margin_right = 53.0001
@@ -113,7 +117,7 @@ story_text = "He's a real crybaby who can't be left alone for too long"
 [node name="CollisionShape2D" parent="StoryArea2" index="0"]
 position = Vector2( 67.397, -1.41422 )
 
-[node name="RichTextLabel" parent="StoryArea2" index="1"]
+[node name="RichTextLabel" parent="StoryArea2" index="2"]
 margin_top = -8.0
 margin_bottom = 31.0
 text = ""
@@ -125,7 +129,7 @@ story_text = "He copies every single move I make, down to my double jump."
 [node name="CollisionShape2D" parent="StoryArea3" index="0"]
 position = Vector2( 31.1128, 2.82843 )
 
-[node name="RichTextLabel" parent="StoryArea3" index="1"]
+[node name="RichTextLabel" parent="StoryArea3" index="2"]
 margin_top = -8.0
 margin_bottom = 41.0
 text = ""
@@ -137,7 +141,7 @@ story_text = "Got to wait for him so we can enter the door together."
 [node name="CollisionShape2D" parent="StoryArea4" index="0"]
 position = Vector2( 31.1128, 2.82843 )
 
-[node name="RichTextLabel" parent="StoryArea4" index="1"]
+[node name="RichTextLabel" parent="StoryArea4" index="2"]
 margin_top = -8.0
 margin_bottom = 41.0
 text = ""
