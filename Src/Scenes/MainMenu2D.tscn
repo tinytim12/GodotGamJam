@@ -127,13 +127,14 @@ grow_horizontal = 2
 grow_vertical = 2
 rect_scale = Vector2( 2, 2 )
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 1 )
 custom_colors/default_color = Color( 0.87451, 0.443137, 0.14902, 1 )
 custom_colors/font_color_shadow = Color( 0.4, 0.223529, 0.192157, 1 )
+custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "[shake rate=4 level=4]Foxy Family[/shake]"
 text = "Foxy Family"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="button_up" from="Play_button" to="." method="_on_Play_button_up"]

@@ -106,11 +106,9 @@ __meta__ = {
 
 [node name="Switch" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1069.01, 116.463 )
-itype = "Switch"
 
 [node name="Switch2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1070.43, 154.647 )
-itype = "Switch"
 
 [node name="Gate" parent="." instance=ExtResource( 7 )]
 position = Vector2( 476.264, -2.82843 )
@@ -125,7 +123,7 @@ story_text = "THE END "
 [node name="CollisionShape2D" parent="StoryArea" index="0"]
 position = Vector2( 3.50288, -9.34387 )
 
-[node name="RichTextLabel" parent="StoryArea" index="1"]
+[node name="RichTextLabel" parent="StoryArea" index="2"]
 margin_left = -62.2421
 margin_top = -38.8681
 margin_right = 85.758
